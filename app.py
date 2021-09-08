@@ -40,11 +40,14 @@ def callback():
 def handle_message(event):
     print('event= ', event)
     print('event.message= ',event.message)
-    if event.message.text == '1+1=  ':
-
+    if event.message.text == 'C':
+        line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage("請輸入數字:"))
+        num1 = input()
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text='2'))
+            TextSendMessage(text=num1))
     else:
         line_bot_api.reply_message(
                 event.reply_token,
