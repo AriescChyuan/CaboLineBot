@@ -7,9 +7,12 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage, TextSendMessage,ImageSendMessage
 )
 import os
+import requests
+from bs4 import BeautifulSoup
+import random
 
 app = Flask(__name__)
 
@@ -40,18 +43,22 @@ def callback():
 def handle_message(event):
     print('event= ', event)
     print('event.message= ',event.message)
-    if event.message.text == 'C':
+    if event.message == "喵":
+        r = requests.get('https://www.google.com/search?q=cat&sxsrf=AOaemvImC7MDwPJ1pYHw4NJkvRuabzvPug:1631091057322&source=lnms&tbm=isch&sa=X&ved=2ahUKEwid_8TY_-7yAhUHBZQKHdNFCGsQ_AUoAnoECAEQBA&biw=1440&bih=638')
+        soup = BeautifulSoup(r.text, 'html.parser')
+        imgs = soup.find_all('img')
+        imgs_list = []
+        for i in imgs:
+            imgs_list.append(i.get('src'))
+        random_index = random.randrange(len(imgs_list))
         line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage("請輸入數字:"))
-        num1 = input()
+                ImageSendMessage(original_content_url=imgs_list[random_index], 
+                                 preview_image_url=imgs_list[random_index]))
+    else:            
         line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=num1))
-    else:
-        line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=event.message.text + '@_@a'))
+                    event.reply_token,
+                    TextSendMessage(text=event.message.text + ' @_@a'))
 
 
 if __name__ == "__main__":
