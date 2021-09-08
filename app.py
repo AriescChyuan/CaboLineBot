@@ -43,7 +43,7 @@ def callback():
 def handle_message(event):
     print('event= ', event)
     print('event.message= ',event.message)
-    if event.message == "喵":
+    if event.message.text == "喵":
         r = requests.get('https://www.google.com/search?q=cat&sxsrf=AOaemvImC7MDwPJ1pYHw4NJkvRuabzvPug:1631091057322&source=lnms&tbm=isch&sa=X&ved=2ahUKEwid_8TY_-7yAhUHBZQKHdNFCGsQ_AUoAnoECAEQBA&biw=1440&bih=638')
         soup = BeautifulSoup(r.text, 'html.parser')
         imgs = soup.find_all('img')
