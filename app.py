@@ -52,13 +52,21 @@ def handle_message(event):
     if msg == "喵":
         r = requests.get('https://www.tooopen.com/img/89_869.aspx')
 
-        soup = BeautifulSoup(r.text, 'html.parser')
-        imgs = soup.find_all('img',limit=None)
-        imgs_list = []
-        for i in imgs[2:]:
-            imgs_list.append(i.get('src'))
-        random_index = random.randrange(len(imgs[2:]))
-        line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=imgs_list[random_index], preview_image_url=imgs_list[random_index]))
+        # soup = BeautifulSoup(r.text, 'html.parser')
+        # imgs = soup.find_all('img',limit=None)
+        # imgs_list = []
+        # for i in imgs[2:]:
+        #     imgs_list.append(i.get('src'))
+        # random_index = random.randrange(len(imgs[2:]))
+        # line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=imgs_list[random_index], preview_image_url=imgs_list[random_index]))
+        IU_URL = requests.get('https://imgur.com/search/score?q=cat')
+        soup = BeautifulSoup(IU_URL.text,'html')
+        x = soup.find_all('img')
+        cat_img_list = []
+        for i in x[3:]:
+            cat_img_list.append('https:' + i.get('src'))
+        random_index = random.randrange(len(cat_img_list))
+        line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=cat_img_list[random_index], preview_image_url=cat_img_list[random_index]))
 
     elif msg == "功能":
         message = buttons_message()
@@ -86,8 +94,8 @@ def handle_message(event):
             else:
                 product_photo_list.append(x[i].find(class_ = "boxify-image center-contain sl-lazy-image").get('style').split('(')[-1][:-2])
         random_index = random.randrange(len(product_url__list))
-        # line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=product_photo_list[random_index], preview_image_url=product_photo_list[random_index]))
-        line_bot_api.reply_message(event.reply_token,TextSendMessage('https://www.sweethousetw.com/' + product_url__list[random_index]))
+        line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=product_photo_list[random_index], preview_image_url=product_photo_list[random_index]))
+        # line_bot_api.reply_message(event.reply_token,TextSendMessage('https://www.sweethousetw.com/' + product_url__list[random_index]))
 
     elif msg == "雷達":
         r = requests.get('https://www.cwb.gov.tw/V8/C/W/OBS_Radar.html')
