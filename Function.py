@@ -10,7 +10,7 @@ def buttons_message():
     message = TemplateSendMessage(
         alt_text='Hello ~*',
         template=ButtonsTemplate(
-            thumbnail_image_url="https://shoplineimg.com/5b792cc067962300148050a5/5fe1be2fa88493003b811c4a/x40.webp?source_format=png",
+            thumbnail_image_url="https://shoplineimg.com/5b792cc067962300148050a5/5fe1be2fa88493003b811c4a/x200.webp?source_format=png",
             title="功能列表",
             text="想要什麼功能呢？",
             actions=[
