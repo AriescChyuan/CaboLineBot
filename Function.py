@@ -27,6 +27,10 @@ def buttons_message():
                     uri="https://www.sweethousetw.com/"
                 ),
                 MessageTemplateAction(
+                    label="抽IU",
+                    text="IU"
+                ),
+                MessageTemplateAction(
                     label="查看雷達回波圖",
                     text="雷達"
                 ),
