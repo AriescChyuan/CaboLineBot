@@ -86,7 +86,6 @@ def handle_message(event):
             else:
                 product_photo_list.append(x[i].find(class_ = "boxify-image center-contain sl-lazy-image").get('style').split('(')[-1][:-2])
         random_index = random.randrange(len(product_url__list))
-        line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://www.sweethousetw.com/' + product_url__list[random_index], preview_image_url='https://www.sweethousetw.com/' + product_url__list[random_index]))
         # line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=product_photo_list[random_index], preview_image_url=product_photo_list[random_index]))
         line_bot_api.reply_message(event.reply_token,TextSendMessage('https://www.sweethousetw.com/' + product_url__list[random_index]))
 
