@@ -1,31 +1,36 @@
 from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import (InvalidSignatureError)
 from linebot.models import *
+
+import requests
+from bs4 import BeautifulSoup
+
 #TemplateSendMessage - ButtonsTemplate (按鈕介面訊息)
 def buttons_message():
     message = TemplateSendMessage(
-        alt_text='好消息來囉～',
+        alt_text='Hello ~*',
         template=ButtonsTemplate(
-            thumbnail_image_url="https://pic2.zhimg.com/v2-de4b8114e8408d5265503c8b41f59f85_b.jpg",
-            title="是否要進行抽獎活動？",
-            text="輸入生日後即獲得抽獎機會",
+            thumbnail_image_url="https://shoplineimg.com/5b792cc067962300148050a5/5fe1be2fa88493003b811c4a/x40.webp?source_format=png",
+            title="功能列表",
+            text="想要什麼功能呢？",
             actions=[
-                DatetimePickerTemplateAction(
-                    label="請選擇生日",
-                    data="input_birthday",
-                    mode='date',
-                    initial='1990-01-01',
-                    max='2019-03-10',
-                    min='1930-01-01'
+                # DatetimePickerTemplateAction(
+                #     label="請選擇生日",
+                #     data="input_birthday",
+                #     mode='date',
+                #     initial='1990-01-01',
+                #     max='2019-03-10',
+                #     min='1930-01-01'
+                # ),
+                URITemplateAction(
+                    label="SweetHouse官方網站",
+                    uri="https://www.sweethousetw.com/"
                 ),
                 MessageTemplateAction(
-                    label="看抽獎品項",
-                    text="有哪些抽獎品項呢？"
+                    label="查看雷達回波圖",
+                    text="雷達"
                 ),
-                URITemplateAction(
-                    label="免費註冊享回饋",
-                    uri="https://tw.shop.com/nbts/create-myaccount.xhtml?returnurl=https%3A%2F%2Ftw.shop.com%2F"
-                )
+                
             ]
         )
     )
