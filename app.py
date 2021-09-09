@@ -9,6 +9,8 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,ImageSendMessage
 )
+
+from Function import *
 import os
 import requests
 from bs4 import BeautifulSoup
@@ -41,9 +43,12 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    print('event= ', event)
-    print('event.message= ',event.message)
-    if event.message.text == "喵":
+    # print('event= ', event)
+    # print('event.message= ',event.message)
+
+    msg = event.message.text
+
+    if msg == "喵":
         r = requests.get('https://www.google.com/search?q=cat&sxsrf=AOaemvImC7MDwPJ1pYHw4NJkvRuabzvPug:1631091057322&source=lnms&tbm=isch&sa=X&ved=2ahUKEwid_8TY_-7yAhUHBZQKHdNFCGsQ_AUoAnoECAEQBA&biw=1440&bih=638')
         soup = BeautifulSoup(r.text, 'html.parser')
         imgs = soup.find_all('img')
@@ -51,10 +56,11 @@ def handle_message(event):
         for i in imgs:
             imgs_list.append(i.get('src'))
         random_index = random.randrange(len(imgs_list))
-        line_bot_api.reply_message(
-                event.reply_token,
-                ImageSendMessage(original_content_url=imgs_list[random_index], 
-                                 preview_image_url=imgs_list[random_index]))
+        line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=imgs_list[random_index], preview_image_url=imgs_list[random_index]))
+    elif msg == "功能":
+        message = buttons_message()
+        line_bot_api.reply_message(event.reply_token, message)
+
     else:            
         line_bot_api.reply_message(
                     event.reply_token,
