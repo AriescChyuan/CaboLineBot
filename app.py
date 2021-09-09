@@ -15,6 +15,7 @@ import os
 import requests
 from bs4 import BeautifulSoup
 import random
+import re
 
 app = Flask(__name__)
 
@@ -58,9 +59,11 @@ def handle_message(event):
             imgs_list.append(i.get('src'))
         random_index = random.randrange(len(imgs[2:]))
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=imgs_list[random_index], preview_image_url=imgs_list[random_index]))
+
     elif msg == "功能":
         message = buttons_message()
         line_bot_api.reply_message(event.reply_token, message)
+
     elif msg == "IU":
         IU_URL = requests.get('https://imgur.com/search/score?q=iu')
         soup = BeautifulSoup(IU_URL.text,'html')
@@ -70,6 +73,16 @@ def handle_message(event):
             IU_img_list.append('https:' + i.get('src'))
         random_index = random.randrange(len(IU_img_list))
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=IU_img_list[random_index], preview_image_url=IU_img_list[random_index]))
+    elif msg == "抽sweethouse商品":
+        r = requests.get('https://www.sweethousetw.com/products/')
+        soup = BeautifulSoup(r.text,'html')
+        x = soup.find_all('a',href=re.compile('^/products/'))
+        product_list = []
+        for i in range(len(x)):
+            product_list.append(x[i].get('href'))
+        random_index = random.randrange(len(product_list))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage('https://www.sweethousetw.com/' + product_list[random_index]))
+
     elif msg == "雷達":
         r = requests.get('https://www.cwb.gov.tw/V8/C/W/OBS_Radar.html')
         soup = BeautifulSoup(r.text,'html')

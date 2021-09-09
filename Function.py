@@ -31,6 +31,10 @@ def buttons_message():
                     text="IU"
                 ),
                 MessageTemplateAction(
+                    label="抽SweetHouse商品",
+                    text="抽sweethouse商品"
+                ),
+                MessageTemplateAction(
                     label="查看雷達回波圖",
                     text="雷達"
                 ),
