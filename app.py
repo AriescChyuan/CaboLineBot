@@ -128,7 +128,7 @@ def handle_message(event):
             if index==5:
                break
             url = data['href']
-        news += "https://news.google.com/{}\n".format(url)
+            news += "https://news.google.com/{}\n".format(url)
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=news))
 
     else:        
