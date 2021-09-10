@@ -1,7 +1,8 @@
 import random
-x =int(random.random()*1000)
+
 
 def random_talk():
+    x =int(random.random()*1000)
     talk = ''
     if x < 10:
         talk = '嘻嘻'
