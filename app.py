@@ -110,7 +110,8 @@ def handle_message(event):
                     TextSendMessage(text=event.message.text + ' @_@a'))
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event,destination):
-    print(destination)
+    print('event',event)
+    print('destination',destination)
 
 
 if __name__ == "__main__":
