@@ -104,7 +104,8 @@ def handle_message(event):
         png_url = x[5].get('content')
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=png_url, preview_image_url=png_url))
 
-    else:            
+    else:        
+        pass    
         # line_bot_api.reply_message(
         #             event.reply_token,
         #             TextSendMessage(text=event.message.text + ' @_@a'))
