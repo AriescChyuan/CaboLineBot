@@ -22,10 +22,7 @@ def buttons_message():
                 #     max='2019-03-10',
                 #     min='1930-01-01'
                 # ),
-                URITemplateAction(
-                    label="SweetHouse官方網站",
-                    uri="https://www.sweethousetw.com/"
-                ),
+                # 
                 
                 MessageTemplateAction(
                     label="抽SweetHouse商品",

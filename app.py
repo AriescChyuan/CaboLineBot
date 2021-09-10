@@ -108,14 +108,15 @@ def handle_message(event):
         res = requests.get(url)
         soup = BeautifulSoup(res.text, 'html.parser') 
         x = soup.select('ul.ranking_list_r a')
-        movie_ranking = ''
+        movie_ranking = '近期前五名電影:\n'
 
         for index, i in enumerate(x) :
-            if index == 10:
+            if index == 5:
                 break
-            title = i.find('span').text
+            # title = i.find('span').text
             link = i['href']
-            movie_ranking += "{}\n{}\n".format(title,link)
+            # movie_ranking += "{}\n{}\n".format(title,link)
+            movie_ranking += link+'\n'
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=movie_ranking))
     elif msg == "新聞":
         url = 'https://news.google.com/topstories?hl=zh-TW&gl=TW&ceid=TW:zh-Hant'
