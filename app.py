@@ -103,6 +103,8 @@ def handle_message(event):
         x = soup.find_all('meta')
         png_url = x[5].get('content')
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=png_url, preview_image_url=png_url))
+    elif msg == "test":
+        line_bot_api.broadcast(TextSendMessage(text='Hello World!'))
 
     else:        
         pass    
