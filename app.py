@@ -103,18 +103,21 @@ def handle_message(event):
         x = soup.find_all('meta')
         png_url = x[5].get('content')
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=png_url, preview_image_url=png_url))
-    elif msg == "test":
-        rich_menu_to_create = RichMenu(
-        size=RichMenuSize(width=2500, height=843),
-        selected=False,
-        name="Nice richmenu",
-        chat_bar_text="Tap here",
-        areas=[RichMenuArea(
-        bounds=RichMenuBounds(x=0, y=0, width=2500, height=843),
-        action=URIAction(label='Go to line.me', uri='https://line.me'))]
-        )
-        rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
-        print('rich_menu_id= ',rich_menu_id)
+    elif msg == "電影":
+        url = 'https://movies.yahoo.com.tw/'
+        res = requests.get(url)
+        soup = BeautifulSoup(res.text, 'html.parser') 
+        x = soup.select('ul.ranking_list_r a')
+        movie_ranking = ''
+
+        for index, i in enumerate(x) :
+            if index == 10:
+                break
+            title = i.find('span').text
+            link = i['href']
+            movie_ranking += "{}\n{}\n".format(title,link)
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=movie_ranking)
+
 
     else:        
         pass    
