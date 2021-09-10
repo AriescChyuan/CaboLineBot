@@ -116,7 +116,7 @@ def handle_message(event):
             title = i.find('span').text
             link = i['href']
             movie_ranking += "{}\n{}\n".format(title,link)
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=movie_ranking)
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=movie_ranking))
 
 
     else:        
