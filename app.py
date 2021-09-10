@@ -112,6 +112,22 @@ def handle_message(event):
 def handle_message(event,destination):
     print('event',event)
     print('destination',destination)
+    msg = event.message.text
+    if msg == "抽sweethouse商品":
+        r = requests.get('https://www.sweethousetw.com/products/')
+        soup = BeautifulSoup(r.text,'html')
+        x = soup.find_all('a',href=re.compile('^/products/'))
+        product_url__list = []
+        product_photo_list = []
+        for i in range(len(x)):
+            product_url__list.append(x[i].get('href'))
+            if x[i].find(class_ = "boxify-image center-contain sl-lazy-image") == None:
+                product_photo_list.append('None')
+            else:
+                product_photo_list.append(x[i].find(class_ = "boxify-image center-contain sl-lazy-image").get('style').split('(')[-1][:-2])
+        random_index = random.randrange(len(product_url__list))
+        # line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=product_photo_list[random_index], preview_image_url=product_photo_list[random_index]))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage('https://www.sweethousetw.com/' + product_url__list[random_index]))
 
 
 if __name__ == "__main__":
