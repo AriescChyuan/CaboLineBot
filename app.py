@@ -11,6 +11,7 @@ from linebot.models import (
 )
 
 from Function import *
+from random_speak import  *
 import os
 import requests
 from bs4 import BeautifulSoup
@@ -132,10 +133,8 @@ def handle_message(event):
        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=news))
 
     else:        
-        pass    
-        # line_bot_api.reply_message(
-        #             event.reply_token,
-        #             TextSendMessage(text=event.message.text + ' @_@a'))
+        talk = random_talk()   
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=talk))
 
 
 if __name__ == "__main__":
