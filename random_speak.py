@@ -2,7 +2,7 @@ import random
 
 
 def random_talk():
-    x =int(random.random()*10000)
+    x =int(random.random()*5000)
     talk = ''
     if x < 5:
         talk = '嘻嘻'
