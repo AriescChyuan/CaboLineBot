@@ -104,7 +104,17 @@ def handle_message(event):
         png_url = x[5].get('content')
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=png_url, preview_image_url=png_url))
     elif msg == "test":
-        line_bot_api.broadcast(TextSendMessage(text='Hello World!'))
+        rich_menu_to_create = RichMenu(
+        size=RichMenuSize(width=2500, height=843),
+        selected=False,
+        name="Nice richmenu",
+        chat_bar_text="Tap here",
+        areas=[RichMenuArea(
+        bounds=RichMenuBounds(x=0, y=0, width=2500, height=843),
+        action=URIAction(label='Go to line.me', uri='https://line.me'))]
+        )
+        rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
+        print('rich_menu_id= ',rich_menu_id)
 
     else:        
         pass    
