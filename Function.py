@@ -32,7 +32,15 @@ def buttons_message():
                     text="抽sweethouse商品"
                 ),
                 MessageTemplateAction(
-                    label="查看雷達回波圖",
+                    label="今日前五大新聞",
+                    text="新聞"
+                ),
+                MessageTemplateAction(
+                    label="近期排行前五名電影",
+                    text="電影"
+                ),
+                MessageTemplateAction(
+                    label="雷達回波圖",
                     text="雷達"
                 )
                 

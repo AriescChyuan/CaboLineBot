@@ -117,7 +117,18 @@ def handle_message(event):
             link = i['href']
             movie_ranking += "{}\n{}\n".format(title,link)
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=movie_ranking))
-
+    elif msg == "新聞":
+        url = 'https://news.google.com/topstories?hl=zh-TW&gl=TW&ceid=TW:zh-Hant'
+        res = requests.get(url)
+        soup = BeautifulSoup(res.text, 'html.parser') 
+        x = soup.select('a.VDXfz')
+        news ='今日前五大新聞:\n'
+        for index, data in enumerate(x):
+            if index==5:
+               break
+            url = data['href']
+        news += '{}\n'.format(url)
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=news))
 
     else:        
         pass    
