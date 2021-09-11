@@ -2,7 +2,8 @@ import random
 
 
 def random_talk():
-    x =int(random.random()*5000)
+    x =int(random.random()*3000)
+    print('x= ',x)
     talk = ''
     if x < 5:
         talk = '嘻嘻'
