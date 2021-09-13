@@ -47,12 +47,12 @@ def callback():
 def handle_message(event):
     # print('event= ', event)
     # print('event.message= ',event.message)
-    
+    url = give_picture(msg)
+    line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=url, preview_image_url=url))
     msg = event.message.text
     response = talk_to_you(msg)
     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=response))
-    url = give_picture(msg)
-    line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=url, preview_image_url=url))
+    
     # if msg.find('咖波')!= -1 and msg.find('笨') != -1  :
     #     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=('哭么阿！！')))
     # elif msg.find('咖波')!= -1 and msg.find('智障') != -1  :
