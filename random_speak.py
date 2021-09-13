@@ -1,8 +1,57 @@
 import random
+from linebot import (
+    LineBotApi, WebhookHandler
+)
+from linebot.exceptions import (
+    InvalidSignatureError
+)
+from linebot.models import (
+    MessageEvent, TextMessage, TextSendMessage,ImageSendMessage
+)
+def talk_to_you(msg):
+    if msg.find('咖波')!=-1 or msg.find('卡波')!=-1 or msg.find('cabo')!=-1 :
+        # 被罵反應
+        if msg.find('笨') != -1  :
+            talk = '哭么阿！！'
+        elif  msg.find('智障') != -1  :
+            talk = '你才低能兒 凸！！'
+        elif  msg.find('白目') != -1  :
+            talk = '你才白目'
+        elif  msg.find('醜') != -1  :
+            talk = '你有照過鏡子嗎？ 還敢說我'
+        elif  msg.find('廢') != -1  :
+            talk = '你也沒多有用阿！'
+        elif  msg.find('呆') != -1  :
+            talk = '你才呆啦 ！！'
+        elif  msg.find('去死') != -1  :
+            talk = '你才去死啦 哼！！'
+        elif  msg.find('肥') != -1 or msg.find('胖') != -1 or msg.find('豬') != -1:
+    
+            if msg.find('肥')!=-1:
+                talk = '你才肥'
+            elif msg.find('胖')!=-1:
+                talk = '你才大胖子'
+            elif msg.find('豬')!=-1:
+                talk = '你爸媽是豬，才生你這個豬兒子！！'
+       
+    else :
+        x =int(random.random()*5)
+        if x == 0:
+            talk = '幹嘛？'
+        elif x == 1:
+            talk = '???'
+        elif x == 2 :
+            talk = '請問有什麼事嗎？'
+        elif x ==3 :
+            talk = '什麼？'
+        elif x == 4 :
+            talk = '沒空啦'
+        elif x ==5:
+            talk = 'zZZ'
 
-
+    return talk 
 def random_talk():
-    x =int(random.random()*2000)
+    x =int(random.random()*2500)
     print('x= ',x)
     talk = ''
     if x < 5:
