@@ -47,9 +47,10 @@ def callback():
 def handle_message(event):
     # print('event= ', event)
     # print('event.message= ',event.message)
+    msg = event.message.text
     url = give_picture(msg)
     line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=url, preview_image_url=url))
-    msg = event.message.text
+    
     response = talk_to_you(msg)
     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=response))
     
