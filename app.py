@@ -51,20 +51,22 @@ def handle_message(event):
     msg = event.message.text
 
     if msg.find('咖波')!= -1 and msg.find('笨') != -1  :
-        print('哭么阿！！')
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=('哭么阿！！')))
     elif msg.find('咖波')!= -1 and msg.find('智障') != -1  :
-        print('你才低能兒 凸！！')
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=('你才低能兒 凸！！')))
+    elif msg.find('咖波')!= -1 and msg.find('白目') != -1  :
+         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=('你才白目')))
     elif msg.find('咖波')!= -1 and msg.find('醜') != -1  :
-        print('你有照過鏡子嗎？ 還敢說我')
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=('你有照過鏡子嗎？ 還敢說我')))
     elif msg.find('咖波')!= -1 and msg.find('肥') != -1 or msg.find('胖') != -1 or msg.find('豬') != -1:
     
         if msg.find('肥')!=-1:
-            print('你才肥')
+            talk = '你才肥'
         elif msg.find('胖')!=-1:
-            print('你才大胖子')
+            talk = '你才大胖子'
         elif msg.find('豬')!=-1:
-            print('你爸媽是豬，才生你這個豬兒子！！')
-            
+            talk = '你爸媽是豬，才生你這個豬兒子！！'
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=talk))
     elif msg.find('咖波')!=-1 or msg.find('卡波')!=-1 or msg.find('cabo')!=-1 :
         x =int(random.random()*5)
         if x == 0:
