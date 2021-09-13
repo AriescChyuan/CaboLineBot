@@ -2,7 +2,7 @@ import random
 
 
 def random_talk():
-    x =int(random.random()*1500)
+    x =int(random.random()*2000)
     print('x= ',x)
     talk = ''
     if x < 5:
