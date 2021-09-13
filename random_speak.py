@@ -33,21 +33,21 @@ def talk_to_you(msg):
                 talk = '你才大胖子'
             elif msg.find('豬')!=-1:
                 talk = '你爸媽是豬，才生你這個豬兒子！！'
-       
-    else :
-        x =int(random.random()*5)
-        if x == 0:
-            talk = '幹嘛？'
-        elif x == 1:
-            talk = '???'
-        elif x == 2 :
-            talk = '請問有什麼事嗎？'
-        elif x ==3 :
-            talk = '什麼？'
-        elif x == 4 :
-            talk = '沒空啦'
-        elif x ==5:
-            talk = 'zZZ'
+        else :
+            x =int(random.random()*5)
+            if x == 0:
+                talk = '幹嘛？'
+            elif x == 1:
+              talk = '???'
+            elif x == 2 :
+              talk = '請問有什麼事嗎？'
+            elif x ==3 :
+              talk = '什麼？'
+            elif x == 4 :
+              talk = '沒空啦'
+            elif x ==5:
+              talk = 'zZZ'
+    
 
     return talk 
 def random_talk():
