@@ -73,7 +73,7 @@ def give_picture(msg):
             goal = msg[msg.index('張')+1 : msg.find('圖')]
 
         r = requests.get('https://unsplash.com/s/photos/{}'.format(goal))
-        soup = BeautifulSoup(r.text, "lxml") 
+        soup = BeautifulSoup(r.text, "html.parser") 
         x = soup.find_all('img',{'class','oCCRx'})
         url_list =  [u.get('src') for u in x]
         random_index = random.randrange(len(url_list))
