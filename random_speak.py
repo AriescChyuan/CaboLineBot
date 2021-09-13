@@ -2,7 +2,7 @@ import random
 
 
 def random_talk():
-    x =int(random.random()*3000)
+    x =int(random.random()*1500)
     print('x= ',x)
     talk = ''
     if x < 5:
@@ -47,5 +47,7 @@ def random_talk():
         talk = 'Hi~'
     elif x >= 135 and x <140:
         talk = '什麼時候我也會收到禮物呀！！'
+    elif x >= 140 and x <145:
+        talk = '小布丁把餅乾吃完了...'
 
     return talk

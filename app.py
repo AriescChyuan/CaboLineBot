@@ -49,6 +49,21 @@ def handle_message(event):
     # print('event.message= ',event.message)
 
     msg = event.message.text
+    if msg.find('咖波')!=-1 or msg.find('卡波')!=-1 or msg.find('cabo')!=-1 :
+        x =int(random.random()*5)
+        if x == 0:
+            talk = '幹嘛？'
+        elif x == 1:
+            talk = '???'
+        elif x == 2 :
+            talk = '請問有什麼事嗎？'
+        elif x ==3 :
+            talk = '什麼？'
+        elif x == 4 :
+            talk = '沒空啦'
+        elif x ==5:
+            talk = 'zZZ'
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=talk))
 
     if msg == "喵":
         r = requests.get('https://www.tooopen.com/img/89_869.aspx')
@@ -129,7 +144,7 @@ def handle_message(event):
            if index==5:
                break
            url = data['href']
-           news += "https://news.google.com/{}\n".format(url)
+           news += "https://news.googlÇÇe.com/{}\n".format(url)
        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=news))
 
     else:        
