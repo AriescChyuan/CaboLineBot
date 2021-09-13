@@ -8,6 +8,11 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,ImageSendMessage
 )
+import requests
+import os
+from bs4 import BeautifulSoup
+import random
+import re
 def talk_to_you(msg):
     if msg.find('咖波')!=-1 or msg.find('卡波')!=-1 or msg.find('cabo')!=-1 :
         # 被罵反應
@@ -50,6 +55,25 @@ def talk_to_you(msg):
     
 
     return talk 
+def give_picture(msg):
+    if msg.find('咖波')!=-1 or msg.find('卡波')!=-1 or msg.find('cabo')!=-1 :
+        if msg.find('照') != -1 or  msg.find('圖') !=-1 and msg.find('美') and msg.find('的'):
+            goal = msg[msg.index('張')+1 : msg.index('的')+1]
+        if msg.find('照') != -1 or  msg.find('圖') !=-1 and msg.find('美'):
+            goal = msg[msg.index('張')+1 : msg.index('美')+1]
+        elif msg.find('照片') != -1 or  msg.find('圖片') !=-1 and msg.find('的'):
+            goal = msg[msg.index('張')+1 : msg.index('的')+1]
+        elif msg.find('照片') != -1:
+            goal = msg[msg.index('張')+1 : msg.index('照')+1]
+        elif msg.find('圖片') !=-1:
+            goal = msg[msg.index('張')+1 : msg.index('圖')+1]
+
+        r = requests.get('https://unsplash.com/s/photos/{}'.format(goal))
+        soup = BeautifulSoup(r.text, "lxml") 
+        x = soup.find_all('img',{'class','oCCRx'})
+        url_list =  [u.get('src') for u in x]
+        random_index = random.randrange(len(url_list))
+        return url_list[random_index]
 def random_talk():
     x =int(random.random()*2500)
     print('x= ',x)
