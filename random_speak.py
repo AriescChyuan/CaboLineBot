@@ -53,6 +53,8 @@ def talk_to_you(msg):
               talk = '沒空啦'
             elif x ==5:
               talk = 'zZZ'
+    else:
+        return
     
 
     return talk 
@@ -72,7 +74,8 @@ def give_picture(msg):
             goal = msg[msg.index('張')+1 : msg.find('照')]
         elif msg.find('圖') !=-1:
             goal = msg[msg.index('張')+1 : msg.find('圖')]
-
+        else :
+            return
         # r = requests.get('https://unsplash.com/s/photos/{}'.format(goal))
         # soup = BeautifulSoup(r.text, "html.parser") 
         # x = soup.find_all('img',{'class','oCCRx'})
