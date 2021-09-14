@@ -80,16 +80,6 @@ def handle_message(event):
     elif msg.lower() == "menu":
         message = buttons_message()
         line_bot_api.reply_message(event.reply_token, message)
-
-    elif msg == "IU":
-        IU_URL = requests.get('https://imgur.com/search/score?q=iu')
-        soup = BeautifulSoup(IU_URL.text,'html')
-        x = soup.find_all('img')
-        IU_img_list = []
-        for i in x[3:]:
-            IU_img_list.append('https:' + i.get('src'))
-        random_index = random.randrange(len(IU_img_list))
-        line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=IU_img_list[random_index], preview_image_url=IU_img_list[random_index]))
     elif msg == "抽sweethouse商品":
         r = requests.get('https://www.sweethousetw.com/products/')
         soup = BeautifulSoup(r.text,'html')
