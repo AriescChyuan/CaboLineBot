@@ -72,12 +72,18 @@ def give_picture(msg):
         elif msg.find('圖') !=-1:
             goal = msg[msg.index('張')+1 : msg.find('圖')]
 
-        r = requests.get('https://unsplash.com/s/photos/{}'.format(goal))
-        soup = BeautifulSoup(r.text, "html.parser") 
-        x = soup.find_all('img',{'class','oCCRx'})
-        url_list =  [u.get('src') for u in x]
-        random_index = random.randrange(len(url_list))
-        return url_list[random_index]
+        # r = requests.get('https://unsplash.com/s/photos/{}'.format(goal))
+        # soup = BeautifulSoup(r.text, "html.parser") 
+        # x = soup.find_all('img',{'class','oCCRx'})
+        # url_list =  [u.get('src') for u in x]
+        r = requests.get('https://www.google.com/search?q={}&rlz=1C2CAFB_enTW617TW617&source=lnms&tbm=isch&sa=X&ved=0ahUKEwictOnTmYDcAhXGV7wKHX-OApwQ_AUICigB&biw=1128&bih=960'.format(goal))
+        headers = {'User-Agent': 'Mozilla/5.0'}
+        response = requests.get(r,headers = headers) #使用header避免訪問受到限制
+        soup = BeautifulSoup(response.text,'html.parser')
+        urls = soup.find_all('img',{'class':'yWs4tf'})
+        urls_lsit = [ x.get('src') for x in urls]
+        random_index = random.randrange(len(urls_lsit))
+        return urls_lsit[random_index]
 def random_talk():
     x =int(random.random()*2500)
     print('x= ',x)
