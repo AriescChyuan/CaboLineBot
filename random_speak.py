@@ -76,7 +76,7 @@ def give_picture(msg):
             return
         print('goal',goal)
         url = 'https://www.google.com/search?q={}&rlz=1C2CAFB_enTW617TW617&source=lnms&tbm=isch&sa=X&ved=0ahUKEwictOnTmYDcAhXGV7wKHX-OApwQ_AUICigB&biw=1128&bih=960'.format(goal)
-        headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36'}
+        headers = {'User-Agent': 'Mozilla/5.0'}
         response = requests.get(url,headers = headers) #使用header避免訪問受到限制
         soup = BeautifulSoup(response.text,'html.parser')
         urls = soup.find_all('img',{'class':'yWs4tf'})
