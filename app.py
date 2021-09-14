@@ -48,17 +48,15 @@ def handle_message(event):
     # print('event= ', event)
     # print('event.message= ',event.message)
     msg = event.message.text
-    url = give_picture(msg)
-    print('url: ',url)
-    # line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=url, preview_image_url=url))
-    
-    response = talk_to_you(msg)
-    print('response:', response)
-    # line_bot_api.reply_message(event.reply_token,TextSendMessage(text=response))
-    
 
-    
-    
+    url = give_picture(msg)
+    response = talk_to_you(msg)
+
+    if url != None:
+        line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=url, preview_image_url=url))
+    elif response != None:
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=response))
+
 
     if msg == "喵":
         r = requests.get('https://www.tooopen.com/img/89_869.aspx')
@@ -79,7 +77,7 @@ def handle_message(event):
         random_index = random.randrange(len(cat_img_list))
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=cat_img_list[random_index], preview_image_url=cat_img_list[random_index]))
 
-    elif msg == "Menu":
+    elif msg.lower() == "menu":
         message = buttons_message()
         line_bot_api.reply_message(event.reply_token, message)
 
