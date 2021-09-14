@@ -14,6 +14,7 @@ from bs4 import BeautifulSoup
 import random
 import re
 def talk_to_you(msg):
+    talk =''
     if msg.find('咖波')!=-1 or msg.find('卡波')!=-1 or msg.find('cabo')!=-1 :
         # 被罵反應
         if msg.find('笨') != -1  :
