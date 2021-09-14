@@ -31,8 +31,8 @@ def talk_to_you(msg):
             talk = '你才呆啦 ！！'
         elif  msg.find('去死') != -1  :
             talk = '你才去死啦 哼！！'
-        elif  msg.find('白痴') != -1  :
-            talk = '你才87勒 肝！'
+        elif  msg.find('白痴') != -1 or msg.find('白癡') != -1  :
+            talk = '你才87勒 干！'
         elif  msg.find('肥') != -1 or msg.find('胖') != -1 or msg.find('豬') != -1:
     
             if msg.find('肥')!=-1:
@@ -68,10 +68,6 @@ def give_picture(msg):
             goal = msg[msg.index('張')+1 : msg.index('照')]
         elif msg.find('圖片') !=-1:
             goal = msg[msg.index('張')+1 : msg.index('圖')]
-#         elif (msg.find('照') != -1 or  msg.find('圖') !=-1) and msg.find('美') != -1 and msg.find('的') != -1:
-#             goal = msg[msg.index('張')+1 : msg.index('的')]
-#         elif (msg.find('照') != -1 or  msg.find('圖') !=-1) and msg.find('美') != -1:
-#             goal = msg[msg.index('張')+1 : msg.rfind('美')]
         elif msg.find('照') != -1 :
             goal = msg[msg.index('張')+1 : msg.find('照')]
         elif msg.find('圖') !=-1:
