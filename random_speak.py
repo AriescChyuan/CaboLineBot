@@ -31,6 +31,8 @@ def talk_to_you(msg):
             talk = '你才呆啦 ！！'
         elif  msg.find('去死') != -1  :
             talk = '你才去死啦 哼！！'
+        elif  msg.find('白痴') != -1  :
+            talk = '你才87勒 肝！'
         elif  msg.find('肥') != -1 or msg.find('胖') != -1 or msg.find('豬') != -1:
     
             if msg.find('肥')!=-1:
@@ -54,7 +56,7 @@ def talk_to_you(msg):
             elif x ==5:
               talk = 'zZZ'
     else:
-        return
+        return 
     
 
     return talk 
@@ -76,10 +78,7 @@ def give_picture(msg):
             goal = msg[msg.index('張')+1 : msg.find('圖')]
         else :
             return
-        # r = requests.get('https://unsplash.com/s/photos/{}'.format(goal))
-        # soup = BeautifulSoup(r.text, "html.parser") 
-        # x = soup.find_all('img',{'class','oCCRx'})
-        # url_list =  [u.get('src') for u in x]
+        print('goal',goal)
         r = requests.get('https://www.google.com/search?q={}&rlz=1C2CAFB_enTW617TW617&source=lnms&tbm=isch&sa=X&ved=0ahUKEwictOnTmYDcAhXGV7wKHX-OApwQ_AUICigB&biw=1128&bih=960'.format(goal))
         headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36'}
         response = requests.get(r,headers = headers) #使用header避免訪問受到限制
