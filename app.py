@@ -17,6 +17,13 @@ import requests
 from bs4 import BeautifulSoup
 import random
 import re
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
+
+import time
 
 app = Flask(__name__)
 
@@ -56,6 +63,44 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=url, preview_image_url=url))
     elif response != None:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=response))
+
+    if msg.lower().find('#') == 0:
+        chrome = webdriver.Chrome('./chromedriver')
+        target = msg
+        url_list=[]
+        try:
+            chrome.get("https://www.instagram.com/")
+            username = WebDriverWait(chrome, 5).until(
+                EC.presence_of_element_located((By.NAME, "username"))
+            )
+            username.send_keys('jetliayu@gmail.com')
+            password = WebDriverWait(chrome, 5).until(
+                EC.presence_of_element_located((By.NAME, "password"))
+            )
+            password.send_keys('Aries19920321')
+            password.submit()
+            data_save_windows = WebDriverWait(chrome, 5).until(
+                EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/div/div/section/div/button'))
+             ).click()
+            time.sleep(1)
+            search = WebDriverWait(chrome, 5).until(
+                EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/nav/div[2]/div/div/div[2]/input'))
+            )   
+            search.send_keys(target)
+            time.sleep(0.5)
+            search.send_keys(Keys.RETURN)
+            time.sleep(0.5)
+            search.send_keys(Keys.RETURN)
+            WebDriverWait(chrome, 5).until(
+                EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/main/header/div[2]/div/div[1]/h1'))
+            )
+            imgs = chrome.find_elements_by_class_name("FFVAD")
+            for img in imgs:
+                url_list.append(img.get_attribute('src'))
+            random_index = random.randrange(len(url_list))
+            line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=url_list[random_index], preview_image_url=url_list[random_index]))
+        finally:
+            chrome.quit()
 
 
     if msg == "喵":
