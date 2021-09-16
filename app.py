@@ -70,26 +70,26 @@ def handle_message(event):
         chrome_options.add_argument("--headless") #無頭模式
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--no-sandbox")
-        chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+        chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
         # chrome = webdriver.Chrome('./chromedriver')
         target = msg
         url_list=[]
         try:
             chrome.get("https://www.instagram.com/")
-            username = WebDriverWait(chrome, 5).until(
+            username = WebDriverWait(chrome, 10).until(
                 EC.presence_of_element_located((By.NAME, "username"))
             )
             username.send_keys('jetliayu@gmail.com')
-            password = WebDriverWait(chrome, 5).until(
+            password = WebDriverWait(chrome, 10).until(
                 EC.presence_of_element_located((By.NAME, "password"))
             )
             password.send_keys('Aries19920321')
             password.submit()
-            data_save_windows = WebDriverWait(chrome, 5).until(
+            data_save_windows = WebDriverWait(chrome, 10).until(
                 EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/div/div/section/div/button'))
              ).click()
             time.sleep(1)
-            search = WebDriverWait(chrome, 5).until(
+            search = WebDriverWait(chrome, 10).until(
                 EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/nav/div[2]/div/div/div[2]/input'))
             )   
             search.send_keys(target)
@@ -97,7 +97,7 @@ def handle_message(event):
             search.send_keys(Keys.RETURN)
             time.sleep(0.5)
             search.send_keys(Keys.RETURN)
-            WebDriverWait(chrome, 5).until(
+            WebDriverWait(chrome, 10).until(
                 EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/main/header/div[2]/div/div[1]/h1'))
             )
             imgs = chrome.find_elements_by_class_name("FFVAD")
