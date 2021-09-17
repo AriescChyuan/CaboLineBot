@@ -75,6 +75,7 @@ def handle_message(event):
         # chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"))
 
         # chrome = webdriver.Chrome('./chromedriver')
+        print('chrome=',chrome)
         target = msg
         url_list=[]
         try:
