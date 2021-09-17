@@ -66,6 +66,7 @@ def handle_message(event):
 
     elif msg.lower().find('#') == 0:
         print('driver_path : ',os.environ.get("CHROMEDRIVER_PATH"))
+        print('CHROMEDRIVER_VERSION: ',os.environ.get("CHROMEDRIVER_VERSION"))
         chrome_options = webdriver.ChromeOptions()
         chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
         chrome_options.add_argument("--headless") #無頭模式
