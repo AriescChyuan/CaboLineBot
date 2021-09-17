@@ -184,7 +184,10 @@ def handle_message(event):
 
     else:        
         talk = random_talk()   
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=talk))
+        if talk != "":
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text=talk))
+        else:
+            pass
 
 
 if __name__ == "__main__":

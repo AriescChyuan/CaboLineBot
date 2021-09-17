@@ -85,7 +85,6 @@ def give_picture(msg):
         return urls_lsit[random_index]
 def random_talk():
     x =int(random.random()*2500)
-    print('x= ',x)
     talk = ''
     if x < 5:
         talk = '嘻嘻'
