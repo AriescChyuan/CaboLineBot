@@ -70,7 +70,7 @@ def handle_message(event):
         chrome_options = webdriver.ChromeOptions()
         chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
         chrome_options.add_argument("--headless") #無頭模式
-        # chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--no-sandbox")
         chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
         chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"))
@@ -81,7 +81,7 @@ def handle_message(event):
         try:
             chrome.get("https://www.instagram.com/")
             username = WebDriverWait(chrome, 30).until(
-                EC.presence_of_element_located((By.NAME, "username"))
+                EC.presence_of_element_located((By.XPATH, '//*[@id="loginForm"]/div/div[1]/div/label/input'))
             )
             print('username:',username)
             # username.send_keys('jetliayu@gmail.com')
