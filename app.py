@@ -68,14 +68,13 @@ def handle_message(event):
         print('driver_path : ',os.environ.get("CHROMEDRIVER_PATH"))
         chrome_options = webdriver.ChromeOptions()
         chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-        # chrome_options.add_argument("--headless") #無頭模式
+        chrome_options.add_argument("--headless") #無頭模式
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--no-sandbox")
         chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
         # chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"))
-
+        print('chrome: ',chrome)
         # chrome = webdriver.Chrome('./chromedriver')
-        print('chrome=',chrome)
         target = msg
         url_list=[]
         try:
