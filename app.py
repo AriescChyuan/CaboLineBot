@@ -64,14 +64,14 @@ def handle_message(event):
     elif response != None:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=response))
 
-    if msg.lower().find('#') == 0:
+    elif msg.lower().find('#') == 0:
         chrome_options = webdriver.ChromeOptions()
         chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
         # chrome_options.add_argument("--headless") #無頭模式
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--no-sandbox")
-        chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
-        # chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"))
+        # chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
+        chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"))
         # chrome = webdriver.Chrome('./chromedriver')
         target = msg
         url_list=[]
@@ -110,7 +110,7 @@ def handle_message(event):
             chrome.quit()
 
 
-    if msg == "喵":
+    elif msg == "喵":
         r = requests.get('https://www.tooopen.com/img/89_869.aspx')
 
         # soup = BeautifulSoup(r.text, 'html.parser')
