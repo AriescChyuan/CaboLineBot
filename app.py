@@ -65,6 +65,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=response))
 
     elif msg.lower().find('#') == 0:
+        print('driver_path : ',os.environ.get("CHROMEDRIVER_PATH"))
         chrome_options = webdriver.ChromeOptions()
         chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
         # chrome_options.add_argument("--headless") #無頭模式
@@ -113,13 +114,6 @@ def handle_message(event):
     elif msg == "喵":
         r = requests.get('https://www.tooopen.com/img/89_869.aspx')
 
-        # soup = BeautifulSoup(r.text, 'html.parser')
-        # imgs = soup.find_all('img',limit=None)
-        # imgs_list = []
-        # for i in imgs[2:]:
-        #     imgs_list.append(i.get('src'))
-        # random_index = random.randrange(len(imgs[2:]))
-        # line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=imgs_list[random_index], preview_image_url=imgs_list[random_index]))
         IU_URL = requests.get('https://imgur.com/search/score?q=cat')
         soup = BeautifulSoup(IU_URL.text,'html')
         x = soup.find_all('img')
