@@ -73,14 +73,14 @@ def handle_message(event):
         # chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--no-sandbox")
         chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-        # chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"))
+        chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"))
         print('chrome: ',chrome)
         # chrome = webdriver.Chrome('./chromedriver')
         target = msg
         url_list=[]
         try:
             chrome.get("https://www.instagram.com/")
-            username = WebDriverWait(chrome, 10).until(
+            username = WebDriverWait(chrome, 30).until(
                 EC.presence_of_element_located((By.NAME, "username"))
             )
             print('username:',username)
