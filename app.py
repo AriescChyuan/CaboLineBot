@@ -83,7 +83,7 @@ def handle_message(event):
         url_list=[]
         try:
             chrome.get("https://www.instagram.com/")
-            print(chrome.page_source)
+            # print(chrome.page_source)
             username = WebDriverWait(chrome, 5).until(
                 EC.presence_of_element_located((By.NAME, "username"))
             )
@@ -104,9 +104,9 @@ def handle_message(event):
                 EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/nav/div[2]/div/div/div[2]/input'))
             )   
             search.send_keys(target)
-            time.sleep(1)
+            time.sleep(5)
             search.send_keys(Keys.RETURN)
-            time.sleep(1)
+            time.sleep(5)
             search.send_keys(Keys.RETURN)
             WebDriverWait(chrome, 5).until(
                 EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/main/header/div[2]/div/div[1]/h1'))
