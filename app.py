@@ -80,7 +80,7 @@ def handle_message(event):
         try:
             chrome.get("https://www.instagram.com/")
             username = WebDriverWait(chrome, 10).until(
-                EC.presence_of_element_located((By.XPATH, '//*[@id="loginForm"]/div/div[1]/div/label/input'))
+                EC.presence_of_element_located((By.NAME, "username"))
             )
             print('username:',username)
             username.send_keys('jetliayu@gmail.com')
