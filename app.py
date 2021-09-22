@@ -89,9 +89,9 @@ def handle_message(event):
             )
             password.send_keys('Aries19920321')
             password.submit()
-            data_save_windows = WebDriverWait(chrome, 10).until(
-                EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/div/div/section/div/button'))
-             ).click()
+            # data_save_windows = WebDriverWait(chrome, 10).until(
+            #     EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/div/div/section/div/button'))
+            #  ).click()
             time.sleep(1)
             search = WebDriverWait(chrome, 10).until(
                 EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/nav/div[2]/div/div/div[2]/input'))
