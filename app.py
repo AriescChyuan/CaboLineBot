@@ -83,6 +83,10 @@ def handle_message(event):
         url_list=[]
         try:
             chrome.get("https://www.instagram.com/")
+            login = WebDriverWait(chrome, 5).until(
+                EC.presence_of_element_located((By.CLASS_NAME, "_47KiJ"))
+            )
+            print(login)
             username = WebDriverWait(chrome, 5).until(
                 EC.presence_of_element_located((By.NAME, "username"))
             )
