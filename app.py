@@ -68,13 +68,17 @@ def handle_message(event):
         # print('driver_path : ',os.environ.get("CHROMEDRIVER_PATH"))
         # print('CHROMEDRIVER_VERSION: ',os.environ.get("CHROMEDRIVER_VERSION"))
         chrome_options = webdriver.ChromeOptions()
+
+        #設定瀏覽器的語言為utf-8中文
+        chrome_options.add_argument("--lang=zh-CN.UTF8")
+        #設定瀏覽器的user agent
+        chrome_options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; WOW64; rv:53.0) Gecko/20100101 Firefox/53.0')
         # chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
         # chrome_options.add_argument("--headless") #無頭模式
         # chrome_options.add_argument("--disable-dev-shm-usage")
         # chrome_options.add_argument("--no-sandbox")
         # chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-        # chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"))
-        chrome = webdriver.Chrome()
+        chrome = webdriver.Chrome(chrome_options=chrome_options)
         target = msg
         url_list=[]
         try:
