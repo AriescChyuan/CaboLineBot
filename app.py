@@ -9,7 +9,7 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,ImageSendMessage
 )
-
+from config import *
 from Function import *
 from random_speak import  *
 import os
@@ -27,8 +27,8 @@ import time
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi('nU5RAEvJdjbjMPuvemDBYMsB1XSU+0mwS01/hR38amqqR8HtKiPdEBIGKfdnEg2mj7t+90PraaDEHzO5NmYuUlhShLc/O7hkw9E6OTO2+UcUUZ0OQ0pzdWzCplqawZC1T5OIX7fD7TBWi6NrUwOzugdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('4a98903311f5786863511cea1569ecf7')
+line_bot_api = LineBotApi('CHANNEL_ACCESS_TOKEN')
+handler = WebhookHandler('CHANNEL_SECRET')
 
 
 @app.route("/callback", methods=['POST'])
@@ -66,16 +66,15 @@ def handle_message(event):
 
     elif msg.lower().find('#') == 0:
         # print('driver_path : ',os.environ.get("CHROMEDRIVER_PATH"))
-        print('CHROMEDRIVER_VERSION: ',os.environ.get("CHROMEDRIVER_VERSION"))
+        # print('CHROMEDRIVER_VERSION: ',os.environ.get("CHROMEDRIVER_VERSION"))
         chrome_options = webdriver.ChromeOptions()
-        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-        chrome_options.add_argument("--headless") #無頭模式
-        chrome_options.add_argument("--disable-dev-shm-usage")
-        chrome_options.add_argument("--no-sandbox")
-        chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-        chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"))
-        print('chrome: ',chrome)
-        # chrome = webdriver.Chrome('./chromedriver')
+        # chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+        # chrome_options.add_argument("--headless") #無頭模式
+        # chrome_options.add_argument("--disable-dev-shm-usage")
+        # chrome_options.add_argument("--no-sandbox")
+        # chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+        # chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"))
+        chrome = webdriver.Chrome()
         target = msg
         url_list=[]
         try:
