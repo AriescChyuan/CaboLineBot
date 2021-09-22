@@ -78,17 +78,17 @@ def handle_message(event):
         # chrome_options.add_argument("--disable-dev-shm-usage")
         # chrome_options.add_argument("--no-sandbox")
         # chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-        chrome = webdriver.Chrome(chrome_options=chrome_options)
+        chrome = webdriver.Chrome()
         target = msg
         url_list=[]
         try:
             chrome.get("https://www.instagram.com/")
-            username = WebDriverWait(chrome, 10).until(
+            username = WebDriverWait(chrome, 5).until(
                 EC.presence_of_element_located((By.NAME, "username"))
             )
             print('username:',username)
             username.send_keys('jetliayu@gmail.com')
-            password = WebDriverWait(chrome, 10).until(
+            password = WebDriverWait(chrome, 5).until(
                 EC.presence_of_element_located((By.NAME, "password"))
             )
             password.send_keys('Aries19920321')

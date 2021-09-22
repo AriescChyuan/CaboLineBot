@@ -5,6 +5,7 @@ from linebot.models import *
 import requests
 from bs4 import BeautifulSoup
 
+
 #TemplateSendMessage - ButtonsTemplate (按鈕介面訊息)
 def buttons_message():
     message = TemplateSendMessage(
