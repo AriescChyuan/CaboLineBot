@@ -67,19 +67,19 @@ def handle_message(event):
     elif msg.lower().find('#') == 0:
         # print('driver_path : ',os.environ.get("CHROMEDRIVER_PATH"))
         # print('CHROMEDRIVER_VERSION: ',os.environ.get("CHROMEDRIVER_VERSION"))
-        chrome_options = webdriver.ChromeOptions()
+        #chrome_options = webdriver.ChromeOptions()
         #設定瀏覽器的語言為utf-8中文
-        chrome_options.add_argument("--lang=zh-CN.UTF8")
+        #chrome_options.add_argument("--lang=zh-CN.UTF8")
         #無頭模式
-        chrome_options.add_argument("--headless") 
+        #chrome_options.add_argument("--headless") 
         #設定瀏覽器的user agent
         # chrome_options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; WOW64; rv:53.0) Gecko/20100101 Firefox/53.0')
-        chrome_options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36')
+        #chrome_options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36')
         # chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
         # chrome_options.add_argument("--disable-dev-shm-usage")
         # chrome_options.add_argument("--no-sandbox")
         # chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-        chrome = webdriver.Chrome(options=chrome_options)
+        chrome = webdriver.Chrome()
         target = msg
         url_list=[]
         try:
