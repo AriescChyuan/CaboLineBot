@@ -85,16 +85,18 @@ def handle_message(event):
         try:
             chrome.get("https://www.instagram.com/")
             # print(chrome.page_source)
-            username = WebDriverWait(chrome, 5).until(
-                EC.presence_of_element_located((By.NAME, "username"))
-            )
-            print('username:',username)
-            username.send_keys('jetliayu@gmail.com')
-            password = WebDriverWait(chrome, 5).until(
-                EC.presence_of_element_located((By.NAME, "password"))
-            )
-            password.send_keys('Aries19920321')
-            password.submit()
+            WebDriverWait(chrome, 30).until(EC.presence_of_element_located((By.NAME, "username")))
+            username_input = chrome.find_elements_by_name('username')[0]
+            password_input = chrome.find_elements_by_name('password')[0]
+            username_input.send_keys('jetliayu@gmail.com')
+            password_input.send_keys('Aries19920321')
+            print("inputing username and password...")
+            # ------ 登入 ------
+            WebDriverWait(chrome, 30).until(EC.presence_of_element_located((By.XPATH,'//*[@id="loginForm"]/div/div[3]/button/div')))
+            # ------ 網頁元素定位 ------
+            login_click = chrome.find_elements_by_xpath('//*[@id="loginForm"]/div/div[3]/button/div')[0]
+            # ------ 點擊登入鍵 ------
+            login_click.click()
             data_save_windows = WebDriverWait(chrome, 5).until(
                 EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/div/div/section/div/button'))
             ).click()
