@@ -84,7 +84,7 @@ def handle_message(event):
         url_list=[]
         try:
             chrome.get("https://www.instagram.com/")
-            # print(chrome.page_source)
+            print('page_source = ',chrome.page_source)
             WebDriverWait(chrome, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="loginForm"]/div/div[1]/div/label/input')))
             username_input = chrome.find_elements_by_name('username')[0]
             password_input = chrome.find_elements_by_name('password')[0]
