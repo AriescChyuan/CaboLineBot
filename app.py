@@ -78,7 +78,7 @@ def handle_message(event):
             'Upgrade-Insecure-Requests': '1'
             }
         url="https://stock.tuchong.com/search?term={}".format(texturl)
-        req=requests.get(url,headers=header)
+        req=requests.get(url)
         soup=BeautifulSoup(req.text,'html.parser')
         js=soup.select('script')
         pattern = re.compile(r'(image_id\":(\"\d+\"))')
