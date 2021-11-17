@@ -163,13 +163,13 @@ def handle_message(event):
             movie_ranking += link+'\n'
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=movie_ranking))
     elif msg == "新聞":
-       r = requests.get('https://www.ettoday.net/news/hot-news.htm')
-       soup = BeautifulSoup(r.text,"lxml")
-       results = soup.select('.piece > .pic',limit=5)
-       news = ''
-       for i in results:
-           news += 'https://www.ettoday.net{}\n'.format(i.get('href')+'l')
-       line_bot_api.reply_message(event.reply_token,TextSendMessage(text=news))
+        r = requests.get('https://www.ettoday.net/news/hot-news.htm')
+        soup = BeautifulSoup(r.text,"lxml")
+        results = soup.select('.piece > .pic',limit=5)
+        news = ''
+        for i in results:
+            news += 'https://www.ettoday.net{}\n'.format(i.get('href')+'l')
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=news))
     else:        
         talk = random_talk()   
         if talk != "":

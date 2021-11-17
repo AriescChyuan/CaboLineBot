@@ -24,11 +24,6 @@ def buttons_message():
                 #     min='1930-01-01'
                 # ),
                 # 
-                
-                MessageTemplateAction(
-                    label="抽SweetHouse商品",
-                    text="抽sweethouse商品"
-                ),
                 MessageTemplateAction(
                     label="今日前五大新聞",
                     text="新聞"
