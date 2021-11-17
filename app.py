@@ -65,7 +65,7 @@ def handle_message(event):
     elif response != None:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=response))
     elif msg.lower().find('#') == 0:
-        texturl = parse.quote(msg[1:])
+        texturl = parse.quote(str(msg[1:]))
         header = {      
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
             'Cookie': 'wluuid=66;  ',
