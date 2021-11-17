@@ -79,7 +79,7 @@ def handle_message(event):
             }
         url="https://stock.tuchong.com/search?term={}".format(texturl)
         req=requests.get(url,headers=header)
-        soup=BeautifulSoup(req.text,'lxml')
+        soup=BeautifulSoup(req.text,'html.parser')
         js=soup.select('script')
         pattern = re.compile(r'(image_id\":(\"\d+\"))')
         va = pattern.findall(str(js))
