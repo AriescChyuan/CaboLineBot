@@ -24,6 +24,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 import time
+from  urllib import  parse
 
 app = Flask(__name__)
 
@@ -63,64 +64,91 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=url, preview_image_url=url))
     elif response != None:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=response))
-
     elif msg.lower().find('#') == 0:
-        # print('driver_path : ',os.environ.get("CHROMEDRIVER_PATH"))
-        # print('CHROMEDRIVER_VERSION: ',os.environ.get("CHROMEDRIVER_VERSION"))
-        chrome_options = webdriver.ChromeOptions()
-        #設定瀏覽器的語言為utf-8中文
-        #chrome_options.add_argument("--lang=zh-CN.UTF8")
-        #無頭模式
-        #chrome_options.add_argument("--headless") 
-        #設定瀏覽器的user agent
-        # chrome_options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; WOW64; rv:53.0) Gecko/20100101 Firefox/53.0')
-        chrome_options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36')
-        # chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-        # chrome_options.add_argument("--disable-dev-shm-usage")
-        # chrome_options.add_argument("--no-sandbox")
-        # chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-        chrome = webdriver.Chrome(options=chrome_options)
-        target = msg
+        texturl = parse.quote(msg[1:])
+        header = {      
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+            'Cookie': 'wluuid=66;  ',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+            'Accept-encoding': 'gzip, deflate, br',
+            'Accept-language': 'zh-CN,zh;q=0.9',
+            'Cache-Control': 'max-age=0',
+            'connection': 'keep-alive'
+            , 'Host': 'stock.tuchong.com',
+            'Upgrade-Insecure-Requests': '1'
+            }
+        url="https://stock.tuchong.com/search?term={}".format(texturl)
+        req=requests.get(url,headers=header)
+        soup=BeautifulSoup(req.text,'lxml')
+        js=soup.select('script')
+        pattern = re.compile(r'(image_id\":(\"\d+\"))')
+        va = pattern.findall(str(js))
+        # imageid = va.replace("\"",'')
+        # x = 'https://weiliicimg9.pstatp.com/weili/l/'+str(imageid)+'.webp'
+        # x
         url_list=[]
-        try:
-            chrome.get("https://www.instagram.com/")
-            print('page_source = ',chrome.page_source)
-            WebDriverWait(chrome, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="loginForm"]/div/div[1]/div/label/input')))
-            username_input = chrome.find_elements_by_name('username')[0]
-            password_input = chrome.find_elements_by_name('password')[0]
-            username_input.send_keys('jetliayu@gmail.com')
-            password_input.send_keys('Aries19920321')
-            print("inputing username and password...")
-            # ------ 登入 ------
-            WebDriverWait(chrome, 30).until(EC.presence_of_element_located((By.XPATH,'//*[@id="loginForm"]/div/div[3]/button/div')))
-            # ------ 網頁元素定位 ------
-            login_click = chrome.find_elements_by_xpath('//*[@id="loginForm"]/div/div[3]/button/div')[0]
-            # ------ 點擊登入鍵 ------
-            login_click.click()
-            data_save_windows = WebDriverWait(chrome, 5).until(
-                EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/div/div/section/div/button'))
-            ).click()
-            # notify_windows = WebDriverWait(chrome, 5).until(
-            #     EC.element_to_be_clickable((By.XPATH, '/html/body/div[5]/div/div/div/div[3]/button[2]'))
-            # ).click()
-            search = WebDriverWait(chrome, 5).until(
-                EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/nav/div[2]/div/div/div[2]/input'))
-            )   
-            search.send_keys(target)
-            time.sleep(5)
-            search.send_keys(Keys.RETURN)
-            time.sleep(5)
-            search.send_keys(Keys.RETURN)
-            WebDriverWait(chrome, 5).until(
-                EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/main/header/div[2]/div/div[1]/h1'))
-            )
-            imgs = chrome.find_elements_by_class_name("FFVAD")
-            for img in imgs:
-                url_list.append(img.get_attribute('src'))
-            random_index = random.randrange(len(url_list))
-            line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=url_list[random_index], preview_image_url=url_list[random_index]))
-        finally:
-            chrome.quit()
+        for i in range(len(va)):
+            url = 'https://weiliicimg9.pstatp.com/weili/l/'+va[i][1].strip('\"')+'.webp'
+            url_list.append(url)
+        url = random.choice(url_list)
+        line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=url, preview_image_url=url))
+    # elif msg.lower().find('#') == 0:
+    #     # print('driver_path : ',os.environ.get("CHROMEDRIVER_PATH"))
+    #     # print('CHROMEDRIVER_VERSION: ',os.environ.get("CHROMEDRIVER_VERSION"))
+    #     chrome_options = webdriver.ChromeOptions()
+    #     #設定瀏覽器的語言為utf-8中文
+    #     #chrome_options.add_argument("--lang=zh-CN.UTF8")
+    #     #無頭模式
+    #     #chrome_options.add_argument("--headless") 
+    #     #設定瀏覽器的user agent
+    #     # chrome_options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; WOW64; rv:53.0) Gecko/20100101 Firefox/53.0')
+    #     chrome_options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36')
+    #     # chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    #     # chrome_options.add_argument("--disable-dev-shm-usage")
+    #     # chrome_options.add_argument("--no-sandbox")
+    #     # chrome = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    #     chrome = webdriver.Chrome(options=chrome_options)
+    #     target = msg
+    #     url_list=[]
+    #     try:
+    #         chrome.get("https://www.instagram.com/")
+    #         print('page_source = ',chrome.page_source)
+    #         WebDriverWait(chrome, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="loginForm"]/div/div[1]/div/label/input')))
+    #         username_input = chrome.find_elements_by_name('username')[0]
+    #         password_input = chrome.find_elements_by_name('password')[0]
+    #         username_input.send_keys('jetliayu@gmail.com')
+    #         password_input.send_keys('Aries19920321')
+    #         print("inputing username and password...")
+    #         # ------ 登入 ------
+    #         WebDriverWait(chrome, 30).until(EC.presence_of_element_located((By.XPATH,'//*[@id="loginForm"]/div/div[3]/button/div')))
+    #         # ------ 網頁元素定位 ------
+    #         login_click = chrome.find_elements_by_xpath('//*[@id="loginForm"]/div/div[3]/button/div')[0]
+    #         # ------ 點擊登入鍵 ------
+    #         login_click.click()
+    #         data_save_windows = WebDriverWait(chrome, 5).until(
+    #             EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/div/div/section/div/button'))
+    #         ).click()
+    #         # notify_windows = WebDriverWait(chrome, 5).until(
+    #         #     EC.element_to_be_clickable((By.XPATH, '/html/body/div[5]/div/div/div/div[3]/button[2]'))
+    #         # ).click()
+    #         search = WebDriverWait(chrome, 5).until(
+    #             EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/nav/div[2]/div/div/div[2]/input'))
+    #         )   
+    #         search.send_keys(target)
+    #         time.sleep(5)
+    #         search.send_keys(Keys.RETURN)
+    #         time.sleep(5)
+    #         search.send_keys(Keys.RETURN)
+    #         WebDriverWait(chrome, 5).until(
+    #             EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/main/header/div[2]/div/div[1]/h1'))
+    #         )
+    #         imgs = chrome.find_elements_by_class_name("FFVAD")
+    #         for img in imgs:
+    #             url_list.append(img.get_attribute('src'))
+    #         random_index = random.randrange(len(url_list))
+    #         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=url_list[random_index], preview_image_url=url_list[random_index]))
+    #     finally:
+    #         chrome.quit()
 
     elif msg.lower() == "menu":
         message = buttons_message()
@@ -170,7 +198,7 @@ def handle_message(event):
         results = soup.select('.piece > .pic',limit=5)
         news = ''
         for i in results:
-            news += 'https://www.ettoday.net{}\n'.format(i.get('href'))
+            news += 'https://www.ettoday.net{}\n'.format(i.get('href')+'l')
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=news))
 
     else:        
