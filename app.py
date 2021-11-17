@@ -147,6 +147,7 @@ def handle_message(event):
         x = soup.find_all('meta')
         png_url = x[5].get('content')
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=png_url, preview_image_url=png_url))
+
     elif msg == "電影":
         url = 'https://movies.yahoo.com.tw/'
         res = requests.get(url)
@@ -162,14 +163,16 @@ def handle_message(event):
             # movie_ranking += "{}\n{}\n".format(title,link)
             movie_ranking += link+'\n'
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=movie_ranking))
+
     elif msg == "新聞":
         r = requests.get('https://www.ettoday.net/news/hot-news.htm')
-        soup = BeautifulSoup(r.text,"lxml")
+        soup = BeautifulSoup(r.text,"html.parser")
         results = soup.select('.piece > .pic',limit=5)
         news = ''
         for i in results:
-            news += 'https://www.ettoday.net{}\n'.format(i.get('href')+'l')
+            news += 'https://www.ettoday.net{}\n'.format(i.get('href'))
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=news))
+
     else:        
         talk = random_talk()   
         if talk != "":
