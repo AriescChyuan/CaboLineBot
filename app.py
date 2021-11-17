@@ -181,7 +181,7 @@ def handle_message(event):
        results = soup.select('.piece > .pic',limit=5)
        news = ''
        for i in results:
-           news += 'https://www.ettoday.net/{}\n'.format(i.get('href'))
+           news += 'https://www.ettoday.net{}\n'.format(i.get('href'))
        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=news))
     else:        
         talk = random_talk()   
