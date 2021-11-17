@@ -122,36 +122,23 @@ def handle_message(event):
         finally:
             chrome.quit()
 
-
-    elif msg == "喵":
-        r = requests.get('https://www.tooopen.com/img/89_869.aspx')
-
-        IU_URL = requests.get('https://imgur.com/search/score?q=cat')
-        soup = BeautifulSoup(IU_URL.text,'html')
-        x = soup.find_all('img')
-        cat_img_list = []
-        for i in x[3:]:
-            cat_img_list.append('https:' + i.get('src'))
-        random_index = random.randrange(len(cat_img_list))
-        line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=cat_img_list[random_index], preview_image_url=cat_img_list[random_index]))
-
     elif msg.lower() == "menu":
         message = buttons_message()
         line_bot_api.reply_message(event.reply_token, message)
-    elif msg == "抽sweethouse商品":
-        r = requests.get('https://www.sweethousetw.com/products/')
-        soup = BeautifulSoup(r.text,'html')
-        x = soup.find_all('a',href=re.compile('^/products/'))
-        product_url__list = []
-        product_photo_list = []
-        for i in range(len(x)):
-            product_url__list.append(x[i].get('href'))
-            if x[i].find(class_ = "boxify-image center-contain sl-lazy-image") == None:
-                product_photo_list.append('None')
-            else:
-                product_photo_list.append(x[i].find(class_ = "boxify-image center-contain sl-lazy-image").get('style').split('(')[-1][:-2])
-        random_index = random.randrange(len(product_url__list))
-        line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=product_photo_list[random_index], preview_image_url=product_photo_list[random_index]))
+    # elif msg == "抽sweethouse商品":
+    #     r = requests.get('https://www.sweethousetw.com/products/')
+    #     soup = BeautifulSoup(r.text,'html')
+    #     x = soup.find_all('a',href=re.compile('^/products/'))
+    #     product_url__list = []
+    #     product_photo_list = []
+    #     for i in range(len(x)):
+    #         product_url__list.append(x[i].get('href'))
+    #         if x[i].find(class_ = "boxify-image center-contain sl-lazy-image") == None:
+    #             product_photo_list.append('None')
+    #         else:
+    #             product_photo_list.append(x[i].find(class_ = "boxify-image center-contain sl-lazy-image").get('style').split('(')[-1][:-2])
+    #     random_index = random.randrange(len(product_url__list))
+    #     line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=product_photo_list[random_index], preview_image_url=product_photo_list[random_index]))
         # line_bot_api.reply_message(event.reply_token,TextSendMessage('https://www.sweethousetw.com/' + product_url__list[random_index]))
 
     elif msg == "雷達":
@@ -181,7 +168,7 @@ def handle_message(event):
        results = soup.select('.piece > .pic',limit=5)
        news = ''
        for i in results:
-           news += 'https://www.ettoday.net{}\n'.format(i.get('href'))
+           news += 'https://www.ettoday.net{}\n'.format(i.get('href')+'l')
        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=news))
     else:        
         talk = random_talk()   

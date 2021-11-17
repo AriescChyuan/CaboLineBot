@@ -7,7 +7,7 @@ sched = BlockingScheduler()
 # 定義排程 : 在周一至周五，每 20 分鐘就做一次 def scheduled_jog()
 @sched.scheduled_job('cron', day_of_week='mon-fri', minute='*/20')
 def scheduled_job():
-    url = "https://{你的 Heroku App 名稱}.herokuapp.com/"
+    url = "https://linebot-bruce.herokuapp.com/"
     connect = urllib.request.urlopen(url)
     
 sched.start()  # 啟動排程
