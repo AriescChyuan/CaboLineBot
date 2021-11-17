@@ -91,7 +91,7 @@ def handle_message(event):
         for i in range(len(va)):
             url = 'https://weiliicimg9.pstatp.com/weili/l/'+va[i][1].strip('\"')+'.webp'
             url_list.append(url)
-        url = random.choice(url_list)
+        url = random.choice(url_list[0:100])
         print('url',url)
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=url, preview_image_url=url))
     # elif msg.lower().find('#') == 0:
