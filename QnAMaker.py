@@ -9,7 +9,7 @@ def QnAMaker(message_text):
                    json.dumps({'question': message_text}),
                    headers={
                        'Content-Type': 'application/json',
-                       'Ocp-Apim-Subscription-Key': 'dc303682-21ae-4bf1-b813-4a416a151f74'
+                       'Authorization': 'dc303682-21ae-4bf1-b813-4a416a151f74'
                    }
                )
 
