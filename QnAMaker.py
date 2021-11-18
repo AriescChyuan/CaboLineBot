@@ -22,7 +22,8 @@ def QnAMaker(message_text):
             return data["error"]["message"]
         #這裡我們預設取第一個答案
         answer = random.choice(data['answers'][0]['answer'].split('，'))
-        print('answer', answer)
+        if answer == 'No good match found in KB.':
+            return '？？？'
         return answer
         
 
