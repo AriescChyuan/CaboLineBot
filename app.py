@@ -133,7 +133,8 @@ def handle_message(event):
             news += 'https://www.ettoday.net{}\n'.format(i.get('href')+'l')
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=news))
     else:       
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=ans))
+        if ans != '':    
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text=ans))
         # talk = random_talk()   
         # if talk != "":
         #     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=talk))
