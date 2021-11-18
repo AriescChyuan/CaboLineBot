@@ -21,9 +21,9 @@ def QnAMaker(message_text):
             return data["error"]["message"]
         #這裡我們預設取第一個答案
         answer = data['answers'][0]['answer']
-
-        return answer
         print('answer', answer)
+        return answer
+        
 
     except Exception:
 
