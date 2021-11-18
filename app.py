@@ -205,11 +205,11 @@ def handle_message(event):
         for i in results:
             news += 'https://www.ettoday.net{}\n'.format(i.get('href')+'l')
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=news))
-
-    else:        
+    elif msg:
         AI_respone = QnAMaker(msg)
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=AI_respone))
-        
+    else:        
+
         talk = random_talk()   
         if talk != "":
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=talk))
