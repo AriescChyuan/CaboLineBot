@@ -14,7 +14,7 @@ def QnAMaker(message_text):
                )
 
     data = response.json()
-
+    print('respone =', data)
     try: 
         #我們使用免費service可能會超過限制（一秒可以發的request數）
         if "error" in data:
