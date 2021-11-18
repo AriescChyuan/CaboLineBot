@@ -25,6 +25,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 import time
 from  urllib import  parse
+import QnAMaker
 
 app = Flask(__name__)
 
@@ -210,7 +211,8 @@ def handle_message(event):
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=talk))
         else:
             pass
-
+        AI_respone = QnAMaker(msg)
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=AI_respone))
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
