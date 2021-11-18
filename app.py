@@ -205,8 +205,8 @@ def handle_message(event):
         for i in results:
             news += 'https://www.ettoday.net{}\n'.format(i.get('href')+'l')
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=news))
-            
-    else:       
+
+    elif msg :
         url = "https://caboqna.azurewebsites.net/qnamaker/knowledgebases/e6f059e2-e1c1-44c8-a494-6e3a385a1979/generateAnswer"
         # 發送request到QnAMaker Endpoint要答案
         response = requests.post(
@@ -232,6 +232,9 @@ def handle_message(event):
         
         # AI_respone = QnAMaker(msg)
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=answer))
+
+    else:       
+        
         talk = random_talk()   
         if talk != "":
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=talk))
