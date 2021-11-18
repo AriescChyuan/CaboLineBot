@@ -205,34 +205,6 @@ def handle_message(event):
         for i in results:
             news += 'https://www.ettoday.net{}\n'.format(i.get('href')+'l')
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=news))
-
-    elif msg :
-        url = "https://caboqna.azurewebsites.net/qnamaker/knowledgebases/e6f059e2-e1c1-44c8-a494-6e3a385a1979/generateAnswer"
-        # 發送request到QnAMaker Endpoint要答案
-        response = requests.post(
-                   url,
-                   json.dumps({'question': msg}),
-                   headers={
-                       'Content-Type': 'application/json',
-                       'Authorization': 'dc303682-21ae-4bf1-b813-4a416a151f74'
-                      }
-                   )
-
-        data = response.json()
-        print('respone =', data)
-        #我們使用免費service可能會超過限制（一秒可以發的request數）
-        if "error" in data:
-             answer =  data["error"]["message"]
-
-        else:
-            #這裡我們預設取第一個答案
-             answer = data['answers'][0]['answer']
-        print('answer', answer)
-
-        
-        # AI_respone = QnAMaker(msg)
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=answer))
-
     else:       
         
         talk = random_talk()   
