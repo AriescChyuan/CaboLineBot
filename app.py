@@ -25,7 +25,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 import time
 from  urllib import  parse
-import QnAMaker
+from QnAMaker import *
 
 app = Flask(__name__)
 
