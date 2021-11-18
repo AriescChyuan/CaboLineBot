@@ -1,5 +1,6 @@
 import requests
 import json
+import random
 
 url = "https://caboqna.azurewebsites.net/qnamaker/knowledgebases/e6f059e2-e1c1-44c8-a494-6e3a385a1979/generateAnswer"
 def QnAMaker(message_text):
@@ -20,7 +21,7 @@ def QnAMaker(message_text):
         if "error" in data:
             return data["error"]["message"]
         #這裡我們預設取第一個答案
-        answer = data['answers'][0]['answer']
+        answer = random.choice(data['answers'][0]['answer'].split('，'))
         print('answer', answer)
         return answer
         
