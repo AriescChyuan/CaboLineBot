@@ -13,6 +13,14 @@ import os
 from bs4 import BeautifulSoup
 import random
 import re
+def greeting(msg):
+    ls = ['早安','晚安','午安']
+    respone= ''
+    for greet in ls:
+        if msg.find(greet) != -1:
+            respone = greet +'～！^_^'
+            break
+    return respone
 def talk_to_you(msg):
     talk =''
     if msg.find('咖波')!=-1 or msg.find('卡波')!=-1 or msg.find('cabo')!=-1 :

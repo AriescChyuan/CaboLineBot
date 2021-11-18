@@ -59,11 +59,13 @@ def handle_message(event):
 
     url = give_picture(msg)
     response = talk_to_you(msg)
-
+    greeting_resp = greeting(msg)
     if url != None:
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=url, preview_image_url=url))
     elif response != None:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=response))
+    elif greeting_resp != None:
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=greeting_resp))
     elif msg.lower().find('#') == 0:
         texturl = parse.quote(msg[1:])
         # header = {      
