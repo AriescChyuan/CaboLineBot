@@ -57,6 +57,11 @@ def handle_message(event):
     # print('event= ', event)
     # print('event.message= ',event.message)
     msg = event.message.text
+    
+    AI_respone = QnAMaker(msg)
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=AI_respone))
+
+
 
     url = give_picture(msg)
     response = talk_to_you(msg)
@@ -206,8 +211,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=news))
 
     else:        
-        AI_respone = QnAMaker(msg)
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=AI_respone))
+        
         talk = random_talk()   
         if talk != "":
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=talk))
