@@ -16,18 +16,15 @@ from random_speak import  *
 import os
 import requests
 from bs4 import BeautifulSoup
-import random
-import re
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.options import Options
-import time
-from  urllib import  parse
-from QnAMaker import *
+# from selenium import webdriver
+# from selenium.webdriver.common.by import By
+# from selenium.webdriver.support.ui import WebDriverWait
+# from selenium.webdriver.support import expected_conditions as EC
+# from selenium.webdriver.common.keys import Keys
+# from selenium.webdriver.chrome.options import Options
 
+from QnAMaker import *
+from SendPicture import *
 app = Flask(__name__)
 
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
@@ -67,35 +64,13 @@ def handle_message(event):
     #     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=response))
     # elif greeting_resp != None:
     #     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=greeting_resp))
-    if ans.lower().find('#') == 0:
-        texturl = parse.quote(msg[1:])
-        # header = {      
-        #     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
-        #     # 'Cookie': 'wluuid=66;  ',
-        #     # 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
-        #     # 'Accept-encoding': 'gzip, deflate, br',
-        #     # 'Accept-language': 'zh-CN,zh;q=0.9',
-        #     # 'Cache-Control': 'max-age=0',
-        #     # 'connection': 'keep-alive'
-        #     # , 'Host': 'stock.tuchong.com',
-        #     # 'Upgrade-Insecure-Requests': '1'
-        #     }
-        url="https://stock.tuchong.com/search?term={}".format(texturl)
-        req=requests.get(url)
-        soup=BeautifulSoup(req.text,'html.parser')
-        js=soup.select('script')
-        pattern = re.compile(r'(image_id\":(\"\d+\"))')
-        va = pattern.findall(str(js))
-        # imageid = va.replace("\"",'')
-        # x = 'https://weiliicimg9.pstatp.com/weili/l/'+str(imageid)+'.webp'
-        # x
-        url_list=[]
-        for i in range(len(va)):
-            url = 'https://weiliicimg9.pstatp.com/weili/l/'+va[i][1].strip('\"')+'.webp'
-            url_list.append(url)
-        url = random.choice(url_list)
-        # url = url_list[random.randint(0,len(url_list)-1)]
-        line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=url, preview_image_url=url))
+    if ans == '正妹':
+        img = sendPicture(ans)
+        line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=img, preview_image_url=img))
+        
+    elif ans == '帥哥':
+        img = sendPicture(ans)
+        line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=img, preview_image_url=img))
 
     elif ans.lower() == "menu":
         message = buttons_message()
