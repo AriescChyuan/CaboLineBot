@@ -7,7 +7,9 @@ def QnAMaker(message_text):
     # 發送request到QnAMaker Endpoint要答案
     response = requests.post(
                    url,
-                   json.dumps({'question': message_text}),
+                   json.dumps({'question': message_text,
+                               'scoreThreshold': 70,     #信賴分數，準確度
+                              }),
                    headers={
                        'Content-Type': 'application/json',
                        'Authorization': 'dc303682-21ae-4bf1-b813-4a416a151f74'
