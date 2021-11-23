@@ -67,7 +67,7 @@ def handle_message(event):
     if ans == '正妹':
         img = sendPicture(ans)
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=img, preview_image_url=img))
-        
+
     elif ans == '帥哥':
         img = sendPicture(ans)
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=img, preview_image_url=img))
@@ -107,6 +107,46 @@ def handle_message(event):
         for i in results:
             news += 'https://www.ettoday.net{}\n'.format(i.get('href')+'l')
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=news))
+    elif ans == '測試':
+        headers = {"Authorization":CHANNEL_ACCESS_TOKEN,"Content-Type":"application/json"}
+
+        body = {
+            "size": {"width": 2500, "height": 1686},
+            "selected": "true",
+            "name": "Controller",
+            "chatBarText": "Controller",
+            "areas":[
+        {
+          "bounds": {"x": 551, "y": 325, "width": 321, "height": 321},
+          "action": {"type": "message", "text": "up"}
+        },
+        {
+          "bounds": {"x": 876, "y": 651, "width": 321, "height": 321},
+          "action": {"type": "message", "text": "right"}
+        },
+        {
+          "bounds": {"x": 551, "y": 972, "width": 321, "height": 321},
+          "action": {"type": "message", "text": "down"}
+        },
+        {
+          "bounds": {"x": 225, "y": 651, "width": 321, "height": 321},
+          "action": {"type": "message", "text": "left"}
+        },
+        {
+          "bounds": {"x": 1433, "y": 657, "width": 367, "height": 367},
+          "action": {"type": "message", "text": "btn b"}
+        },
+        {
+          "bounds": {"x": 1907, "y": 657, "width": 367, "height": 367},
+          "action": {"type": "message", "text": "btn a"}
+        }
+        ]
+        }
+
+        req = requests.request('POST', 'https://api.line.me/v2/bot/richmenu', 
+                       headers=headers,data=json.dumps(body).encode('utf-8'))
+
+        print(req.text)
     else:       
         if ans != '':    
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=ans))
