@@ -186,4 +186,4 @@ def richmenu_start():
         rich_menu_id=rich_menu_b_id
     )
     line_bot_api.create_rich_menu_alias(alias_b)
-    print('success')
+    print('RichMenu Started!')
