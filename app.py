@@ -54,7 +54,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg = event.message.text
-    richmenu_start()
+
     ans = QnAMaker(msg)
 
     # url = give_picture(msg)
