@@ -175,14 +175,14 @@ def richmenu_start():
 
     # 7. Create rich menu alias A
     alias_a = RichMenuAlias(
-        rich_menu_alias_id='richmenu-alias-a',
+        rich_menu_alias_id='a',
         rich_menu_id=rich_menu_a_id
     )
     line_bot_api.create_rich_menu_alias(alias_a)
 
     # 8. Create rich menu alias B
     alias_b = RichMenuAlias(
-        rich_menu_alias_id='richmenu-alias-b',
+        rich_menu_alias_id='b',
         rich_menu_id=rich_menu_b_id
     )
     line_bot_api.create_rich_menu_alias(alias_b)
