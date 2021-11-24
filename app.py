@@ -25,6 +25,7 @@ from bs4 import BeautifulSoup
 
 from QnAMaker import *
 from SendPicture import *
+from RichMenu import *
 app = Flask(__name__)
 
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
@@ -108,45 +109,7 @@ def handle_message(event):
             news += 'https://www.ettoday.net{}\n'.format(i.get('href')+'l')
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=news))
     elif ans == '測試':
-        headers = {"Authorization":CHANNEL_ACCESS_TOKEN,"Content-Type":"application/json"}
-
-        body = {
-            "size": {"width": 2500, "height": 1686},
-            "selected": "true",
-            "name": "Controller",
-            "chatBarText": "Controller",
-            "areas":[
-        {
-          "bounds": {"x": 551, "y": 325, "width": 321, "height": 321},
-          "action": {"type": "message", "text": "up"}
-        },
-        {
-          "bounds": {"x": 876, "y": 651, "width": 321, "height": 321},
-          "action": {"type": "message", "text": "right"}
-        },
-        {
-          "bounds": {"x": 551, "y": 972, "width": 321, "height": 321},
-          "action": {"type": "message", "text": "down"}
-        },
-        {
-          "bounds": {"x": 225, "y": 651, "width": 321, "height": 321},
-          "action": {"type": "message", "text": "left"}
-        },
-        {
-          "bounds": {"x": 1433, "y": 657, "width": 367, "height": 367},
-          "action": {"type": "message", "text": "btn b"}
-        },
-        {
-          "bounds": {"x": 1907, "y": 657, "width": 367, "height": 367},
-          "action": {"type": "message", "text": "btn a"}
-        }
-        ]
-        }
-
-        req = requests.request('POST', 'https://api.line.me/v2/bot/richmenu', 
-                       headers=headers,data=json.dumps(body).encode('utf-8'))
-
-        print(req.text)
+        main()
     else:       
         if ans != '':    
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=ans))
