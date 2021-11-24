@@ -8,7 +8,7 @@ def QnAMaker(message_text):
     response = requests.post(
                    url,
                    json.dumps({'question': message_text,
-                               'scoreThreshold': 96,     #信賴分數，準確度 
+                               'scoreThreshold': 90,     #信賴分數，準確度 
                               }),
                    headers={
                        'Content-Type': 'application/json',
