@@ -54,6 +54,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg = event.message.text
+    richmenu_start()
     ans = QnAMaker(msg)
 
     # url = give_picture(msg)
@@ -109,7 +110,7 @@ def handle_message(event):
             news += 'https://www.ettoday.net{}\n'.format(i.get('href')+'l')
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=news))
     elif ans == '測試':
-        main()
+        pass
     else:       
         if ans != '':    
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=ans))

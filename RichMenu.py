@@ -113,7 +113,7 @@ def create_action(action):
         )
 
 
-def main():
+def richmenu_start():
     # 2. Create rich menu A (richmenu-a)
     rich_menu_object_a = rich_menu_object_a_json()
     areas = [
