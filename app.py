@@ -109,8 +109,9 @@ def handle_message(event):
         for i in results:
             news += 'https://www.ettoday.net{}\n'.format(i.get('href')+'l')
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=news))
-    elif ans == '測試':
-        pass
+    elif ans == '骰子':
+        dice = ['1','2','3','4','5','6']
+        ans = "您擲到的骰子點數為：{}點。".format(random.choice(dice))
     elif ans == '晚餐':
         ls = ['麥當勞','雞滷飯','火鍋','炒飯','泡麵','水果吃到飽']
         ans = random.choice(ls)
