@@ -111,6 +111,10 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=news))
     elif ans == '測試':
         pass
+    elif ans == '晚餐':
+        ls = ['麥當勞','雞滷飯','火鍋','炒飯','泡麵','水果吃到飽']
+        ans = random.choice(ls)
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=ans))
     else:       
         if ans != '':    
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=ans))
