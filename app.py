@@ -23,7 +23,7 @@ from bs4 import BeautifulSoup
 # from selenium.webdriver.support import expected_conditions as EC
 # from selenium.webdriver.common.keys import Keys
 # from selenium.webdriver.chrome.options import Options
-
+import datetime
 from QnAMaker import *
 from SendPicture import *
 from RichMenu import *
@@ -118,27 +118,9 @@ def handle_message(event):
         ls = ['麥當勞','雞滷飯','火鍋','炒飯','泡麵','水果吃到飽','鍋貼','滷味']
         ans = random.choice(ls)
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=ans))
-    elif ans == '測試':
-        data = {
-    "to": "U24c11ad61979778f76d11fb91ce15bf8",
-    "messages": [
-        {
-            "type": "text",
-            "text": "Hello~這是Line Bot API測試訊息"
-        },
-        {
-            "type": "sticker",
-            "packageId": "1",
-            "stickerId": "2"
-        }
-                 ]
-        }  
-        response = requests.post(
-                   'https://api.lxine.me/v2/bot/message/push',
-                   data=json.dumps(data),headers={
-                       'Content-Type': 'application/json',
-                       'Authorization': 'Bearer nU5RAEvJdjbjMPuvemDBYMsB1XSU+0mwS01/hR38amqqR8HtKiPdEBIGKfdnEg2mj7t+90PraaDEHzO5NmYuUlhShLc/O7hkw9E6OTO2+UcUUZ0OQ0pzdWzCplqawZC1T5OIX7fD7TBWi6NrUwOzugdB04t89/1O/w1cDnyilFU='})
-        print(requests.text)
+    elif ans == '時間':
+        time = '現在時間：'+ datetime.datetime.now().ctime()
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=time))
     else:       
         if ans != '':    
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=ans))
