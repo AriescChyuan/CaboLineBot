@@ -22,11 +22,11 @@ def scheduled_job():
     url = "https://linebot-bruce.herokuapp.com/"
     connect = urllib.request.urlopen(url)
 
-@sched.scheduled_job('cron', day_of_week='mon-sun', hour='11',minute='35')
+@sched.scheduled_job('cron', day_of_week='mon-sun', hour='11',minute='45')
 def scheduled_job():
     try:
-        text = '早安！！'
-        line_bot_api.push_message(line_bot_userid, TextSendMessage(text=text))
+        msg = '早安！！'
+        line_bot_api.push_message(line_bot_userid, TextSendMessage(text=msg))
     except LineBotApiError as e:
         print('MessagePush Error:',e)
 
