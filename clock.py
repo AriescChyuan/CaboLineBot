@@ -13,8 +13,8 @@ from config import *
 
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 line_bot_userid = USERID
-# scheduler1 = BackgroundScheduler(timezone="Asia/Taipei")
-scheduler2 = BackgroundScheduler()
+sched = BackgroundScheduler()
+# scheduler2 = BackgroundScheduler()
 # sched = BlockingScheduler()
 
 # 定義排程 : 在周一至周五，每 20 分鐘就做一次 def scheduled_jog()
@@ -23,7 +23,7 @@ scheduler2 = BackgroundScheduler()
 #     url = "https://linebot-bruce.herokuapp.com/"
 #     connect = urllib.request.urlopen(url)
 
-@scheduler2.scheduled_job('cron', day_of_week='mon-sun', hour='10',minute='57')
+@sched.scheduled_job('cron', day_of_week='mon-sun', hour='11',minute='5')
 def scheduled_job():
     try:
         text = '早安！！'
@@ -32,7 +32,7 @@ def scheduled_job():
         print('MessagePush Error:',e)
 
 # scheduler1.start()  
-scheduler2.start()  
+sched.start()  
 
 
 
