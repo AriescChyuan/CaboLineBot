@@ -8,20 +8,33 @@ from linebot import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,ImageSendMessage
 )
+from linebot.exceptions import LineBotApiError
 from config import *
 
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
-scheduler = BackgroundScheduler()
+line_bot_userid = USERID
+scheduler1 = BackgroundScheduler()
+scheduler2 = BackgroundScheduler()
 # sched = BlockingScheduler()
 
 # 定義排程 : 在周一至周五，每 20 分鐘就做一次 def scheduled_jog()
-@scheduler.scheduled_job('cron', day_of_week='mon-fri', minute='*/20')
+@scheduler1.scheduled_job('cron', day_of_week='mon-fri', minute='*/20')
 def scheduled_job():
     url = "https://linebot-bruce.herokuapp.com/"
     connect = urllib.request.urlopen(url)
-@scheduler.test_job('cron', day_of_week='mon-fri', minute='*/20')
+@scheduler2.test_job('cron', day_of_week='mon-sun', hour='8',minute='30')
 def test_job():
-    url = "https://linebot-bruce.herokuapp.com/"
-    connect = urllib.request.urlopen(url)
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=movie_ranking))
-scheduler.start()  # 啟動排程
+   
+    try:
+        text = '早安！！'
+        line_bot_api.push_message(line_bot_userid, TextSendMessage(text=text))
+    except LineBotApiError as e:
+        print(e)
+
+scheduler1.start()  
+scheduler2.start()  
+
+
+
+
+
