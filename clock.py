@@ -22,14 +22,13 @@ scheduler2 = BackgroundScheduler()
 def scheduled_job():
     url = "https://linebot-bruce.herokuapp.com/"
     connect = urllib.request.urlopen(url)
-@scheduler2.scheduled_job('cron', day_of_week='mon-sun', hour='8',minute='30')
+@scheduler2.scheduled_job('cron', day_of_week='mon-sun', hour='9',minute='30')
 def scheduled_job():
-   
     try:
         text = '早安！！'
         line_bot_api.push_message(line_bot_userid, TextSendMessage(text=text))
     except LineBotApiError as e:
-        print(e)
+        print('MessagePush Error:',e)
 
 scheduler1.start()  
 scheduler2.start()  
