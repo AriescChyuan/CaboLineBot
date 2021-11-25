@@ -22,7 +22,7 @@ def scheduled_job():
     url = "https://linebot-bruce.herokuapp.com/"
     connect = urllib.request.urlopen(url)
 
-@sched.scheduled_job('cron', day_of_week='mon-sun', hour='11',minute='55')
+@sched.scheduled_job('cron', day_of_week='mon-sun', hour='11',minute='58')
 def scheduled_job():
     try:
         line_bot_api.push_message(USERID, TextSendMessage(text='測試'))
