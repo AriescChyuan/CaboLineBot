@@ -22,7 +22,7 @@ def scheduled_job():
     url = "https://linebot-bruce.herokuapp.com/"
     connect = urllib.request.urlopen(url)
 
-@sched.scheduled_job('cron', day_of_week='mon-sun', hour='11',minute='30')
+@sched.scheduled_job('cron', day_of_week='mon-sun', hour='11',minute='35')
 def scheduled_job():
     try:
         text = '早安！！'
