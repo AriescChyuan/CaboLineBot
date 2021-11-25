@@ -22,8 +22,8 @@ scheduler2 = BackgroundScheduler()
 def scheduled_job():
     url = "https://linebot-bruce.herokuapp.com/"
     connect = urllib.request.urlopen(url)
-@scheduler2.test_job('cron', day_of_week='mon-sun', hour='8',minute='30')
-def test_job():
+@scheduler2.scheduled_job('cron', day_of_week='mon-sun', hour='8',minute='30')
+def scheduled_job():
    
     try:
         text = '早安！！'
