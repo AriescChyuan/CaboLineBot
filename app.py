@@ -121,6 +121,24 @@ def handle_message(event):
     elif ans == '時間':
         time = '現在時間：'+ datetime.datetime.now().ctime()
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=time))
+    elif ans == '地震':
+        r = requests.get('https://www.cwb.gov.tw/V8/C/E/MOD/EQ_ROW.html?T=2021112514-4')
+        soup = BeautifulSoup(r.text,"html.parser")
+        results = soup.find_all('a',attrs={'aria-label':'點此看更多詳細資訊'})
+
+        time = location = results[0].find_all('span')[0].text[:-3]
+        location = results[0].find('li').text
+        depth = results[0].find_all('li')[1].text[2:]
+        scale = results[0].find_all('li')[2].text[4:]
+        url  = 'https://www.cwb.gov.tw/' + results[0].get('href')
+        string = ''' 最近一次地震：\n
+        時間：{}
+        地點：{}
+        深度：{}
+        規模：{}
+        點我看更多：{}
+        '''.format(time, location, depth, scale, url)
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=string))
     else:       
         if ans != '':    
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=ans))
