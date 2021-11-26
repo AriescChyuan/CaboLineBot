@@ -131,7 +131,7 @@ def handle_message(event):
         depth = results[0].find_all('li')[1].text[2:]
         scale = results[0].find_all('li')[2].text[4:]
         url  = 'https://www.cwb.gov.tw/' + results[0].get('href')
-        string = "最近一次地震：時間：{}\n地點：{}\n深度：{}\n規模：{}\n點我看更多：{}".format(time, location, depth, scale, url)
+        string = "最近一次地震：\n時間：{}\n地點：{}\n深度：{}\n規模：{}\n點我看更多：{}".format(time, location, depth, scale, url)
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=string))
     else:       
         if ans != '':    
