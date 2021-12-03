@@ -25,4 +25,5 @@ def fan_control():
         print (json.dumps(payload))
         #要發布的主題和內容
         client.publish("linebot/linebot", json.dumps(payload))
-        time.sleep(5)
+        # time.sleep(5)
+        break

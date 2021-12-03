@@ -137,6 +137,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=string))
     elif ans == '電扇開':
         fan_control()
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="電扇開"))
     else:       
         if ans != '':    
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=ans))
