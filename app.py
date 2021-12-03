@@ -27,6 +27,7 @@ import datetime
 from QnAMaker import *
 from SendPicture import *
 from RichMenu import *
+from mqtt_pub import *
 app = Flask(__name__)
 
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
@@ -134,6 +135,8 @@ def handle_message(event):
         url  = 'https://www.cwb.gov.tw/' + results[0].get('href')
         string = "最近一次地震：\n時間：{}\n地點：{}\n最大震度：{}\n深度：{}\n規模：{}\n點我看更多：{}".format(time, location, maximum, depth, scale, url)
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=string))
+    elif ans == '電扇開':
+        fan_control()
     else:       
         if ans != '':    
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=ans))
