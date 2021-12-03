@@ -9,7 +9,7 @@ def on_connect(client, userdata, flags, rc, properties=None):
 def on_publish(client, userdata, mid, properties=None):
     print("mid: " + str(mid))
 
-def fan_control():
+def fan_control(msg):
     client = paho.Client(client_id="123", userdata=None, protocol=paho.MQTTv5)
     client.on_connect = on_connect
     client.tls_set(tls_version=mqtt.client.ssl.PROTOCOL_TLS)
@@ -20,6 +20,6 @@ def fan_control():
     while True:
         
         print('hi')
-        client.publish("linebot/linebot", payload="1", qos=1)
+        client.publish("linebot/linebot", payload=msg, qos=1)
         time.sleep(2)
         break

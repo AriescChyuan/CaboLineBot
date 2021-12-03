@@ -136,8 +136,11 @@ def handle_message(event):
         string = "最近一次地震：\n時間：{}\n地點：{}\n最大震度：{}\n深度：{}\n規模：{}\n點我看更多：{}".format(time, location, maximum, depth, scale, url)
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=string))
     elif ans == '電扇開':
-        fan_control()
+        fan_control("1")
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text="電扇開"))
+    elif ans == '電扇關':
+        fan_control("0")
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="電扇關"))
     else:       
         if ans != '':    
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=ans))
