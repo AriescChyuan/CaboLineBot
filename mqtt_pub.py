@@ -20,6 +20,6 @@ def fan_control():
     while True:
         
         print('hi')
-        client.publish("linebot/linebot", payload="on", qos=1)
+        client.publish("linebot/linebot", payload="1", qos=1)
         time.sleep(2)
         break
