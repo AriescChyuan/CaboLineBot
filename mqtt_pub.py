@@ -1,31 +1,25 @@
 import time
 import paho.mqtt.client as paho
 from paho import mqtt
-import json  
-import datetime 
+# import json  
+# import datetime 
+def on_connect(client, userdata, flags, rc, properties=None):
+    print("CONNACK received with code %s." % rc)
 
+def on_publish(client, userdata, mid, properties=None):
+    print("mid: " + str(mid))
 
 def fan_control():
-    # 設置日期時間的格式
-    ISOTIMEFORMAT = '%m/%d %H:%M:%S'
-
-    # 連線設定
-    # 初始化地端程式
-    client = paho.Client(client_id="linebot", userdata=None, protocol=paho.MQTTv5)
-
-    # 設定登入帳號密碼
-    client.username_pw_set("Bruce","Aries19920321")
-
-    # 設定連線資訊(IP, Port, 連線時間)
-    client.connect("337d8bc43b214494bf2990e1f5d1e905.s2.eu.hivemq.cloud", 8883, 60)
+    client = paho.Client(client_id="123", userdata=None, protocol=paho.MQTTv5)
+    client.on_connect = on_connect
     client.tls_set(tls_version=mqtt.client.ssl.PROTOCOL_TLS)
+    client.username_pw_set("Bruce", "Aries19920321")
+    client.connect("337d8bc43b214494bf2990e1f5d1e905.s2.eu.hivemq.cloud", 8883)
+    client.on_publish = on_publish
 
     while True:
-        # t0 = random.randint(0,30)
-        t = datetime.datetime.now().strftime(ISOTIMEFORMAT)
-        payload = {'message' : 'on' , 'Time' : t}
-        print (json.dumps(payload))
-        #要發布的主題和內容
-        client.publish("linebot/linebot", json.dumps(payload))
-        # time.sleep(5)
+        
+        print('hi')
+        client.publish("linebot/linebot", payload="on", qos=1)
+        time.sleep(2)
         break
