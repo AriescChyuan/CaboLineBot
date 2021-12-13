@@ -28,12 +28,12 @@ def scheduled_job():
         line_bot_api.push_message('U24c11ad61979778f76d11fb91ce15bf8', TextSendMessage(text='早安！'))
     except LineBotApiError as e:
         print('MessagePush Error:',e)
-@sched.scheduled_job('cron', day_of_week='mon-sun', hour='18',minute='0')
-def scheduled_job():
-    try:
-        line_bot_api.push_message('U24c11ad61979778f76d11fb91ce15bf8', TextSendMessage(text='帶攝影機！'))
-    except LineBotApiError as e:
-        print('MessagePush Error:',e)
+# @sched.scheduled_job('cron', day_of_week='mon-sun', hour='18',minute='0')
+# def scheduled_job():
+#     try:
+#         line_bot_api.push_message('U24c11ad61979778f76d11fb91ce15bf8', TextSendMessage(text='帶攝影機！'))
+#     except LineBotApiError as e:
+#         print('MessagePush Error:',e)
         
 sched.start()  
 
