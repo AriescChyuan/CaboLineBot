@@ -3,7 +3,7 @@ import json
 import random
 
 # url = "https://caboqna.azurewebsites.net/qnamaker/knowledgebases/e6f059e2-e1c1-44c8-a494-6e3a385a1979/generateAnswer"
-url = "https://caboqna.azurewebsites.net/qnamaker/knowledgebases/e6f059e2-e1c1-44c8-a494-6e3a385a1979/generateAnswer"
+url = "https://caboqna.azurewebsites.net/qnamaker/knowledgebases/d7955609-c5a4-43d3-b59b-500e40a09636/generateAnswer"
 def QnAMaker(message_text):
     # 發送request到QnAMaker Endpoint要答案
     response = requests.post(
