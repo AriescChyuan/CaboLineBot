@@ -2,6 +2,7 @@ import requests
 import json
 import random
 
+# url = "https://caboqna.azurewebsites.net/qnamaker/knowledgebases/e6f059e2-e1c1-44c8-a494-6e3a385a1979/generateAnswer"
 url = "https://caboqna.azurewebsites.net/qnamaker/knowledgebases/e6f059e2-e1c1-44c8-a494-6e3a385a1979/generateAnswer"
 def QnAMaker(message_text):
     # 發送request到QnAMaker Endpoint要答案
@@ -12,7 +13,7 @@ def QnAMaker(message_text):
                               }),
                    headers={
                        'Content-Type': 'application/json',
-                       'Authorization': 'dc303682-21ae-4bf1-b813-4a416a151f74'
+                       'Authorization': '8fb473c8-97c9-426e-943f-bc8b403fd157'
                    }
                )
 
