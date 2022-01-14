@@ -116,8 +116,9 @@ def handle_message(event):
         ans = "您擲到的骰子點數為：{}點。".format(random.choice(dice))
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=ans))
     elif ans == 'ELRS':
-        url = '''Github :https://github.com/ExpressLRS/ExpressLRS 
-                 Configurator : https://github.com/ExpressLRS/ExpressLRS-Configurator/releases/
+        url = '''官網 ： https://github.com/ExpressLRS/ExpressLRS 
+                 刷韌體軟體 ： https://github.com/ExpressLRS/ExpressLRS-Configurator/releases/
+                 設定教學 ： https://www.youtube.com/watch?v=SVSJg7AAK0U&t=617s
               '''
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=url))
     elif ans == '晚餐':
