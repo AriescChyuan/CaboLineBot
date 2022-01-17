@@ -11,7 +11,7 @@ def buttons_message():
     message = TemplateSendMessage(
         alt_text='功能列表',
         template=ButtonsTemplate(
-            thumbnail_image_url="https://scontent-tpe1-1.xx.fbcdn.net/v/t1.6435-9/174565562_1844518219042064_4536448119655854412_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=e3f864&_nc_ohc=eC5WFsujvzIAX9ZBlAy&_nc_ht=scontent-tpe1-1.xx&oh=e98d95b957f099c2f3fac233e48e8c0d&oe=6160E6CF",
+            thumbnail_image_url="https://pin.it/6b2bs4V",
             title="功能列表",
             text="想要什麼功能呢？",
             actions=[
