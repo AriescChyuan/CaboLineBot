@@ -11,7 +11,7 @@ def buttons_message():
     message = TemplateSendMessage(
         alt_text='功能列表',
         template=ButtonsTemplate(
-            thumbnail_image_url="https://images.pexels.com/photos/6427953/pexels-photo-6427953.jpeg?cs=srgb&dl=pexels-tom-fisk-6427953.jpg&fm=jpg",
+            thumbnail_image_url="https://i.imgur.com/QPc6mx8.jpg",
             title="功能列表",
             text="想要什麼功能呢？",
             actions=[
@@ -35,10 +35,6 @@ def buttons_message():
                 MessageTemplateAction(
                     label="幫你選晚餐～",
                     text="晚餐"
-                ),
-                MessageTemplateAction(
-                    label="西巴辣",
-                    text="骰子"
                 ),
                 MessageTemplateAction(
                     label="雷達回波圖",
