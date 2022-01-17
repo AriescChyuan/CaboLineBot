@@ -33,6 +33,14 @@ def buttons_message():
                     text="電影"
                 ),
                 MessageTemplateAction(
+                    label="幫你選晚餐～",
+                    text="晚餐"
+                ),
+                MessageTemplateAction(
+                    label="西巴辣",
+                    text="骰子"
+                ),
+                MessageTemplateAction(
                     label="雷達回波圖",
                     text="雷達"
                 )
