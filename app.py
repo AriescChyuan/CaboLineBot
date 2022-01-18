@@ -156,8 +156,8 @@ def handle_message(event):
         location_message = LocationSendMessage(
             title='烏日飛場',
             address='烏日飛場',
-            latitude=24.1088065,
-            longitude=121.6016170
+            latitude=24.1088411,
+            longitude=120.6016898
         )
         line_bot_api.reply_message(event.reply_token, location_message)
     elif ans == '芬園飛場':
