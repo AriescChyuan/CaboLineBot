@@ -54,10 +54,10 @@ def callback():
     return 'OK'
 @handler.add(PostbackEvent)    
 def handle_postback(event):
-        print(event.postback.data)
-        message = buttons_message()
-        line_bot_api.reply_message(event.reply_token, message)
-
+        if event.postback.data == 'fly_field':
+            message = field_location()
+            line_bot_api.reply_message(event.reply_token, message)
+        
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg = event.message.text
@@ -151,6 +151,31 @@ def handle_message(event):
     elif ans == '電扇關':
         fan_control("0")
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text="電扇關"))
+
+    elif ans == '烏日飛場':
+        location_message = LocationSendMessage(
+            title='烏日飛場',
+            address='烏日飛場',
+            latitude=24.1088065,
+            longitude=121.6016170
+        )
+        line_bot_api.reply_message(event.reply_token, location_message)
+    elif ans == '芬園飛場':
+        location_message = LocationSendMessage(
+            title='芬園飛場',
+            address='入口位置',
+            latitude=24.1956838,
+            longitude=120.6856098
+        )
+        line_bot_api.reply_message(event.reply_token, location_message)
+    elif ans == '一江橋飛場':
+        location_message = LocationSendMessage(
+            title='一江橋飛場',
+            address='台中市太平區新城路',
+            latitude=24.1324936,
+            longitude=120.7387336
+        )
+        line_bot_api.reply_message(event.reply_token, location_message)
     else:       
         if ans != '':    
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=ans))

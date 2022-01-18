@@ -27,7 +27,7 @@ def buttons_message():
                 PostbackTemplateAction(
                     label="各飛場位置",
                     text="飛場位置",
-                    data='fly'
+                    data='fly_field'
                 ),
                 MessageTemplateAction(
                     label="近期排行前五名電影",
@@ -46,7 +46,35 @@ def buttons_message():
         )
     )
     return message
-
+def field_location():
+    message = TemplateSendMessage(
+        alt_text='飛場位置',
+        template=ButtonsTemplate(
+            thumbnail_image_url="https://i.imgur.com/QPc6mx8.jpg",
+            title="飛場位置",
+            text="選擇您想去的位置",
+            actions=[
+                MessageTemplateAction(
+                    label="烏日",
+                    text="烏日飛場",
+                ),
+                MessageTemplateAction(
+                    label="芬園",
+                    text="芬園飛場"
+                ),
+                MessageTemplateAction(
+                    label="一江橋",
+                    text="一江橋飛場"
+                ),
+                # MessageTemplateAction(
+                #     label="下一頁",
+                #     text="飛場位置下一頁"
+                # )
+                
+            ]
+        )
+    )
+    return message
 #TemplateSendMessage - ConfirmTemplate(確認介面訊息)
 def Confirm_Template():
 
