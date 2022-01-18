@@ -52,6 +52,7 @@ def callback():
         abort(400)
 
     return 'OK'
+@handler.add(PostbackEvent)    
 def handle_postback(event):
         print(event.postback.data)
         message = buttons_message()
