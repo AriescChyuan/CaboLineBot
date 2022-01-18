@@ -24,9 +24,10 @@ def buttons_message():
                 #     min='1930-01-01'
                 # ),
                 # 
-                MessageTemplateAction(
+                PostbackTemplateAction(
                     label="各飛場位置",
-                    text="飛場位置"
+                    text="飛場位置",
+                    data='fly'
                 ),
                 MessageTemplateAction(
                     label="近期排行前五名電影",
