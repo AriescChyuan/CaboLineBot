@@ -25,8 +25,8 @@ def buttons_message():
                 # ),
                 # 
                 MessageTemplateAction(
-                    label="今日前五大新聞",
-                    text="新聞"
+                    label="各飛場位置",
+                    text="飛場位置"
                 ),
                 MessageTemplateAction(
                     label="近期排行前五名電影",

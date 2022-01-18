@@ -68,6 +68,8 @@ def handle_message(event):
     #     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=response))
     # elif greeting_resp != None:
     #     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=greeting_resp))
+    print(event.postback.data)
+
     if ans == '正妹':
         img = sendPicture(ans)
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=img, preview_image_url=img))
