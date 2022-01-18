@@ -164,8 +164,8 @@ def handle_message(event):
         location_message = LocationSendMessage(
             title='芬園飛場',
             address='入口位置',
-            latitude=24.1956838,
-            longitude=120.6856098
+            latitude=24.0087000,
+            longitude=120.6794389
         )
         line_bot_api.reply_message(event.reply_token, location_message)
     elif ans == '一江橋飛場':
@@ -174,6 +174,14 @@ def handle_message(event):
             address='台中市太平區新城路',
             latitude=24.1324936,
             longitude=120.7387336
+        )
+        line_bot_api.reply_message(event.reply_token, location_message)
+    elif ans == '員林飛場':
+        location_message = LocationSendMessage(
+            title='員林飛場',
+            address='員林市自行車主題園區',
+            latitude=23.9613639,
+            longitude=120.6056722
         )
         line_bot_api.reply_message(event.reply_token, location_message)
     else:       
