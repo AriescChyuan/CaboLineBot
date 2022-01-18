@@ -52,13 +52,13 @@ def callback():
         abort(400)
 
     return 'OK'
-
-
+def handle_postback(event):
+        print(event.postback.data)
+        
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg = event.message.text
-    if isinstance(event, PostbackEvent):
-        print(event.postback.data)
+    
     ans = QnAMaker(msg)
 
     # url = give_picture(msg)
