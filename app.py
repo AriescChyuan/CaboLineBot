@@ -54,7 +54,7 @@ def callback():
     return 'OK'
 def handle_postback(event):
         print(event.postback.data)
-        
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg = event.message.text
@@ -70,7 +70,6 @@ def handle_message(event):
     #     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=response))
     # elif greeting_resp != None:
     #     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=greeting_resp))
-    print(event.postback.data)
 
     if ans == '正妹':
         img = sendPicture(ans)
