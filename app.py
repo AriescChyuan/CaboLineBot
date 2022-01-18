@@ -54,7 +54,7 @@ def callback():
     return 'OK'
 
 
-@handler.add(MessageEvent, message=TextMessage)
+@handler.add(MessageEvent,PostbackEvent, message=TextMessage)
 def handle_message(event):
     msg = event.message.text
 
