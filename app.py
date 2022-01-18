@@ -54,10 +54,11 @@ def callback():
     return 'OK'
 
 
-@handler.add(MessageEvent,PostbackEvent, message=TextMessage)
+@handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg = event.message.text
-
+    if isinstance(event, PostbackEvent):
+        print(event.postback.data)
     ans = QnAMaker(msg)
 
     # url = give_picture(msg)
