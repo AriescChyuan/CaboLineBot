@@ -54,6 +54,8 @@ def callback():
     return 'OK'
 def handle_postback(event):
         print(event.postback.data)
+        message = buttons_message()
+        line_bot_api.reply_message(event.reply_token, message)
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
