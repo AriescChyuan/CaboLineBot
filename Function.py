@@ -67,7 +67,7 @@ def field_location():
                     text="一江橋飛場"
                 ),
                 MessageTemplateAction(
-                    label="員林飛場",
+                    label="員林",
                     text="員林飛場"
                 ),
                 # MessageTemplateAction(
