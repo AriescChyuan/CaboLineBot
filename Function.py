@@ -26,7 +26,7 @@ def buttons_message():
                 # 
                 PostbackTemplateAction(
                     label="各飛場位置",
-                    text="",
+                    text="飛場位置",
                     data='fly_field'
                 ),
                 MessageTemplateAction(
