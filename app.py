@@ -183,7 +183,12 @@ def handle_message(event):
             longitude=120.6056722
         )
         line_bot_api.reply_message(event.reply_token, location_message)
-    else:       
+    elif ans == 'StickFunctions':
+        image_message = ImageSendMessage(
+            original_content_url='https://i.imgur.com/kD4D0Zi.jpg',
+            preview_image_url='https://i.imgur.com/kD4D0Zi.jpg')
+        line_bot_api.reply_message(event.reply_token, image_message)
+    else:      
         if ans != '':    
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=ans))
         # talk = random_talk()   

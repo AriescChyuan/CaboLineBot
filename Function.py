@@ -30,8 +30,8 @@ def buttons_message():
                     data='fly_field'
                 ),
                 MessageTemplateAction(
-                    label="近期排行前五名電影",
-                    text="電影"
+                    label="遙控器撥桿功能(BetaFlight)",
+                    text="StickFunctions"
                 ),
                 MessageTemplateAction(
                     label="幫你選晚餐～",
