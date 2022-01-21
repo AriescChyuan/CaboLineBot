@@ -59,9 +59,9 @@ def handle_postback(event):
         
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    msg = event.message.text
+    ans = event.message.text
     
-    ans = QnAMaker(msg)
+    # ans = QnAMaker(msg)
 
     # url = give_picture(msg)
     # response = talk_to_you(msg)
