@@ -81,7 +81,7 @@ def handle_message(event):
         img = sendPicture(ans)
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=img, preview_image_url=img))
 
-    elif ans.lower() == "menu":
+    elif ans.lower() == "選單":
         message = buttons_message()
         line_bot_api.reply_message(event.reply_token, message)
 
