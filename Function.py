@@ -29,14 +29,14 @@ def buttons_message():
                     # text="飛場位置",
                     data='FlyField'
                 ),
-                MessageTemplateAction(
+                PostbackTemplateAction(
                     label="遙控器撥桿功能(BetaFlight)",
-                    text="StickFunctions"
+                    data="StickFun"
                 ),
                 PostbackTemplateAction(
                     label="各韌體目前版本",
                     # text="各韌體目前版本",
-                    data="FirmwareVersion"
+                    data="FirmwareVer"
                 ),
                 MessageTemplateAction(
                     label="雷達回波圖",
