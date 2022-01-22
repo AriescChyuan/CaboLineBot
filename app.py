@@ -93,8 +93,14 @@ def handle_postback(event):
             soup = BeautifulSoup(r.text,"html.parser")
             msg = soup.find('span',class_ = "css-truncate css-truncate-target text-bold mr-2").string
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=msg))
-            
-        # =================    雷達回波    ===========================================================
+        # =================    選單第二頁    ========================================================== 
+        elif event.postback.data == 'to_menu2':
+            message = menu2()
+            line_bot_api.reply_message(event.reply_token, message)
+        elif event.postback.data == 'droneInfo':
+            message = carousel_template()
+            line_bot_api.reply_message(event.reply_token, message)
+        # =================    雷達回波    ===============
         elif event.postback.data == 'ladar':
             r = requests.get('https://www.cwb.gov.tw/V8/C/W/OBS_Radar.html')
             soup = BeautifulSoup(r.text,'html')
@@ -129,7 +135,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=img, preview_image_url=img))
 
     elif ans.lower() == "選單":
-        message = buttons_message()
+        message = menu1()
         line_bot_api.reply_message(event.reply_token, message)
 
     elif ans == "雷達":

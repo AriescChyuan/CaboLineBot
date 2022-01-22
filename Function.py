@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 
 
 #TemplateSendMessage - ButtonsTemplate (按鈕介面訊息)
-def buttons_message():
+def menu1():
     message = TemplateSendMessage(
         alt_text='功能列表',
         template=ButtonsTemplate(
@@ -39,9 +39,33 @@ def buttons_message():
                     data="FirmwareVer"
                 ),
                 PostbackTemplateAction(
-                    label="雷達回波圖",
+                    label="下一頁",
                     # text="雷達"
-                    data="ladar"
+                    data="to_menu2"
+                )
+                
+            ]
+        )
+    )
+    return message
+def menu2():
+    message = TemplateSendMessage(
+        alt_text='功能列表',
+        template=ButtonsTemplate(
+            thumbnail_image_url="https://i.imgur.com/QPc6mx8.jpg",
+            title="功能列表2",
+            text="想要什麼功能呢？",
+            actions=[
+            
+                PostbackTemplateAction(
+                    label="其他(暫時)",
+                    # text="飛場位置",
+                    data='droneInfo'
+                ),
+                PostbackTemplateAction(
+                    label="下一頁",
+                    # text="雷達"
+                    data="to_menu3"
                 )
                 
             ]
@@ -120,9 +144,9 @@ def carousel_template():
     template=CarouselTemplate(
         columns=[
             CarouselColumn(
-                thumbnail_image_url='https://dflyvision.com/wp-content/uploads/2020/10/cinematic-fpv-drone-spain-3.jpg',
-                title='穿越機相關',
-                text='穿越機相關',
+                thumbnail_image_url='https://i.imgur.com/FyOetwJ.jpg',
+                title='穿越機招式教學',
+                text='建議要先在模擬器測試動作，再上實機測試！',
                 actions=[
                     URIAction(
                         label='招式教學(初級)',
@@ -139,23 +163,22 @@ def carousel_template():
                 ]
             ),
             CarouselColumn(
-                thumbnail_image_url='https://example.com/item2.jpg',
-                title='this is menu2',
-                text='description2',
+                thumbnail_image_url='https://i.imgur.com/6IFuqL2.png',
+                title='天氣相關',
+                text='天氣預測，地震資訊等等...',
                 actions=[
-                    PostbackAction(
-                        label='postback2',
-                        display_text='postback text2',
-                        data='action=buy&itemid=2'
+                    MessageAction(
+                        label='雷達回波圖',
+                        text='雷達'
                     ),
                     MessageAction(
-                        label='message2',
-                        text='message text2'
+                        label='最近一次地震',
+                        text='地震'
                     ),
-                    URIAction(
-                        label='uri2',
-                        uri='http://example.com/2'
-                     )
+                    # URIAction(
+                    #     label='uri2',
+                    #     uri='http://example.com/2'
+                    #  )
                     ]
              )
             ]
