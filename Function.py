@@ -26,7 +26,7 @@ def buttons_message():
                 # 
                 PostbackTemplateAction(
                     label="各飛場位置",
-                    text="飛場位置",
+                    # text="飛場位置",
                     data='FlyField'
                 ),
                 MessageTemplateAction(
@@ -35,7 +35,7 @@ def buttons_message():
                 ),
                 PostbackTemplateAction(
                     label="各韌體目前版本",
-                    text="各韌體目前版本",
+                    # text="各韌體目前版本",
                     data="FirmwareVersion"
                 ),
                 MessageTemplateAction(

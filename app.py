@@ -53,14 +53,14 @@ def callback():
     return 'OK'
 @handler.add(PostbackEvent)    
 def handle_postback(event):
-        if event.postback.data == 'fly_field':
+        if event.postback.data == 'FlyField':
             message = field_location()
             line_bot_api.reply_message(event.reply_token, message)
-        elif event.postback.data == 'Firmware_Version':
+        elif event.postback.data == 'FirmwareVersion':
             message = firmware_version()
             line_bot_api.reply_message(event.reply_token, message)
 
-            
+        print('data=', event.postback.data)
         
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
