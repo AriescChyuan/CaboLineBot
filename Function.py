@@ -27,15 +27,16 @@ def buttons_message():
                 PostbackTemplateAction(
                     label="各飛場位置",
                     text="飛場位置",
-                    data='fly_field'
+                    data='FlyField'
                 ),
                 MessageTemplateAction(
                     label="遙控器撥桿功能(BetaFlight)",
                     text="StickFunctions"
                 ),
-                MessageTemplateAction(
-                    label="幫你選晚餐～",
-                    text="晚餐"
+                PostbackTemplateAction(
+                    label="各韌體目前版本",
+                    text="各韌體目前版本",
+                    data="FirmwareVersion"
                 ),
                 MessageTemplateAction(
                     label="雷達回波圖",
@@ -74,6 +75,27 @@ def field_location():
                 #     label="下一頁",
                 #     text="飛場位置下一頁"
                 # )
+                
+            ]
+        )
+    )
+    return message
+def firmware_version():
+    message = TemplateSendMessage(
+        alt_text='目前韌體版本',
+        template=ButtonsTemplate(
+            thumbnail_image_url="https://i.imgur.com/QPc6mx8.jpg",
+            title="查看韌體當前版本",
+            text="選擇您想知道的韌體",
+            actions=[
+                MessageTemplateAction(
+                    label="BetaFlight",
+                    text="Beta_Version",
+                ),
+                MessageTemplateAction(
+                    label="Inav",
+                    text="Inav_Version",
+                ),
                 
             ]
         )

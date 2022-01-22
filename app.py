@@ -56,6 +56,11 @@ def handle_postback(event):
         if event.postback.data == 'fly_field':
             message = field_location()
             line_bot_api.reply_message(event.reply_token, message)
+        elif event.postback.data == 'Firmware_Version':
+            message = firmware_version()
+            line_bot_api.reply_message(event.reply_token, message)
+
+            
         
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
@@ -188,6 +193,12 @@ def handle_message(event):
             original_content_url='https://i.imgur.com/kD4D0Zi.jpg',
             preview_image_url='https://i.imgur.com/kD4D0Zi.jpg')
         line_bot_api.reply_message(event.reply_token, image_message)
+    elif ans == 'BetaFlightVersion':
+        r = requests.get('https://github.com/betaflight/betaflight/releases')
+        soup = BeautifulSoup(r.text,"html.parser")
+        results = soup.find_all('a',class_ = "Link--primary",attrs={"data-view-component": "true"})
+        msg = results[0].string
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=msg))
     else:      
         pass
         # if ans != '':    
