@@ -230,7 +230,9 @@ def handle_message(event):
             longitude=120.6056722
         )
         line_bot_api.reply_message(event.reply_token, location_message)
-    
+    elif ans == 'test':
+        message = carousel_template()
+        line_bot_api.reply_message(event.reply_token, message)
     else:      
         pass
         # if ans != '':    
