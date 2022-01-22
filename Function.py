@@ -89,12 +89,12 @@ def firmware_version():
             title="查看韌體當前版本",
             text="選擇您想知道的韌體",
             actions=[
-                PostbackTemplateAction(
+                MessageTemplateAction(
                     label="BetaFlight",
                     text="Beta_Version",
-                    data='BetaVersion'
+                    # data='BetaVersion'
                 ),
-                PostbackTemplateAction(
+                MessageTemplateAction(
                     label="Inav",
                     text="InavVersion",
                 ),

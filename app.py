@@ -66,7 +66,6 @@ def handle_postback(event):
             line_bot_api.reply_message(event.reply_token, image_message)
     # =================    韌體版本查詢    ===========================================================
         elif event.postback.data == 'FirmwareVer':
-            print('HIHIHIHIHIHIHIIHIIHHIIHIHIHIH')
             message = firmware_version()
             line_bot_api.reply_message(event.reply_token, message)
             # ===== BetaFlight ======
