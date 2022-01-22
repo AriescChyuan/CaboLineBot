@@ -91,15 +91,24 @@ def firmware_version():
             actions=[
                 PostbackTemplateAction(
                     label="BetaFlight",
-                    text="Beta_Version",
+                    # text="Beta_Version",
                     data='BetaVersion'
                 ),
                 PostbackTemplateAction(
                     label="Inav",
-                    text="InavVersion",
+                    # text="InavVersion",
                     data="InaVersion"
                 ),
-                
+                PostbackTemplateAction(
+                    label="OpenTX",
+                    # text="OpenTxVersion",
+                    data="OpenTxVersion"
+                ),
+                PostbackTemplateAction(
+                    label="EdgeTX",
+                    # text="EdgeTxVersion",
+                    data="EdgeTxVersion"
+                ),
             ]
         )
     )
