@@ -120,23 +120,27 @@ def carousel_template():
     template=CarouselTemplate(
         columns=[
             CarouselColumn(
-                thumbnail_image_url='https://example.com/item1.jpg',
-                title='this is menu1',
-                text='description1',
+                thumbnail_image_url='https://dflyvision.com/wp-content/uploads/2020/10/cinematic-fpv-drone-spain-3.jpg',
+                title='穿越機相關',
+                text='穿越機相關',
                 actions=[
-                    PostbackAction(
-                        label='postback1',
-                        display_text='postback text1',
-                        data='action=buy&itemid=1'
-                    ),
-                    MessageAction(
-                        label='message1',
-                        text='message text1'
+                    URIAction(
+                        label='招式教學(初級)',
+                        uri='https://www.youtube.com/watch?v=VnKg2aCTPtk&list=PLj23ZLg5V56prLy-r3-GVd_9wBU4iVC7H'
                     ),
                     URIAction(
-                        label='uri1',
-                        uri='http://example.com/1'
-                    )
+                        label='招式教學(中級)',
+                        uri='https://www.youtube.com/watch?v=FamqCNGrq2M&list=PLj23ZLg5V56qvExRVYQkBq6bUsJjwHQqZ'
+                    ),
+                    URIAction(
+                        label='招式教學(高級)',
+                        uri='https://www.youtube.com/watch?v=rsA_llKYtSE&list=PLj23ZLg5V56q99molL1nY1XVa0j42cnzl'
+                    ),
+                    URIAction(
+                        label='測試',
+                        uri=''
+                    ),
+                    
                 ]
             ),
             CarouselColumn(
