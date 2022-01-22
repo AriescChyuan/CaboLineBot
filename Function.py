@@ -38,9 +38,10 @@ def buttons_message():
                     # text="各韌體目前版本",
                     data="FirmwareVer"
                 ),
-                MessageTemplateAction(
+                PostbackTemplateAction(
                     label="雷達回波圖",
-                    text="雷達"
+                    # text="雷達"
+                    data="ladar"
                 )
                 
             ]
