@@ -144,7 +144,7 @@ def carousel_template():
     template=CarouselTemplate(
         columns=[
             CarouselColumn(
-                thumbnail_image_url='https://i.imgur.com/FyOetwJ.jpg',
+                thumbnail_image_url='',#https://i.imgur.com/FyOetwJ.jpg
                 title='穿越機招式教學',
                 text='建議要先在模擬器測試動作，再上實機測試！',
                 actions=[
@@ -163,7 +163,7 @@ def carousel_template():
                 ]
             ),
             CarouselColumn(
-                thumbnail_image_url='https://i.imgur.com/6IFuqL2.png',
+                thumbnail_image_url='',#https://i.imgur.com/6IFuqL2.png
                 title='天氣相關',
                 text='天氣預測，地震資訊等等...',
                 actions=[
