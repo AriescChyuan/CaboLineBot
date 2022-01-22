@@ -135,12 +135,7 @@ def carousel_template():
                     URIAction(
                         label='招式教學(高級)',
                         uri='https://www.youtube.com/watch?v=rsA_llKYtSE&list=PLj23ZLg5V56q99molL1nY1XVa0j42cnzl'
-                    ),
-                    URIAction(
-                        label='測試',
-                        uri=''
-                    ),
-                    
+                    )
                 ]
             ),
             CarouselColumn(
