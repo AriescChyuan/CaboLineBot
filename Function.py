@@ -91,7 +91,7 @@ def firmware_version():
             actions=[
                 PostbackTemplateAction(
                     label="BetaFlight",
-                    # text="Beta_Version",
+                    text="Beta_Version",
                     data='BetaVersion'
                 ),
                 PostbackTemplateAction(
