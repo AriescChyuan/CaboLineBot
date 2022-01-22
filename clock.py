@@ -10,6 +10,7 @@ from linebot.models import (
 )
 from linebot.exceptions import LineBotApiError
 from config import *
+from mqtt_pub import *
 
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 
@@ -22,12 +23,16 @@ def scheduled_job():
     url = "https://linebot-bruce.herokuapp.com/"
     connect = urllib.request.urlopen(url)
 
-# @sched.scheduled_job('cron', day_of_week='mon-sun', hour='8',minute='0')
-# def scheduled_job():
-#     try:
-#         line_bot_api.push_message('U24c11ad61979778f76d11fb91ce15bf8', TextSendMessage(text='早安！'))
-#     except LineBotApiError as e:
-#         print('MessagePush Error:',e)
+@sched.scheduled_job('cron', day_of_week='mon-sun', hour='6',minute='30')
+def scheduled_job():
+    fan_control("1")
+@sched.scheduled_job('cron', day_of_week='mon-sun', hour='7',minute='30')
+def scheduled_job():
+    fan_control("0")
+    # try:
+    #     line_bot_api.push_message('U24c11ad61979778f76d11fb91ce15bf8', TextSendMessage(text='早安！'))
+    # except LineBotApiError as e:
+    #     print('MessagePush Error:',e)
 # @sched.scheduled_job('cron', day_of_week='mon-sun', hour='18',minute='0')
 # def scheduled_job():
 #     try:
