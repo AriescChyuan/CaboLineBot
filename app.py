@@ -75,6 +75,13 @@ def handle_postback(event):
             results = soup.find_all('a',class_ = "Link--primary",attrs={"data-view-component": "true"})
             msg = results[0].string
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=msg))
+        elif event.postback.data == 'InaVersion':
+            r = requests.get('https://github.com/iNavFlight/inav/releases')
+            soup = BeautifulSoup(r.text,"html.parser")
+            results = soup.find_all('a',class_ = "Link--primary",attrs={"data-view-component": "true"})
+            msg = results[0].string
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text=msg))
+        # =================    雷達回波    ===========================================================
         elif event.postback.data == 'ladar':
             r = requests.get('https://www.cwb.gov.tw/V8/C/W/OBS_Radar.html')
             soup = BeautifulSoup(r.text,'html')
