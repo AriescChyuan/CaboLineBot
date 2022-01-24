@@ -23,7 +23,7 @@ def scheduled_job():
     url = "https://linebot-bruce.herokuapp.com/"
     connect = urllib.request.urlopen(url)
 
-@sched.scheduled_job('cron', day_of_week='mon-sun', hour='24',minute='5')
+@sched.scheduled_job('cron', day_of_week='mon-sun', hour='24',minute='8')
 def scheduled_job():
     fan_control("0")
 @sched.scheduled_job('cron', day_of_week='mon-sun', hour='7',minute='30')
