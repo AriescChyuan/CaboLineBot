@@ -29,6 +29,7 @@ from QnAMaker import *
 from SendPicture import *
 from RichMenu import *
 from mqtt_pub import *
+from fake_useragent import UserAgent
 app = Flask(__name__)
 
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
@@ -129,9 +130,14 @@ def handle_message(event):
 
     if ans == '正妹':
 
+        # headers = {
+        #         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36'
+        # }
         headers = {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36'
-        }
+        'referer': 'http://pic.netbian.com',
+        'User-Agent': UserAgent().random
+        
+         }
 
         page = random.randint(1, 140)
         if page == 1:
@@ -143,7 +149,7 @@ def handle_message(event):
         print(response)
         soup = BeautifulSoup(response.text, "html.parser")
         ls = soup.find_all(src=re.compile("/uploads"))
-
+        
         num = random.randint(0, len(ls)-1)
         url = "http://pic.netbian.com" + ls[num].get('src')
         print(url)
