@@ -133,7 +133,7 @@ def handle_message(event):
          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36'
         }
         # url = "https://pic.netbian.com/4kmeinv/index.html"
-        url = "http://www.netbian.com/meinv/index.htm"
+        url = "https://stock.tuchong.com/"
         response = requests.get(url,headers=headers)
         print(f'response: {response}')
         # header ={'User-Agent': 'Mozilla/5.0 (Windows NT x.y; Win64; x64; rv:10.0) Gecko/20100101 Firefox/10.0 '}
