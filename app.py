@@ -130,24 +130,24 @@ def handle_message(event):
 
     if ans == '正妹' or ans =='beauty':
 
-        headers = {
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
-        'Cookie': 'wluuid=66;  ',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
-        'Accept-encoding': 'gzip, deflate, br',
-        'Accept-language': 'zh-CN,zh;q=0.9',
-        'Cache-Control': 'max-age=0',
-        'connection': 'keep-alive'
-        , 'Host': 'stock.tuchong.com',
-        'Upgrade-Insecure-Requests': '1'
-        }
+        # headers = {
+        # 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+        # 'Cookie': 'wluuid=66;  ',
+        # 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+        # 'Accept-encoding': 'gzip, deflate, br',
+        # 'Accept-language': 'zh-CN,zh;q=0.9',
+        # 'Cache-Control': 'max-age=0',
+        # 'connection': 'keep-alive'
+        # , 'Host': 'stock.tuchong.com',
+        # 'Upgrade-Insecure-Requests': '1'
+        # }
         page = random.randint(1, 120)
         if page==1:
             url = "https://www.baibian365.com/4Kmeinv/"
         else:
             url = f"https://www.baibian365.com/4Kmeinv/index_{page}.html"
 
-        response = requests.get(url, headers=headers)
+        response = requests.get(url)
         print(response)
         soup = BeautifulSoup(response.text,"html.parser")
 
