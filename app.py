@@ -128,8 +128,16 @@ def handle_message(event):
     #     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=greeting_resp))
 
     if ans == '正妹':
+
+        hdr = {
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+        'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Language': 'zh-CN,zh;q=0.9',
+        'Connection': 'keep-alive'}
         url = "https://pic.netbian.com/4kmeinv/index.html"
-        response = requests.get(url,)
+        response = requests.get(url,headers=hdr)
         print(f'response: {response}')
         # header ={'User-Agent': 'Mozilla/5.0 (Windows NT x.y; Win64; x64; rv:10.0) Gecko/20100101 Firefox/10.0 '}
 
