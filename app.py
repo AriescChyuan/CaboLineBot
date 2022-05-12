@@ -133,11 +133,13 @@ def handle_message(event):
             "User-Agent":"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
         }
         page = random.randint(1,140)
+        print(f'page: {page}')
         if page == 1:
             url = "https://pic.netbian.com/4kmeinv/index.html"
         else:
             url = f"https://pic.netbian.com/4kmeinv/index_{page}.html"
         response = requests.get(url, headers=headers)
+        print(f'response: {response}')
         soup = BeautifulSoup(response.text, "html.parser")
         # soup = soup.prettify()
         ls = soup.find_all( src=re.compile("/uploads/allimg"))
