@@ -133,11 +133,7 @@ def handle_message(event):
         # headers = {
         #         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36'
         # }
-        headers = {
-        'referer': 'http://pic.netbian.com',
-        'User-Agent': UserAgent().random
-        
-         }
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:66.0) Gecko/20100101 Firefox/66.0',}
 
         page = random.randint(1, 140)
         if page == 1:
