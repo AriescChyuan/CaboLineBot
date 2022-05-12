@@ -134,23 +134,25 @@ def handle_message(event):
         #         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36'
         # }
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:66.0) Gecko/20100101 Firefox/66.0',}
-
-        page = random.randint(1, 140)
-        if page == 1:
-            url = "http://pic.netbian.com/4kmeinv/index.html"
-        else:
-            url = f"http://pic.netbian.com/4kmeinv/index_{page}.html"
-
-        response = requests.get(url, headers=headers)
-        print(response)
-        soup = BeautifulSoup(response.text, "html.parser")
-        ls = soup.find_all(src=re.compile("/uploads"))
         
-        num = random.randint(0, len(ls)-1)
-        url = "http://pic.netbian.com" + ls[num].get('src')
-        print(url)
+        response = requests.get('https://www.baibian365.com/4Kmeinv/', headers=headers)
+        print(response)
+        # page = random.randint(1, 140)
+        # if page == 1:
+        #     url = "http://pic.netbian.com/4kmeinv/index.html"
+        # else:
+        #     url = f"http://pic.netbian.com/4kmeinv/index_{page}.html"
 
-        line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=url, preview_image_url=url))
+        # response = requests.get(url, headers=headers)
+        # print(response)
+        # soup = BeautifulSoup(response.text, "html.parser")
+        # ls = soup.find_all(src=re.compile("/uploads"))
+        
+        # num = random.randint(0, len(ls)-1)
+        # url = "http://pic.netbian.com" + ls[num].get('src')
+        # print(url)
+
+        # line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=url, preview_image_url=url))
 
 
     elif ans == '帥哥':
