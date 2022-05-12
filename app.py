@@ -130,29 +130,32 @@ def handle_message(event):
 
     if ans == '正妹':
 
-        # headers = {
-        #         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36'
-        # }
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:66.0) Gecko/20100101 Firefox/66.0',}
-        
-        response = requests.get('https://www.baibian365.com/4Kmeinv/', headers=headers)
+        headers = {
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+        'Cookie': 'wluuid=66;  ',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+        'Accept-encoding': 'gzip, deflate, br',
+        'Accept-language': 'zh-CN,zh;q=0.9',
+        'Cache-Control': 'max-age=0',
+        'connection': 'keep-alive'
+        , 'Host': 'stock.tuchong.com',
+        'Upgrade-Insecure-Requests': '1'
+        }
+        page = random.randint(1, 120)
+        if page==1:
+            url = "https://www.baibian365.com/4Kmeinv/"
+        else:
+            url = f"https://www.baibian365.com/4Kmeinv/index_{page}.html"
+
+        response = requests.get(url, headers=headers)
         print(response)
-        # page = random.randint(1, 140)
-        # if page == 1:
-        #     url = "http://pic.netbian.com/4kmeinv/index.html"
-        # else:
-        #     url = f"http://pic.netbian.com/4kmeinv/index_{page}.html"
+        soup = BeautifulSoup(response.text,"html.parser")
 
-        # response = requests.get(url, headers=headers)
-        # print(response)
-        # soup = BeautifulSoup(response.text, "html.parser")
-        # ls = soup.find_all(src=re.compile("/uploads"))
-        
-        # num = random.randint(0, len(ls)-1)
-        # url = "http://pic.netbian.com" + ls[num].get('src')
-        # print(url)
+        ls = soup.find_all(src = re.compile("https:"))
+        num = random.randint(0,len(ls)-1)
+        url = ls[num].get('src')
 
-        # line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=url, preview_image_url=url))
+        line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=url, preview_image_url=url))
 
 
     elif ans == '帥哥':
