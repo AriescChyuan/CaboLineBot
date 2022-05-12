@@ -138,7 +138,7 @@ def handle_message(event):
             url = "https://pic.netbian.com/4kmeinv/index.html"
         else:
             url = f"https://pic.netbian.com/4kmeinv/index_{page}.html"
-        response = requests.get(url, headers=headers)
+        response = requests.get(url)
         print(f'response: {response}')
         soup = BeautifulSoup(response.text, "html.parser")
         # soup = soup.prettify()
