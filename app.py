@@ -128,26 +128,28 @@ def handle_message(event):
     #     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=greeting_resp))
 
     if ans == '正妹':
-        # img = sendPicture(ans)
-        header ={'User-Agent': 'Mozilla/5.0 (Windows NT x.y; Win64; x64; rv:10.0) Gecko/20100101 Firefox/10.0 '}
-
-        page = random.randint(1,140)
-        print(f'page: {page}')
-        if page == 1:
-            url = "https://pic.netbian.com/4kmeinv/index.html"
-        else:
-            url = f"https://pic.netbian.com/4kmeinv/index_{page}.html"
-        response = requests.get(url, headers=header)
+        url = "https://pic.netbian.com/4kmeinv/index.html"
+        response = requests.get(url,)
         print(f'response: {response}')
-        soup = BeautifulSoup(response.text, "html.parser")
-        # soup = soup.prettify()
-        ls = soup.find_all( src=re.compile("/uploads/allimg"))
+        # header ={'User-Agent': 'Mozilla/5.0 (Windows NT x.y; Win64; x64; rv:10.0) Gecko/20100101 Firefox/10.0 '}
 
-        num = random.randint(0,len(ls)-1)
-        url = ls[num].get("src")
-        url = "https://pic.netbian.com/" + url
+        # page = random.randint(1,140)
+        # print(f'page: {page}')
+        # if page == 1:
+        #     url = "https://pic.netbian.com/4kmeinv/index.html"
+        # else:
+        #     url = f"https://pic.netbian.com/4kmeinv/index_{page}.html"
+        # response = requests.get(url, headers=header)
+        # print(f'response: {response}')
+        # soup = BeautifulSoup(response.text, "html.parser")
+        # # soup = soup.prettify()
+        # ls = soup.find_all( src=re.compile("/uploads/allimg"))
+
+        # num = random.randint(0,len(ls)-1)
+        # url = ls[num].get("src")
+        # url = "https://pic.netbian.com/" + url
         
-        line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=url, preview_image_url=url))
+        # line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=url, preview_image_url=url))
 
 
     elif ans == '帥哥':
