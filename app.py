@@ -29,7 +29,7 @@ from QnAMaker import *
 from SendPicture import *
 from RichMenu import *
 from mqtt_pub import *
-from fake_useragent import UserAgent
+
 app = Flask(__name__)
 
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
@@ -172,6 +172,30 @@ def handle_message(event):
         x = soup.find_all('meta')
         png_url = x[5].get('content')
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=png_url, preview_image_url=png_url))
+        
+    elif ans == "天氣預測":
+        headers = {'user-agent': 'Mozilla/5.0'}
+        res = requests.get('https://www.cwb.gov.tw/V8/C/W/County/MOD/Week/66_Week_m.html?T=2022051320-5', headers = headers)
+        soup = BeautifulSoup(res.text, 'html.parser')
+        date_ls =[]
+        day_ls = [] 
+        nights_ls = []
+        All = ""
+        dates = soup.find_all('span', class_="date")
+        for i in range(7):
+            date_ls.append(dates[i].text)
+            
+        days = soup.find_all('span',class_='Day')
+        for i in range(7):
+            day_ls.append(days[i].find('img').get('alt'))
+            
+        nights = soup.find_all('span',class_='Night')
+        for i in range(7):
+            nights_ls.append(days[i].find('img').get('alt'))
+
+        for i in range(7):
+            All+=f"{date_ls[i][0:3]}({date_ls[i][3:]}):白天: {day_ls[i]} , 晚上: {nights_ls[i]}。 \n"
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=All))
 
     elif ans == "電影":
         url = 'https://movies.yahoo.com.tw/'
