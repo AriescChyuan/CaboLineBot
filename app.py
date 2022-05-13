@@ -194,7 +194,7 @@ def handle_message(event):
             nights_ls.append(days[i].find('img').get('alt'))
 
         for i in range(7):
-            All+=f"{date_ls[i][0:3]}({date_ls[i][3:]}):\n白天: {day_ls[i]} , 晚上: {nights_ls[i]}。 \n"
+            All+=f"{date_ls[i][0:3]}({date_ls[i][3:]}):\n白天: {day_ls[i]} , 晚上: {nights_ls[i]}。 \n\n"
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=All))
 
     elif ans == "電影":
