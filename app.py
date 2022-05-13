@@ -172,8 +172,8 @@ def handle_message(event):
         x = soup.find_all('meta')
         png_url = x[5].get('content')
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=png_url, preview_image_url=png_url))
-        
-    elif ans == "天氣預測":
+
+    elif ans == "天氣預測" or ans == "天氣預報" :
         headers = {'user-agent': 'Mozilla/5.0'}
         res = requests.get('https://www.cwb.gov.tw/V8/C/W/County/MOD/Week/66_Week_m.html?T=2022051320-5', headers = headers)
         soup = BeautifulSoup(res.text, 'html.parser')
@@ -194,7 +194,7 @@ def handle_message(event):
             nights_ls.append(days[i].find('img').get('alt'))
 
         for i in range(7):
-            All+=f"{date_ls[i][0:3]}({date_ls[i][3:]}):白天: {day_ls[i]} , 晚上: {nights_ls[i]}。 \n"
+            All+=f"{date_ls[i][0:3]}({date_ls[i][3:]}):\n白天: {day_ls[i]} , 晚上: {nights_ls[i]}。 \n"
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=All))
 
     elif ans == "電影":
