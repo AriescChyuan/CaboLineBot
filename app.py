@@ -128,34 +128,22 @@ def handle_message(event):
     # elif greeting_resp != None:
     #     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=greeting_resp))
 
-    if ans == '正妹' or ans.lower() =='beauty':
+    if ans == '正妹' or ans.lower() =='beauty' or ans == '抽':
 
-        # headers = {
-        # 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
-        # 'Cookie': 'wluuid=66;  ',
-        # 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
-        # 'Accept-encoding': 'gzip, deflate, br',
-        # 'Accept-language': 'zh-CN,zh;q=0.9',
-        # 'Cache-Control': 'max-age=0',
-        # 'connection': 'keep-alive'
-        # , 'Host': 'stock.tuchong.com',
-        # 'Upgrade-Insecure-Requests': '1'
-        # }
-        page = random.randint(1, 120)
-        if page==1:
-            url = "https://www.baibian365.com/4Kmeinv/"
-        else:
-            url = f"https://www.baibian365.com/4Kmeinv/index_{page}.html"
+        response = requests.get('https://www.jkforum.net/forum-736-1.html')
+        soup = BeautifulSoup(response.text, 'html.parser')
+        # max_page = soup.find_all('label')[0].find('span').string.split(' ')[2]
+        max_page = int(soup.find_all(title=re.compile('共\s\d+\s頁'))[0].string.split(' ')[2])
+        random_page = random.randint(1, int(max_page))
 
-        response = requests.get(url)
-        print(response)
-        soup = BeautifulSoup(response.text,"html.parser")
+        url = f"https://www.jkforum.net/forum-736-{random_page}.html"
+        res = requests.get(url)
+        soup = BeautifulSoup(res.text, 'html.parser')
+        images = soup.find_all("img", src=re.compile("https://www.my"))[:-3]
+        images_len = len(images)
+        image_url = soup.find_all("img", src=re.compile("https://www.my"))[:-3][random.randint(0, images_len-1)].get("src")
 
-        ls = soup.find_all(src = re.compile("https:"))
-        num = random.randint(0,len(ls)-1)
-        url = ls[num].get('src')
-
-        line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=url, preview_image_url=url))
+        line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=image_url, preview_image_url=image_url))
 
 
     elif ans == '帥哥':
