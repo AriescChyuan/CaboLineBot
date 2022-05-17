@@ -130,13 +130,14 @@ def handle_message(event):
 
     if ans == '正妹' or ans.lower() =='beauty' or ans == '抽':
 
-        response = requests.get('https://www.jkforum.net/forum-736-1.html')
+        response = requests.get('https://www.jkforum.net/type-736-1940.html?forumdisplay&typeid=1940&filter=typeid&typeid=1940&forumdisplay=&page=1')
         soup = BeautifulSoup(response.text, 'html.parser')
         # max_page = soup.find_all('label')[0].find('span').string.split(' ')[2]
         max_page = int(soup.find_all(title=re.compile('共\s\d+\s頁'))[0].string.split(' ')[2])
         random_page = random.randint(1, int(max_page))
 
-        url = f"https://www.jkforum.net/forum-736-{random_page}.html"
+        # url = f"https://www.jkforum.net/forum-736-{random_page}.html"
+        url = f"https://www.jkforum.net/type-736-1940.html?forumdisplay&typeid=1940&filter=typeid&typeid=1940&forumdisplay=&page={random_page}"
         res = requests.get(url)
         soup = BeautifulSoup(res.text, 'html.parser')
         images = soup.find_all("img", src=re.compile("https://www.my"))[:-3]
