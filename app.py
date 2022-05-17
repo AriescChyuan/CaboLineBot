@@ -128,7 +128,7 @@ def handle_message(event):
     # elif greeting_resp != None:
     #     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=greeting_resp))
 
-    if ans == '正妹' or ans.lower() =='beauty' or ans == '抽':
+    if ans == '正妹' or ans.lower() =='beauty' or ans == '抽' or ans == "美女":
 
         response = requests.get('https://www.jkforum.net/type-736-1940.html?forumdisplay&typeid=1940&filter=typeid&typeid=1940&forumdisplay=&page=1')
         soup = BeautifulSoup(response.text, 'html.parser')
