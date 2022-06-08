@@ -172,7 +172,7 @@ def handle_message(event):
         date_ls =[]
         day_ls = [] 
         nights_ls = []
-        All = f"「{x}」一週天氣預測：\n"
+        All = f"「{ans[0:3]}」一週天氣預測：\n"
         dates = soup.find_all('span', class_="date")
         for i in range(7):
             date_ls.append(dates[i].text)
