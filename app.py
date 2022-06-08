@@ -15,7 +15,7 @@ from Function import *
 from random_speak import  *
 import os
 import requests
-import json
+import re
 from bs4 import BeautifulSoup
 import random
 # from selenium import webdriver
