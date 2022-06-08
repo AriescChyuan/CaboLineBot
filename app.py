@@ -162,14 +162,17 @@ def handle_message(event):
         png_url = x[5].get('content')
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=png_url, preview_image_url=png_url))
 
-    elif ans == "天氣預測" or ans == "天氣預報" :
+    elif re.match(r'\w{3}天氣', ans) != None:
+        county_Id_map = {"新北市":"65", "台北市":"63", "桃園市":"68","新竹市":"10018","新竹縣":"10004","苗栗縣":"10005", "台中市":"66","彰化市": "10007",
+                 "雲林縣":"10009", "嘉義縣":"10010", "嘉義市":"10020","南投縣":"10008","台南市":"67", "高雄市":"64","屏東縣":"10013", "台東縣":"10014",
+                 "花蓮縣":"10015", "宜蘭縣":"10002", "基隆市":"10017", "澎湖縣":"10016","金門縣":"09020","連江縣":"09007"}
         headers = {'user-agent': 'Mozilla/5.0'}
-        res = requests.get('https://www.cwb.gov.tw/V8/C/W/County/MOD/Week/66_Week_m.html?T=2022051320-5', headers = headers)
+        res = requests.get(f'https://www.cwb.gov.tw/V8/C/W/County/MOD/Week/{county_Id_map[ans[0:3]]}_Week_m.html', headers = headers)
         soup = BeautifulSoup(res.text, 'html.parser')
         date_ls =[]
         day_ls = [] 
         nights_ls = []
-        All = ""
+        All = f"「{x}」一週天氣預測：\n"
         dates = soup.find_all('span', class_="date")
         for i in range(7):
             date_ls.append(dates[i].text)
@@ -180,7 +183,7 @@ def handle_message(event):
             
         nights = soup.find_all('span',class_='Night')
         for i in range(7):
-            nights_ls.append(days[i].find('img').get('alt'))
+            nights_ls.append(nights[i].find('img').get('alt'))
 
         for i in range(7):
             All+=f"{date_ls[i][0:3]}({date_ls[i][3:]}):\n白天: {day_ls[i]} , 晚上: {nights_ls[i]}。 \n\n"
