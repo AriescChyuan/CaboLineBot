@@ -29,7 +29,7 @@ from QnAMaker import *
 from SendPicture import *
 from RichMenu import *
 from mqtt_pub import *
-
+import openai
 app = Flask(__name__)
 
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
@@ -303,6 +303,8 @@ def handle_message(event):
     elif ans == 'test':
         message = carousel_template()
         line_bot_api.reply_message(event.reply_token, message)
+    elif ans[0:3] == "AI:":
+        print("openai get it ") 
     else:      
         pass
         # if ans != '':    
