@@ -31,7 +31,9 @@ from RichMenu import *
 from mqtt_pub import *
 import openai
 import json
+from dotenv import load_dotenv
 
+load_dotenv()
 app = Flask(__name__)
 
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
