@@ -303,8 +303,18 @@ def handle_message(event):
     elif ans == 'test':
         message = carousel_template()
         line_bot_api.reply_message(event.reply_token, message)
-    elif ans[0:3] == "AI:":
+    elif ans[0:3].lower() == "AI:":
         print("openai get it ") 
+        openai.api_key = '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'
+            
+        response = openai.Completion.create(
+        model='text-davinci-003',
+        prompt=ans[3:]+ ' ,請用繁體中文回答' ,
+        max_tokens=256,
+        temperature=0.9,)
+        # 接收到回覆訊息後，移除換行符號
+        reply_msg = response["choices"][0]["text"].replace('\n','')
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=reply_msg))
     else:      
         pass
         # if ans != '':    
