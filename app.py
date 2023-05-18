@@ -34,11 +34,12 @@ import json
 from dotenv import load_dotenv
 
 load_dotenv()
+
 app = Flask(__name__)
 
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(CHANNEL_SECRET)
-
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -310,8 +311,9 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, message)
     elif ans[0:3] == "AI:":
         print("openai get it ") 
-        openai.api_key = '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'
+        openai.api_key = OPENAI_API_KEY
         ans = ans[3:]
+        print("key: ",OPENAI_API_KEY)
         print(ans)
         response = openai.Completion.create(
         model='text-davinci-003',
