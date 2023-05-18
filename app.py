@@ -31,7 +31,8 @@ from RichMenu import *
 from mqtt_pub import *
 import openai
 import json
-
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(__name__)
 
