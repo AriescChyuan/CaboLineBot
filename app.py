@@ -31,15 +31,15 @@ from RichMenu import *
 from mqtt_pub import *
 import openai
 import json
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 
 app = Flask(__name__)
 
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(CHANNEL_SECRET)
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
 
 @app.route("/callback", methods=['POST'])
 def callback():
