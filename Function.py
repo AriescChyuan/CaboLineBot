@@ -114,6 +114,10 @@ def field_location_2():
                     text="員林飛場"
                 ),
                 MessageTemplateAction(
+                    label="遠雄之星",
+                    text="遠雄之星"
+                ),
+                MessageTemplateAction(
                     label="芬園",
                     text="芬園飛場"
                 ),

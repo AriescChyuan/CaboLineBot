@@ -260,14 +260,14 @@ def handle_message(event):
             longitude=120.6016898
         )
         line_bot_api.reply_message(event.reply_token, location_message)
-    # elif ans == '芬園飛場':
-    #     location_message = LocationSendMessage(
-    #         title='芬園飛場',
-    #         address='入口位置',
-    #         latitude=24.0087000,
-    #         longitude=120.6794389
-    #     )
-    #     line_bot_api.reply_message(event.reply_token, location_message)
+    elif ans == '芬園飛場':
+        location_message = LocationSendMessage(
+            title='芬園飛場',
+            address='入口位置',
+            latitude=24.0087000,
+            longitude=120.6794389
+        )
+        line_bot_api.reply_message(event.reply_token, location_message)
     elif ans == '埔里飛場':
         location_message = LocationSendMessage(
             title='埔里內埔飛場',
@@ -292,9 +292,9 @@ def handle_message(event):
             longitude=120.6056722
         )
         line_bot_api.reply_message(event.reply_token, location_message)
-    elif ans == '芬園飛場':
+    elif ans == '遠雄之星':
         location_message = LocationSendMessage(
-            title='芬園飛場',
+            title='遠雄之星',
             address='436台中市清水區槺榔里',
             latitude=24.264597,
             longitude=120.540203
