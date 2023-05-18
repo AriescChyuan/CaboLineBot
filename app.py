@@ -303,7 +303,7 @@ def handle_message(event):
     elif ans == 'test':
         message = carousel_template()
         line_bot_api.reply_message(event.reply_token, message)
-    elif ans[0:3].lower() == "AI:":
+    elif ans[0:3] == "AI:":
         print("openai get it ") 
         openai.api_key = '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'
             
