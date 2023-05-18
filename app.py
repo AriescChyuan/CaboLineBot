@@ -50,23 +50,7 @@ def callback():
     # handle webhook body
     try:
         handler.handle(body, signature)
-        tk = json_data['events'][0]['replyToken']
-        msg = json_data['events'][0]['message']['text']
-        if msg[0:3].lower() == "ai:":
-            print("openai get it ") 
-            openai.api_key = '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'
-            msg = msg[3:]
-            print(msg)
-            response = openai.Completion.create(
-            model='text-davinci-003',
-            prompt=msg+ ' ,請用繁體中文回答' ,
-            max_tokens=256,
-            temperature=0.9,)
-            # 接收到回覆訊息後，移除換行符號
-            reply_msg = response["choices"][0]["text"].replace('\n','')
-            print(reply_msg)
-            text_message = TextSendMessage(text=reply_msg)
-            line_bot_api.reply_message(tk,text_message)
+        
     except InvalidSignatureError:
         print("Invalid signature. Please check your channel access token/channel secret.")
         abort(400)
@@ -322,20 +306,21 @@ def handle_message(event):
     elif ans == 'test':
         message = carousel_template()
         line_bot_api.reply_message(event.reply_token, message)
-    # elif ans[0:3] == "AI:":
-    #     print("openai get it ") 
-    #     openai.api_key = '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'
-    #     ans = ans[3:]
-    #     print(ans)
-    #     response = openai.Completion.create(
-    #     model='text-davinci-003',
-    #     prompt=ans+ ' ,請用繁體中文回答' ,
-    #     max_tokens=256,
-    #     temperature=0.9,)
-    #     # 接收到回覆訊息後，移除換行符號
-    #     reply_msg = response["choices"][0]["text"].replace('\n','')
-    #     print(reply_msg)
-    #     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=reply_msg))
+    elif ans[0:3] == "AI:":
+        print("openai get it ") 
+        openai.api_key = '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'
+        ans = ans[3:]
+        print(ans)
+        response = openai.Completion.create(
+        model='text-davinci-003',
+        prompt=ans+ ' ,請用繁體中文回答' ,
+        max_tokens=256,
+        temperature=0.7)
+        
+        # 接收到回覆訊息後，移除換行符號
+        reply_msg = response["choices"][0]["text"].replace('\n','')
+        print(reply_msg)
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=reply_msg))
     else:      
         pass
         # if ans != '':    
