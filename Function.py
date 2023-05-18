@@ -74,10 +74,10 @@ def menu2():
     return message
 def field_location():
     message = TemplateSendMessage(
-        alt_text='飛場位置(一)',
+        alt_text='飛場位置',
         template=ButtonsTemplate(
             thumbnail_image_url="https://i.imgur.com/QPc6mx8.jpg",
-            title="飛場位置(一)",
+            title="飛場位置",
             text="選擇您想去的位置",
             actions=[
                 MessageTemplateAction(
