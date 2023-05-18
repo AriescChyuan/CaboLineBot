@@ -308,7 +308,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, message)
     elif ans[0:3] == "AI:":
         print("openai get it ") 
-        openai.api_key = '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'
+        openai.api_key = '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'
         ans = ans[3:]
         print(ans)
         response = openai.Completion.create(
@@ -316,7 +316,7 @@ def handle_message(event):
         prompt=ans+ ' ,請用繁體中文回答' ,
         max_tokens=256,
         temperature=0.7)
-        
+
         # 接收到回覆訊息後，移除換行符號
         reply_msg = response["choices"][0]["text"].replace('\n','')
         print(reply_msg)
