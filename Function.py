@@ -92,9 +92,9 @@ def field_location():
                     label="一江橋",
                     text="一江橋飛場"
                 ),
-                MessageTemplateAction(
+                PostbackTemplateAction(
                     label="下一頁",
-                    text="下一頁",
+                    # text="下一頁",
                     data = "FlyField2"
                 ),
             ]
