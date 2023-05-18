@@ -30,6 +30,7 @@ from SendPicture import *
 from RichMenu import *
 from mqtt_pub import *
 import openai
+
 app = Flask(__name__)
 
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
