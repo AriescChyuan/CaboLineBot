@@ -306,10 +306,11 @@ def handle_message(event):
     elif ans[0:3] == "AI:":
         print("openai get it ") 
         openai.api_key = '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'
-            
+        ans = ans[3:]
+        print(ans)
         response = openai.Completion.create(
         model='text-davinci-003',
-        prompt=ans[3:]+ ' ,請用繁體中文回答' ,
+        prompt=ans+ ' ,請用繁體中文回答' ,
         max_tokens=256,
         temperature=0.9,)
         # 接收到回覆訊息後，移除換行符號
