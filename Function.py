@@ -77,7 +77,7 @@ def field_location():
         alt_text='飛場位置(一)',
         template=ButtonsTemplate(
             thumbnail_image_url="https://i.imgur.com/QPc6mx8.jpg",
-            title="飛場位置",
+            title="飛場位置(一)",
             text="選擇您想去的位置",
             actions=[
                 MessageTemplateAction(
@@ -106,7 +106,7 @@ def field_location_2():
         alt_text='飛場位置(二)',
         template=ButtonsTemplate(
             thumbnail_image_url="https://i.imgur.com/QPc6mx8.jpg",
-            title="飛場位置",
+            title="飛場位置(二)",
             text="選擇您想去的位置",
             actions=[ 
                 MessageTemplateAction(
