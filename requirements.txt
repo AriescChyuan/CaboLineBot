@@ -7,4 +7,3 @@ APScheduler
 paho-mqtt
 fake_useragent
 openai
-json
