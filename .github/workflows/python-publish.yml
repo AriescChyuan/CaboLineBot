@@ -9,7 +9,7 @@
 name: Upload Python Package
 
 env: 
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+    OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
 on:
   release:
