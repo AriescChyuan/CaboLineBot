@@ -74,7 +74,7 @@ def menu2():
     return message
 def field_location():
     message = TemplateSendMessage(
-        alt_text='飛場位置',
+        alt_text='飛場位置(一)',
         template=ButtonsTemplate(
             thumbnail_image_url="https://i.imgur.com/QPc6mx8.jpg",
             title="飛場位置",
@@ -93,14 +93,30 @@ def field_location():
                     text="一江橋飛場"
                 ),
                 MessageTemplateAction(
+                    label="下一頁",
+                    text="下一頁",
+                    data = "FlyField2"
+                ),
+            ]
+        )
+    )
+    return message
+def field_location_2():
+    message = TemplateSendMessage(
+        alt_text='飛場位置(二)',
+        template=ButtonsTemplate(
+            thumbnail_image_url="https://i.imgur.com/QPc6mx8.jpg",
+            title="飛場位置",
+            text="選擇您想去的位置",
+            actions=[ 
+                MessageTemplateAction(
                     label="員林",
                     text="員林飛場"
                 ),
-                # MessageTemplateAction(
-                #     label="下一頁",
-                #     text="飛場位置下一頁"
-                # )
-                
+                MessageTemplateAction(
+                    label="芬園",
+                    text="芬園飛場"
+                ),
             ]
         )
     )

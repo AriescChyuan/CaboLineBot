@@ -60,6 +60,10 @@ def handle_postback(event):
         if event.postback.data == 'FlyField':
             message = field_location()
             line_bot_api.reply_message(event.reply_token, message)
+    # =================    飛場位置 第二頁   ======================================================
+        elif event.postback.data == 'FlyField2':
+            message = field_location_2()
+            line_bot_api.reply_message(event.reply_token, message)
     # =================    搖桿功能圖    =============================================================
         elif event.postback.data == 'StickFun':
             image_message = ImageSendMessage(
@@ -286,6 +290,14 @@ def handle_message(event):
             address='員林市自行車主題園區',
             latitude=23.9613639,
             longitude=120.6056722
+        )
+        line_bot_api.reply_message(event.reply_token, location_message)
+    elif ans == '芬園飛場':
+        location_message = LocationSendMessage(
+            title='芬園飛場',
+            address='436台中市清水區槺榔里',
+            latitude=24.264597,
+            longitude=120.540203
         )
         line_bot_api.reply_message(event.reply_token, location_message)
     elif ans == 'test':
