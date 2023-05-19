@@ -52,7 +52,7 @@ def menu2():
     message = TemplateSendMessage(
         alt_text='功能列表',
         template=ButtonsTemplate(
-            thumbnail_image_url="https://i.imgur.com/1DYv4Ac.jpg",
+            thumbnail_image_url="https://i.imgur.com/QPc6mx8.jpg",
             title="功能列表2",
             text="想要什麼功能呢？",
             actions=[
