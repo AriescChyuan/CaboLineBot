@@ -317,7 +317,7 @@ def handle_message(event):
         print(reply_msg)
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=reply_msg))
     elif ans == "喵":
-        url = "https://unsplash.com/s/photos/cat"
+        url = "https://unsplash.com/s/photos/kitten"
         r = requests.get(url)
         soup = BeautifulSoup(r.text,'html.parser')
         x = soup.find_all('div', class_ = "MorZF")
