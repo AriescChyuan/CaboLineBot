@@ -319,7 +319,7 @@ def handle_message(event):
     elif ans == "喵":
         url = "https://unsplash.com/s/photos/cat"
         r = requests.get(url)
-        soup = BeautifulSoup(r.text,'lxml')
+        soup = BeautifulSoup(r.text,'html.parser')
         x = soup.find_all('div', class_ = "MorZF")
         temp =[]
         for i in x:
