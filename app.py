@@ -306,9 +306,10 @@ def handle_message(event):
         # print("openai get it ") 
         openai.api_key = OPENAI_API_KEY
         ans = ans[3:]
+        print(ans)
         response = openai.Completion.create(
         model='text-davinci-003',
-        prompt=ans+ ' ,請用繁體中文回答' ,
+        prompt= ans + ' ,請用繁體中文回答' ,
         max_tokens=1024,
         temperature=0.5)
 
