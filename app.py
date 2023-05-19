@@ -10,7 +10,7 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,ImageSendMessage,PostbackEvent,
 )
-from config import *
+# from config import *
 from Function import *
 from random_speak import  *
 import os
@@ -32,12 +32,14 @@ from mqtt_pub import *
 import openai
 import json
 
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+CHANNEL_ACCESS_TOKEN = os.getenv('CHANNEL_ACCESS_TOKEN')
+CHANNEL_SECRET = os.getenv('CHANNEL_SECRET')
+
 app = Flask(__name__)
 
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(CHANNEL_SECRET)
-
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 @app.route("/callback", methods=['POST'])
 def callback():
