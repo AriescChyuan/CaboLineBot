@@ -154,11 +154,6 @@ def handle_message(event):
 
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=image_url, preview_image_url=image_url))
 
-
-    elif ans == '帥哥':
-        img = sendPicture(ans)
-        line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=img, preview_image_url=img))
-
     elif ans.lower() == "選單":
         message = menu1()
         line_bot_api.reply_message(event.reply_token, message)
