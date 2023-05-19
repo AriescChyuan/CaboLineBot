@@ -326,6 +326,16 @@ def handle_message(event):
             temp.append(i.select('img')[0].get('src'))
         img_url = temp[random.randint(0,len(temp)-1)]
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=img_url, preview_image_url=img_url))
+    elif ans == "汪":
+        url = "https://unsplash.com/s/photos/doggy"
+        r = requests.get(url)
+        soup = BeautifulSoup(r.text,'html.parser')
+        x = soup.find_all('div', class_ = "MorZF")
+        temp =[]
+        for i in x:
+            temp.append(i.select('img')[0].get('src'))
+        img_url = temp[random.randint(0,len(temp)-1)]
+        line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=img_url, preview_image_url=img_url))
     else:      
         pass
         # if ans != '':    
