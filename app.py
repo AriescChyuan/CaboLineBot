@@ -155,7 +155,9 @@ def handle_message(event):
         image_url = soup.find_all("img", src=re.compile("https://www.my"))[:-3][random.randint(0, images_len-1)].get("src")
 
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=image_url, preview_image_url=image_url))
-
+    if ans == ("振銓的女友") or ans == ("振銓的女朋友") or ans == ("振銓女友") :
+        image_url = "https://megapx.dcard.tw/v1/images/8aff6b26-fe43-4842-b507-b3d336edcc2c/responsive?width=640"
+        line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=image_url, preview_image_url=image_url))
     elif ans.lower() == "選單":
         message = menu1()
         line_bot_api.reply_message(event.reply_token, message)
