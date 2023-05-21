@@ -156,7 +156,8 @@ def handle_message(event):
 
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=image_url, preview_image_url=image_url))
     if ans == ("振銓的女友") or ans == ("振銓的女朋友") or ans == ("振銓女友") :
-        image_url = "https://megapx.dcard.tw/v1/images/8aff6b26-fe43-4842-b507-b3d336edcc2c/responsive?width=640"
+        print("IU")
+        image_url = "https://imgur.com/a/K8LSS7S"
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=image_url, preview_image_url=image_url))
     elif ans.lower() == "選單":
         message = menu1()
