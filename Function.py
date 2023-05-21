@@ -195,10 +195,10 @@ def carousel_template():
                         label='最近一次地震',
                         text='地震'
                     ),
-                    URIAction(
-                        label='uri2',
-                        uri='http://example.com/2'
-                     )
+                    # URIAction(
+                    #     label='uri2',
+                    #     uri='http://example.com/2'
+                    #  )
                     ]
              )
             ]
