@@ -156,8 +156,8 @@ def handle_message(event):
 
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=image_url, preview_image_url=image_url))
     elif ans == "振銓的女友" or ans == "振銓的女朋友" or ans == "振銓女友" :
-        print("IU")
-        image_url = "https://imgur.com/a/K8LSS7S"
+        print("girl friend called")
+        image_url = "https://pic3.zhimg.com/v2-e0aec76fb91e6d788b3cfe3cfa4afc8e_b.jpg"
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=image_url, preview_image_url=image_url))
     elif ans.lower() == "選單":
         print("menu called")
