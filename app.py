@@ -155,7 +155,7 @@ def handle_message(event):
         image_url = soup.find_all("img", src=re.compile("https://www.my"))[:-3][random.randint(0, images_len-1)].get("src")
 
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=image_url, preview_image_url=image_url))
-    if ans == "振銓的女友" or ans == "振銓的女朋友" or ans == "振銓女友" :
+    elif ans == "振銓的女友" or ans == "振銓的女朋友" or ans == "振銓女友" :
         print("IU")
         image_url = "https://imgur.com/a/K8LSS7S"
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=image_url, preview_image_url=image_url))
