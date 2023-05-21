@@ -342,6 +342,9 @@ def handle_message(event):
             temp.append(i.select('img')[0].get('src'))
         img_url = temp[random.randint(0,len(temp)-1)]
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=img_url, preview_image_url=img_url))
+    elif ans == "穿越機介紹":
+        url = "https://www.youtube.com/watch?v=iM3R4Imulj0"
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=url))
     else:      
         pass
         # if ans != '':    
