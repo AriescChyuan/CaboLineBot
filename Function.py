@@ -29,9 +29,13 @@ def menu1():
                     # text="飛場位置",
                     data='FlyField'
                 ),
-                PostbackTemplateAction(
-                    label="遙控器撥桿功能(BetaFlight)",
-                    data="StickFun"
+                # PostbackTemplateAction(
+                #     label="遙控器撥桿功能(BetaFlight)",
+                #     data="StickFun"
+                # ),
+                MessageTemplateAction(
+                    label="穿越機介紹",
+                    text="穿越機介紹"
                 ),
                 PostbackTemplateAction(
                     label="各韌體目前版本",
