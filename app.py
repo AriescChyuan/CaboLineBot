@@ -160,6 +160,7 @@ def handle_message(event):
         image_url = "https://imgur.com/a/K8LSS7S"
         line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=image_url, preview_image_url=image_url))
     elif ans.lower() == "選單":
+        print("menu called")
         message = menu1()
         line_bot_api.reply_message(event.reply_token, message)
 
