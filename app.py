@@ -306,8 +306,9 @@ def handle_message(event):
             longitude=120.540203
         )
         line_bot_api.reply_message(event.reply_token, location_message)
-    elif ans[:3] == '股票:':
+    elif ans[:3] == '股票:' or ans[:3] == '股票：':
         # message = carousel_template()
+        print(ans)
         today = datetime.date.today()
         today = str(today).split('-')
         today = today[0] + today[1] + today[2]
