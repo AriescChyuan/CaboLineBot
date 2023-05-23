@@ -31,6 +31,7 @@ from RichMenu import *
 from mqtt_pub import *
 import openai
 import json
+import datetime
 
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 CHANNEL_ACCESS_TOKEN = os.getenv('CHANNEL_ACCESS_TOKEN')
@@ -305,8 +306,34 @@ def handle_message(event):
             longitude=120.540203
         )
         line_bot_api.reply_message(event.reply_token, location_message)
-    elif ans == 'test':
-        message = carousel_template()
+    elif ans[:3] == '股票:':
+        # message = carousel_template()
+        today = datetime.date.today()
+        today = str(today).split('-')
+        today = today[0] + today[1] + today[2]
+   
+        stock_no = ans[3:]
+        date =  today
+        headers = {'user-agent': 'Mozilla/5.0'}
+        r = requests.get(f"https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY?date={date}&stockNo={stock_no}&response=json&_=1684846926424", headers=headers)
+        # r = requests.get("https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY?date=20230523&stockNo=8033&response=json&_=1684846926424")
+        stock_json = r.json()
+        stock_df = pd.DataFrame(stock_json['data'])
+        stock_df.columns = stock_json['fields']
+        last_stock = stock_df.iloc[-1]
+        company = stock_json['title'].split(' ')[1] + stock_json['title'].split(' ')[2]
+        date = last_stock['日期']
+        open = last_stock['開盤價']
+        high = last_stock['最高價']
+        low = last_stock['最低價']
+        close = last_stock['收盤價']
+        stock_msg = "公司: " + company + "\n" \
+            "日期:" + date   +" \n" \
+            "開盤價" + open + "\n"  \
+            "最高價" + high + "\n"  \
+            "最低價" + low  + "\n"  \
+            "收盤價" + close + "\n"
+        stock_msg
         line_bot_api.reply_message(event.reply_token, message)
     elif ans[0:2] == "AI" and (ans[2] ==":" or ans[2] == "："):
         # print("openai get it ") 
