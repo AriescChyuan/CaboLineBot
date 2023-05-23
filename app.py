@@ -32,6 +32,7 @@ from mqtt_pub import *
 import openai
 import json
 import datetime
+import pandas as pd
 
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 CHANNEL_ACCESS_TOKEN = os.getenv('CHANNEL_ACCESS_TOKEN')
