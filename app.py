@@ -334,8 +334,8 @@ def handle_message(event):
             "最高價" + high + "\n"  \
             "最低價" + low  + "\n"  \
             "收盤價" + close + "\n"
-        stock_msg
-        line_bot_api.reply_message(event.reply_token, message)
+        # line_bot_api.reply_message(event.reply_token, message)
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=stock_msg))
     elif ans[0:2] == "AI" and (ans[2] ==":" or ans[2] == "："):
         # print("openai get it ") 
         openai.api_key = OPENAI_API_KEY
