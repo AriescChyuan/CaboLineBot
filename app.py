@@ -126,31 +126,24 @@ def callback():
     # handle webhook body
     try:
         handler.handle(body, signature)
-    except ApiException as e:
-        app.logger.warn("Got exception from LINE Messaging API: %s\n" % e.body)
     except InvalidSignatureError:
+        app.logger.info("Invalid signature. Please check your channel access token/channel secret.")
         abort(400)
 
     return 'OK'
 
 
 @handler.add(MessageEvent, message=TextMessageContent)
-def handle_text_message(event):
-    text = event.message.text
+def handle_message(event):
     with ApiClient(configuration) as api_client:
         line_bot_api = MessagingApi(api_client)
-        if text == 'profile':
-            if isinstance(event.source, UserSource):
-                profile = line_bot_api.get_profile(user_id=event.source.user_id)
-                line_bot_api.reply_message(
-                    ReplyMessageRequest(
-                        reply_token=event.reply_token,
-                        messages=[
-                            TextMessage(text='Display name: ' + profile.display_name),
-                            TextMessage(text='Status message: ' + str(profile.status_message))
-                        ]
-                    )
-                )
+        line_bot_api.reply_message_with_http_info(
+            ReplyMessageRequest(
+                reply_token=event.reply_token,
+                messages=[TextMessage(text=event.message.text)]
+            )
+        )
+
 
         # elif text == '正妹' or text.lower() =='beauty' or text == '抽' or text == "美女" or text == "振銓前女友":
 
