@@ -86,12 +86,14 @@ def handle_message(event):
             image_url = soup.find_all("img", src=re.compile("https://www.my"))[:-3][random.randint(0, images_len-1)].get("src")
 
             # line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=image_url, preview_image_url=image_url))
-            ReplyMessageRequest(
+            line_bot_api.reply_message(
+                ReplyMessageRequest(
                     reply_token=event.reply_token,
                     messages=[
                         ImageMessage(original_content_url=image_url, preview_image_url=image_url)
                     ]
                 )
+            )
             
 
 if __name__ == "__main__":
