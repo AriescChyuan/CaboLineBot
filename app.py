@@ -30,7 +30,6 @@ from linebot.v3.webhooks import (
 
 )
 
-
 # from config import *
 from Function import *
 from random_speak import  *
@@ -151,20 +150,10 @@ def handle_postback(event):
 @handler.add(MessageEvent, message=TextMessageContent)
 def handle_message(event):
     ans = event.message.text
+    app.logger.info("-------------"+ans+"------------------")
     print("-------------"+ans+"------------------")
     with ApiClient(configuration) as api_client:
         line_bot_api = MessagingApi(api_client)
-    # ans = QnAMaker(msg)
-
-    # url = give_picture(msg)
-    # response = talk_to_you(msg)
-    # greeting_resp = greeting(msg)
-    # if url != None:
-        # line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=url, preview_image_url=url))
-    # elif response != None:
-    #     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=response))
-    # elif greeting_resp != None:
-    #     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=greeting_resp))
 
         if ans == '正妹' or ans.lower() =='beauty' or ans == '抽' or ans == "美女" or ans == "振銓前女友":
 
