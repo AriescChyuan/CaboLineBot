@@ -80,6 +80,7 @@ def callback():
         handler.handle(body, signature)
         
     except InvalidSignatureError:
+        app.logger.info("Invalid signature. Please check your channel access token/channel secret.")
         print("Invalid signature. Please check your channel access token/channel secret.")
         abort(400)
 
@@ -147,7 +148,7 @@ def handle_postback(event):
 
         
         
-@handler.add(MessageEvent, message=TextMessage)
+@handler.add(MessageEvent, message=TextMessageContent)
 def handle_message(event):
     ans = event.message.text
     print(ans)
