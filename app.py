@@ -150,7 +150,7 @@ def handle_postback(event):
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     ans = event.message.text
-    
+    print(ans)
     # ans = QnAMaker(msg)
 
     # url = give_picture(msg)
