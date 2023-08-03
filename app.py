@@ -137,7 +137,6 @@ def callback():
 @handler.add(MessageEvent, message=TextMessageContent)
 def handle_text_message(event):
     text = event.message.text
-    app.logger.info("hi there~")
     with ApiClient(configuration) as api_client:
         line_bot_api = MessagingApi(api_client)
         if text == 'profile':
@@ -152,6 +151,7 @@ def handle_text_message(event):
                         ]
                     )
                 )
+
         # elif text == '正妹' or text.lower() =='beauty' or text == '抽' or text == "美女" or text == "振銓前女友":
 
         #     response = requests.get('https://www.jkforum.net/type-736-1940.html?forumdisplay&typeid=1940&filter=typeid&typeid=1940&forumdisplay=&page=1')
