@@ -190,7 +190,10 @@ def handle_message(event):
         message = menu1()
         # line_bot_api.reply_message(event.reply_token, message)
         
-        line_bot_api.ReplyMessageRequest(event.reply_token, message)
+        line_bot_api.reply_message(ReplyMessageRequest(
+            reply_token=event.reply_token,
+            messages=message
+        ))
 
     elif ans == "雷達":
         r = requests.get('https://www.cwb.gov.tw/V8/C/W/OBS_Radar.html')
