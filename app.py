@@ -62,10 +62,11 @@ app = Flask(__name__)
 # line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 # handler = WebhookHandler(CHANNEL_SECRET)
 
-line_bot_api = Configuration(access_token=CHANNEL_ACCESS_TOKEN)
+configuration = Configuration(access_token=CHANNEL_ACCESS_TOKEN)
 # handler = WebhookHandler(CHANNEL_SECRET)
 handler = handler = linebot.v3.WebhookHandler(CHANNEL_SECRET)
-
+with ApiClient(configuration) as api_client:
+        line_bot_api = MessagingApi(api_client)
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -148,10 +149,10 @@ def handle_postback(event):
 
         
         
-@handler.add(MessageEvent, message=TextMessageContent)
+@handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     ans = event.message.text
-    print(ans)
+    print("-------------"+ans+"------------------")
     # ans = QnAMaker(msg)
 
     # url = give_picture(msg)
