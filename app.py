@@ -1,15 +1,17 @@
 from typing import AnyStr
 from flask import Flask, request, abort
 
-from linebot import (
+from linebot.v3 import (
     LineBotApi, WebhookHandler
 )
-from linebot.exceptions import (
+from linebot.v3.exceptions import (
     InvalidSignatureError
 )
-from linebot.models import (
+from linebot.v3.models import (
     MessageEvent, TextMessage, TextSendMessage,ImageSendMessage,PostbackEvent,
 )
+
+
 # from config import *
 from Function import *
 from random_speak import  *
