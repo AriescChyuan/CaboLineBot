@@ -1,14 +1,22 @@
-from linebot import (LineBotApi, WebhookHandler)
-from linebot.exceptions import (InvalidSignatureError)
-from linebot.models import *
+# from linebot import (LineBotApi, WebhookHandler)
+# from linebot.exceptions import (InvalidSignatureError)
+# from linebot.models import *
 
 import requests
 from bs4 import BeautifulSoup
-
+from linebot.v3.messaging import (
+    MessageAction,
+    PostbackAction,
+    TemplateMessage,
+    ButtonsTemplate,
+    CarouselTemplate,
+    CarouselColumn,
+    URIAction
+)
 
 #TemplateSendMessage - ButtonsTemplate (按鈕介面訊息)
 def menu1():
-    message = TemplateSendMessage(
+    message = TemplateMessage(
         alt_text='功能列表',
         template=ButtonsTemplate(
             thumbnail_image_url="https://i.imgur.com/QPc6mx8.jpg",
@@ -24,7 +32,7 @@ def menu1():
                 #     min='1930-01-01'
                 # ),
                 # 
-                PostbackTemplateAction(
+                PostbackAction(
                     label="各飛場位置",
                     # text="飛場位置",
                     data='FlyField'
@@ -33,16 +41,16 @@ def menu1():
                 #     label="遙控器撥桿功能(BetaFlight)",
                 #     data="StickFun"
                 # ),
-                MessageTemplateAction(
+                MessageAction(
                     label="穿越機介紹",
                     text="穿越機介紹"
                 ),
-                PostbackTemplateAction(
+                PostbackAction(
                     label="各韌體目前版本",
                     # text="各韌體目前版本",
                     data="FirmwareVer"
                 ),
-                PostbackTemplateAction(
+                PostbackAction(
                     label="下一頁",
                     # text="雷達"
                     data="to_menu2"
@@ -53,7 +61,7 @@ def menu1():
     )
     return message
 def menu2():
-    message = TemplateSendMessage(
+    message = TemplateMessage(
         alt_text='功能列表',
         template=ButtonsTemplate(
             thumbnail_image_url="https://i.imgur.com/QPc6mx8.jpg",
@@ -61,12 +69,12 @@ def menu2():
             text="想要什麼功能呢？",
             actions=[
             
-                PostbackTemplateAction(
+                PostbackAction(
                     label="其他(暫時)",
                     # text="飛場位置",
                     data='droneInfo'
                 ),
-                PostbackTemplateAction(
+                PostbackAction(
                     label="下一頁",
                     # text="雷達"
                     data="to_menu3"
@@ -77,26 +85,26 @@ def menu2():
     )
     return message
 def field_location():
-    message = TemplateSendMessage(
+    message = TemplateMessage(
         alt_text='飛場位置',
         template=ButtonsTemplate(
             thumbnail_image_url="https://i.imgur.com/QPc6mx8.jpg",
             title="飛場位置",
             text="選擇您想去的位置",
             actions=[
-                MessageTemplateAction(
+                MessageAction(
                     label="烏日",
                     text="烏日飛場",
                 ),
-                MessageTemplateAction(
+                MessageAction(
                     label="埔里",
                     text="埔里飛場"
                 ),
-                MessageTemplateAction(
+                MessageAction(
                     label="一江橋",
                     text="一江橋飛場"
                 ),
-                PostbackTemplateAction(
+                PostbackAction(
                     label="下一頁",
                     # text="下一頁",
                     data = "FlyField2"
@@ -106,22 +114,22 @@ def field_location():
     )
     return message
 def field_location_2():
-    message = TemplateSendMessage(
+    message = TemplateMessage(
         alt_text='飛場位置(二)',
         template=ButtonsTemplate(
             thumbnail_image_url="https://i.imgur.com/QPc6mx8.jpg",
             title="飛場位置(二)",
             text="選擇您想去的位置",
             actions=[ 
-                MessageTemplateAction(
+                MessageAction(
                     label="員林",
                     text="員林飛場"
                 ),
-                MessageTemplateAction(
+                MessageAction(
                     label="遠雄之星",
                     text="遠雄之星"
                 ),
-                MessageTemplateAction(
+                MessageAction(
                     label="芬園",
                     text="芬園飛場"
                 ),
@@ -130,29 +138,29 @@ def field_location_2():
     )
     return message
 def firmware_version():
-    message = TemplateSendMessage(
+    message = TemplateMessage(
         alt_text='目前韌體版本',
         template=ButtonsTemplate(
             thumbnail_image_url="https://i.imgur.com/QPc6mx8.jpg",
             title="查看韌體當前版本",
             text="選擇您想知道的韌體",
             actions=[
-                PostbackTemplateAction(
+                PostbackAction(
                     label="BetaFlight",
                     # text="Beta_Version",
                     data='BetaVersion'
                 ),
-                PostbackTemplateAction(
+                PostbackAction(
                     label="Inav",
                     # text="InavVersion",
                     data="InaVersion"
                 ),
-                PostbackTemplateAction(
+                PostbackAction(
                     label="OpenTX",
                     # text="OpenTxVersion",
                     data="OpenTxVersion"
                 ),
-                PostbackTemplateAction(
+                PostbackAction(
                     label="EdgeTX",
                     # text="EdgeTxVersion",
                     data="EdgeTxVersion"
@@ -163,7 +171,7 @@ def firmware_version():
     return message
 #TemplateSendMessage - ConfirmTemplate(確認介面訊息)
 def carousel_template():
-    carousel_template_message = TemplateSendMessage(
+    carousel_template_message = TemplateMessage(
     alt_text='Carousel template',
     template=CarouselTemplate(
         columns=[
@@ -211,17 +219,17 @@ def carousel_template():
     return carousel_template_message
 def Confirm_Template():
 
-    message = TemplateSendMessage(
+    message = TemplateMessage(
         alt_text='是否註冊成為會員？',
         template=ConfirmTemplate(
             text="是否註冊成為會員？",
             actions=[
-                PostbackTemplateAction(
+                PostbackAction(
                     label="馬上註冊",
                     text="現在、立刻、馬上",
                     data="會員註冊"
                 ),
-                MessageTemplateAction(
+                MessageAction(
                     label="查詢其他功能",
                     text="查詢其他功能"
                 )
