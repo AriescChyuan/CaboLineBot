@@ -116,10 +116,12 @@ def handle_message(event):
             message = menu1()
             # line_bot_api.reply_message(event.reply_token, message)
             
-            line_bot_api.reply_message(ReplyMessageRequest(
-                reply_token=event.reply_token,
-                messages=message
-            ))
+            line_bot_api.reply_message(
+                ReplyMessageRequest(
+                    reply_token=event.reply_token,
+                    messages=[message]
+                )
+            )
 
         elif text == "雷達":
             r = requests.get('https://www.cwb.gov.tw/V8/C/W/OBS_Radar.html')
@@ -135,7 +137,7 @@ def handle_message(event):
                 )
             )
 
-        elif re.match(r'\w{3}天氣', ans) != None:
+        elif re.match(r'\w{3}天氣', text) != None:
             county_Id_map = {"新北市":"65", "台北市":"63", "桃園市":"68","新竹市":"10018","新竹縣":"10004","苗栗縣":"10005", "台中市":"66","彰化市": "10007",
                     "雲林縣":"10009", "嘉義縣":"10010", "嘉義市":"10020","南投縣":"10008","台南市":"67", "高雄市":"64","屏東縣":"10013", "台東縣":"10014",
                     "花蓮縣":"10015", "宜蘭縣":"10002", "基隆市":"10017", "澎湖縣":"10016","金門縣":"09020","連江縣":"09007"}
@@ -167,7 +169,7 @@ def handle_message(event):
                 )
             )
 
-        elif ans == "電影":
+        elif text == "電影":
             url = 'https://movies.yahoo.com.tw/'
             res = requests.get(url)
             soup = BeautifulSoup(res.text, 'html.parser') 
@@ -189,7 +191,7 @@ def handle_message(event):
                 )
             )
 
-        elif ans == "新聞":
+        elif text == "新聞":
             r = requests.get('https://www.ettoday.net/news/hot-news.htm')
             soup = BeautifulSoup(r.text,"html.parser")
             results = soup.select('.piece > .pic',limit=5)
@@ -203,7 +205,7 @@ def handle_message(event):
                     messages=[TextMessage(text=news)]
                 )
             )
-        elif ans == '骰子':
+        elif text == '骰子':
             dice = ['1','2','3','4','5','6']
             ans = "您擲到的骰子點數為：{}點。".format(random.choice(dice))
             line_bot_api.reply_message(
@@ -212,7 +214,7 @@ def handle_message(event):
                     messages=[TextMessage(text=ans)]
                 )
             )
-        elif ans == 'ELRS':
+        elif text == 'ELRS':
             url = "官網 ： https://github.com/ExpressLRS/ExpressLRS\n刷韌體軟體 ： https://github.com/ExpressLRS/ExpressLRS-Configurator/releases/\n設定教學 ： https://www.youtube.com/watch?v=SVSJg7AAK0U&t=617s"
                 
             line_bot_api.reply_message(
@@ -221,7 +223,7 @@ def handle_message(event):
                     messages=[TextMessage(text=url)]
                 )
             )
-        elif ans == '晚餐':
+        elif text == '晚餐':
             ls = ['麥當勞','雞滷飯','火鍋','炒飯','泡麵','水果吃到飽','鍋貼','滷味']
             ans = random.choice(ls)
             line_bot_api.reply_message(
@@ -230,7 +232,7 @@ def handle_message(event):
                     messages=[TextMessage(text=ans)]
                 )
             )
-        elif ans == '時間':
+        elif text == '時間':
             time = '現在時間：'+ datetime.datetime.now().ctime()
             line_bot_api.reply_message(
                 ReplyMessageRequest(
@@ -238,7 +240,7 @@ def handle_message(event):
                     messages=[TextMessage(text=time)]
                 )
             )
-        elif ans == '地震':
+        elif text == '地震':
             r = requests.get('https://www.cwb.gov.tw/V8/C/E/MOD/EQ_ROW.html?T=2021112514-4')
             soup = BeautifulSoup(r.text,"html.parser")
             results = soup.find_all('a',attrs={'aria-label':'點此看更多詳細資訊'})
@@ -263,7 +265,7 @@ def handle_message(event):
         #     fan_control("0")
         #     line_bot_api.reply_message(event.reply_token,TextSendMessage(text="電扇關"))
 
-        elif ans == 'test':
+        elif text == 'test':
              app.logger.info("-------------測試------------------")
              line_bot_api.reply_message(
                     ReplyMessageRequest(
@@ -285,7 +287,7 @@ def handle_message(event):
         #     # 接收到回覆訊息後，移除換行符號
         #     reply_msg = response["choices"][0]["text"].replace('\n','')
         #     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=reply_msg))
-        elif ans == "喵":
+        elif text == "喵":
             url = "https://unsplash.com/s/photos/kitten"
             r = requests.get(url)
             soup = BeautifulSoup(r.text,'html.parser')
@@ -302,7 +304,7 @@ def handle_message(event):
                     ]
                 )
             )
-        elif ans == "汪":
+        elif text == "汪":
             url = "https://unsplash.com/s/photos/doggy"
             r = requests.get(url)
             soup = BeautifulSoup(r.text,'html.parser')
@@ -319,7 +321,7 @@ def handle_message(event):
                     ]
                 )
             )
-        elif ans == "穿越機介紹":
+        elif text == "穿越機介紹":
             url = "https://www.youtube.com/watch?v=iM3R4Imulj0"
             line_bot_api.reply_message(
                 ReplyMessageRequest(
@@ -327,6 +329,54 @@ def handle_message(event):
                     messages=[TextMessage(text=url)]
                 )
             )
+        elif text == '烏日飛場':
+            location_message = LocationMessage(
+                title='烏日飛場',
+                address='烏日飛場',
+                latitude=24.1088411,
+                longitude=120.6016898
+            )
+            line_bot_api.reply_message(event.reply_token, location_message)
+        elif text == '芬園飛場':
+            location_message = LocationMessage(
+                title='芬園飛場',
+                address='入口位置',
+                latitude=24.0087000,
+                longitude=120.6794389
+            )
+            line_bot_api.reply_message(event.reply_token, location_message)
+        elif text == '埔里飛場':
+            location_message = LocationMessage(
+                title='埔里內埔飛場',
+                address='545南投縣埔里鎮內埔路15-9號',
+                latitude=23.980823,
+                longitude=120.997347
+            )
+            line_bot_api.reply_message(event.reply_token, location_message)
+        elif text == '一江橋飛場':
+            location_message = LocationMessage(
+                title='一江橋飛場',
+                address='台中市太平區新城路',
+                latitude=24.1324936,
+                longitude=120.7387336
+            )
+            line_bot_api.reply_message(event.reply_token, location_message)
+        elif text == '員林飛場':
+            location_message = LocationMessage(
+                title='員林飛場',
+                address='員林市自行車主題園區',
+                latitude=23.9613639,
+                longitude=120.6056722
+            )
+            line_bot_api.reply_message(event.reply_token, location_message)
+        elif text == '遠雄之星':
+            location_message = LocationMessage(
+                title='遠雄之星',
+                address='436台中市清水區槺榔里',
+                latitude=24.264597,
+                longitude=120.540203
+            )
+            line_bot_api.reply_message(event.reply_token, location_message)
         else:      
             pass
             # if ans != '':    
@@ -457,60 +507,7 @@ def handle_postback(event):
                         ]
                     )
                 )
-@handler.add(MessageEvent, message=LocationMessageContent)
-def handle_location_message(event):
-    text = event.message.text
-    with ApiClient(configuration) as api_client:
-        line_bot_api = MessagingApi(api_client)
 
-        if text == '烏日飛場':
-            location_message = LocationMessage(
-                title='烏日飛場',
-                address='烏日飛場',
-                latitude=24.1088411,
-                longitude=120.6016898
-            )
-            line_bot_api.reply_message(event.reply_token, location_message)
-        elif text == '芬園飛場':
-            location_message = LocationMessage(
-                title='芬園飛場',
-                address='入口位置',
-                latitude=24.0087000,
-                longitude=120.6794389
-            )
-            line_bot_api.reply_message(event.reply_token, location_message)
-        elif text == '埔里飛場':
-            location_message = LocationMessage(
-                title='埔里內埔飛場',
-                address='545南投縣埔里鎮內埔路15-9號',
-                latitude=23.980823,
-                longitude=120.997347
-            )
-            line_bot_api.reply_message(event.reply_token, location_message)
-        elif text == '一江橋飛場':
-            location_message = LocationMessage(
-                title='一江橋飛場',
-                address='台中市太平區新城路',
-                latitude=24.1324936,
-                longitude=120.7387336
-            )
-            line_bot_api.reply_message(event.reply_token, location_message)
-        elif text == '員林飛場':
-            location_message = LocationMessage(
-                title='員林飛場',
-                address='員林市自行車主題園區',
-                latitude=23.9613639,
-                longitude=120.6056722
-            )
-            line_bot_api.reply_message(event.reply_token, location_message)
-        elif text == '遠雄之星':
-            location_message = LocationMessage(
-                title='遠雄之星',
-                address='436台中市清水區槺榔里',
-                latitude=24.264597,
-                longitude=120.540203
-            )
-            line_bot_api.reply_message(event.reply_token, location_message)
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
