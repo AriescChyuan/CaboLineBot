@@ -2,9 +2,10 @@ from typing import AnyStr
 from flask import Flask, request, abort
 
 
-from linebot.v3 import (
-    WebhookHandler
-)
+# from linebot.v3 import (
+#     WebhookHandler
+# )
+from linebot.v3.webhook import WebhookHandler
 
 from linebot.v3.exceptions import (
     InvalidSignatureError
@@ -63,6 +64,7 @@ app = Flask(__name__)
 line_bot_api = Configuration(access_token=CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(CHANNEL_SECRET)
 handler = WebhookHandler('YOUR_CHANNEL_SECRET')
+
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
