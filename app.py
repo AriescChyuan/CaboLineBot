@@ -150,8 +150,6 @@ def handle_postback(event):
 @handler.add(MessageEvent, message=TextMessageContent)
 def handle_message(event):
     ans = event.message.text
-    app.logger.info("-------------"+ans+"------------------")
-    print("-------------"+ans+"------------------")
     with ApiClient(configuration) as api_client:
         line_bot_api = MessagingApi(api_client)
 
@@ -328,10 +326,11 @@ def handle_message(event):
             )
             line_bot_api.reply_message(event.reply_token, location_message)
         elif ans == 'test':
+             app.logger.info("-------------測試------------------")
              line_bot_api.reply_message(
                     ReplyMessageRequest(
                         reply_token=event.reply_token,
-                        messages=[TextMessage(text="測試成功")]
+                        messages=[TextMessage(text="Leaving group")]
                     )
                 )
         elif ans[0:2] == "AI" and (ans[2] ==":" or ans[2] == "："):
