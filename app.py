@@ -22,7 +22,9 @@ from linebot.v3.messaging import (
 from linebot.v3.webhooks import (
     MessageEvent,
     PostbackEvent,
+    WebhookHandler,
     TextMessageContent
+
 )
 
 
@@ -59,7 +61,7 @@ app = Flask(__name__)
 
 line_bot_api = Configuration(access_token=CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(CHANNEL_SECRET)
-
+handler = WebhookHandler('YOUR_CHANNEL_SECRET')
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
