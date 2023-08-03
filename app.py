@@ -336,7 +336,13 @@ def handle_message(event):
                 latitude=24.1088411,
                 longitude=120.6016898
             )
-            line_bot_api.reply_message(event.reply_token, location_message)
+         
+            line_bot_api.reply_message(
+                ReplyMessageRequest(
+                reply_token=event.reply_token,
+                messages=[location_message]
+                )
+            )
         elif text == '芬園飛場':
             location_message = LocationMessage(
                 title='芬園飛場',
@@ -344,7 +350,14 @@ def handle_message(event):
                 latitude=24.0087000,
                 longitude=120.6794389
             )
-            line_bot_api.reply_message(event.reply_token, location_message)
+            
+            line_bot_api.reply_message(
+                ReplyMessageRequest(
+                reply_token=event.reply_token,
+                messages=[location_message]
+                )
+            )
+
         elif text == '埔里飛場':
             location_message = LocationMessage(
                 title='埔里內埔飛場',
@@ -352,7 +365,14 @@ def handle_message(event):
                 latitude=23.980823,
                 longitude=120.997347
             )
-            line_bot_api.reply_message(event.reply_token, location_message)
+            
+            line_bot_api.reply_message(
+                ReplyMessageRequest(
+                reply_token=event.reply_token,
+                messages=[location_message]
+                )
+            )
+
         elif text == '一江橋飛場':
             location_message = LocationMessage(
                 title='一江橋飛場',
@@ -360,7 +380,14 @@ def handle_message(event):
                 latitude=24.1324936,
                 longitude=120.7387336
             )
-            line_bot_api.reply_message(event.reply_token, location_message)
+            
+            line_bot_api.reply_message(
+                ReplyMessageRequest(
+                reply_token=event.reply_token,
+                messages=[location_message]
+                )
+            )
+
         elif text == '員林飛場':
             location_message = LocationMessage(
                 title='員林飛場',
@@ -368,7 +395,14 @@ def handle_message(event):
                 latitude=23.9613639,
                 longitude=120.6056722
             )
-            line_bot_api.reply_message(event.reply_token, location_message)
+
+            line_bot_api.reply_message(
+                ReplyMessageRequest(
+                reply_token=event.reply_token,
+                messages=[location_message]
+                )
+            )
+
         elif text == '遠雄之星':
             location_message = LocationMessage(
                 title='遠雄之星',
@@ -376,7 +410,14 @@ def handle_message(event):
                 latitude=24.264597,
                 longitude=120.540203
             )
-            line_bot_api.reply_message(event.reply_token, location_message)
+
+            line_bot_api.reply_message(
+                ReplyMessageRequest(
+                reply_token=event.reply_token,
+                messages=[location_message]
+                )
+            )
+            
         else:      
             pass
             # if ans != '':    
