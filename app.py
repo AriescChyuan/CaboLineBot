@@ -9,9 +9,10 @@ from argparse import ArgumentParser
 from flask import Flask, request, abort, send_from_directory
 from werkzeug.middleware.proxy_fix import ProxyFix
 
-from linebot.v3 import (
-    WebhookHandler
-)
+# from linebot.v3 import (
+#     WebhookHandler
+# )
+from linebot.v3.webhook import WebhookHandler
 from linebot.v3.models import (
     UnknownEvent
 )
