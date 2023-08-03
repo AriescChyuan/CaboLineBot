@@ -3,8 +3,8 @@ flask
 requests
 bs4
 # selenium==3.8.0
-APScheduler
-paho-mqtt
+# APScheduler
+# paho-mqtt
 fake_useragent
-openai
+# openai
 python-dotenv
