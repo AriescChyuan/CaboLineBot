@@ -134,7 +134,7 @@ def callback():
     return 'OK'
 
 
-@handler.add(MessageEvent, message=TextMessage)
+@handler.add(MessageEvent, message=TextMessageContent)
 def handle_text_message(event):
     text = event.message.text
     with ApiClient(configuration) as api_client:
