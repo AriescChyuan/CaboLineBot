@@ -151,7 +151,7 @@ def handle_text_message(event):
                         ]
                     )
                 )
-        if text == '正妹' or text.lower() =='beauty' or text == '抽' or text == "美女" or text == "振銓前女友":
+        elif text == '正妹' or text.lower() =='beauty' or text == '抽' or text == "美女" or text == "振銓前女友":
 
             response = requests.get('https://www.jkforum.net/type-736-1940.html?forumdisplay&typeid=1940&filter=typeid&typeid=1940&forumdisplay=&page=1')
             soup = BeautifulSoup(response.text, 'html.parser')
