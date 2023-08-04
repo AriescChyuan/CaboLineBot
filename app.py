@@ -14,6 +14,15 @@ from linebot.v3.messaging import (
     TextMessage,
     ImageMessage,
     LocationMessage,
+    FlexMessage,
+    FlexBubble,
+    FlexImage,
+    FlexBox,
+    FlexText,
+    FlexIcon,
+    FlexButton,
+    FlexSeparator,
+    FlexContainer,
 )
 from linebot.v3.webhooks import (
     MessageEvent,
@@ -417,7 +426,109 @@ def handle_message(event):
                 messages=[location_message]
                 )
             )
-            
+        elif text == 'flex':
+            bubble = FlexBubble(
+                direction='ltr',
+                hero=FlexImage(
+                    url='https://example.com/cafe.jpg',
+                    size='full',
+                    aspect_ratio='20:13',
+                    aspect_mode='cover',
+                    action=URIAction(uri='http://example.com', label='label')
+                ),
+                body=FlexBox(
+                    layout='vertical',
+                    contents=[
+                        # title
+                        FlexText(text='Brown Cafe', weight='bold', size='xl'),
+                        # review
+                        FlexBox(
+                            layout='baseline',
+                            margin='md',
+                            contents=[
+                                FlexIcon(size='sm', url='https://example.com/gold_star.png'),
+                                FlexIcon(size='sm', url='https://example.com/grey_star.png'),
+                                FlexIcon(size='sm', url='https://example.com/gold_star.png'),
+                                FlexIcon(size='sm', url='https://example.com/gold_star.png'),
+                                FlexIcon(size='sm', url='https://example.com/grey_star.png'),
+                                FlexText(text='4.0', size='sm', color='#999999', margin='md', flex=0)
+                            ]
+                        ),
+                        # info
+                        FlexBox(
+                            layout='vertical',
+                            margin='lg',
+                            spacing='sm',
+                            contents=[
+                                FlexBox(
+                                    layout='baseline',
+                                    spacing='sm',
+                                    contents=[
+                                        FlexText(
+                                            text='Place',
+                                            color='#aaaaaa',
+                                            size='sm',
+                                            flex=1
+                                        ),
+                                        FlexText(
+                                            text='Shinjuku, Tokyo',
+                                            wrap=True,
+                                            color='#666666',
+                                            size='sm',
+                                            flex=5
+                                        )
+                                    ],
+                                ),
+                                FlexBox(
+                                    layout='baseline',
+                                    spacing='sm',
+                                    contents=[
+                                        FlexText(
+                                            text='Time',
+                                            color='#aaaaaa',
+                                            size='sm',
+                                            flex=1
+                                        ),
+                                        FlexText(
+                                            text="10:00 - 23:00",
+                                            wrap=True,
+                                            color='#666666',
+                                            size='sm',
+                                            flex=5,
+                                        ),
+                                    ],
+                                ),
+                            ],
+                        )
+                    ],
+                ),
+                footer=FlexBox(
+                    layout='vertical',
+                    spacing='sm',
+                    contents=[
+                        # callAction
+                        FlexButton(
+                            style='link',
+                            height='sm',
+                            action=URIAction(label='CALL', uri='tel:000000'),
+                        ),
+                        # separator
+                        FlexSeparator(),
+                        # websiteAction
+                        FlexButton(
+                            style='link',
+                            height='sm',
+                            action=URIAction(label='WEBSITE', uri="https://example.com")
+                        )
+                    ]
+                ),
+            )
+            line_bot_api.reply_message(
+                ReplyMessageRequest(
+                    reply_token=event.reply_token,
+                    messages=[FlexMessage(alt_text="hello", contents=bubble)]
+                )
+            )    
         else:      
             pass
             # if ans != '':    
